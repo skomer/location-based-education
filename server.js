@@ -14,7 +14,17 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-
+// GET QUIZZES
+app.get('/quizzes', function(req, res){
+  dbHelper.getAllQuizzes(function(err, allQuizzes){
+    if ( err ) {
+      res.status( 500 ).end();
+    }
+    else {
+      res.json(allQuizzes);
+    }
+  });
+});
 
 // POST
 app.post('/quizzes', function(req, res){
