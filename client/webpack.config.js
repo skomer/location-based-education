@@ -3,7 +3,7 @@ var config = {
       adminIndex: "./src/admin/index.js"
     },
     output: {
-      path: "./build",
+      path: "./build/bundles",
       filename: "[name].bundle.js"
     },
     devtool: "source-map"
