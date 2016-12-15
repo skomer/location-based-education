@@ -2,30 +2,34 @@ var firebase = require('firebase');
 var values = require('./values');
 
 var firebaseHelper = {
-  signInToFirebase: function( callback ) {
-    var currentUser = firebase.auth.currentUser;
-    if ( currentUser ) {
-      console.log( "user currently signed in:", currentUser );
-      callback( null );
-    }
-    else {
+  app: null,
+  iniitialiseApp: function() {
+    if ( !this.app ) {
       var config = {
         apiKey: values.firebaseAPIKey,
         authDomain: values.firebaseAuthDomain,
         databaseURL: values.firebaseDatabaseUrl
       };
       firebase.initializeApp(config);
-
+    }
+  },
+  signInToFirebase: function( callback ) {
+    var currentUser = firebase.auth.currentUser;
+    if ( currentUser ) {
+      console.log( "user already signed in:", currentUser.email );
+      callback( null );
+    }
+    else {
+      this.iniitialiseApp();
       firebase.auth().onAuthStateChanged( function( user ) {
         if ( user ) {
-          console.log( "user signed in to firebase:", user );
+          console.log( "user signed in to firebase:", user.email );
           callback( null );
         } else {
           console.log( "user signed out of firebase" );
         }
       });
 
-      console.log( "Signing in to firebase..." );
       firebase.auth().signInWithEmailAndPassword( values.userEmail, values.userPassword ).catch( function( err ) {
         var errorCode = err.code;
         var errorMessage = err.message;
