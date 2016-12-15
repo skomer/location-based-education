@@ -19,6 +19,11 @@ app.get('/admin/quizzes', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/admin/index.html'));
 });
 
+// GET
+app.get('/admin/quizzes/new', function(req, res) {
+  res.sendFile(path.join(__dirname + '/client/build/admin/addQuiz.html'));
+});
+
 // GET QUIZZES
 app.get('/quizzes', function(req, res){
   dbHelper.getAllQuizzes(function(err, allQuizzes){
@@ -33,6 +38,7 @@ app.get('/quizzes', function(req, res){
 
 // POST
 app.post('/quizzes', function(req, res){
+  console.log( "req.body:", req.body );
   dbHelper.createQuiz(req.body.title, function( err ) {
     if ( err ) {
       res.status( 500 ).end();

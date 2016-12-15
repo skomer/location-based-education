@@ -13,6 +13,19 @@ var quizServer = {
       }
     }
     request.send();
+  },
+  createQuiz: function( quiz ) {
+    var request = new XMLHttpRequest();
+    var url = "http://localhost:3000/quizzes";
+    request.open( 'POST', url );
+    request.setRequestHeader( 'Content-Type', 'application/json' );
+    request.onload = function() {
+      if ( this.status !== 200 ) {
+        console.error( "POST request to", url, "failed with status", this.status );
+      }
+    }
+    console.log( "quiz:", quiz );
+    request.send( JSON.stringify( quiz ) );
   }
 };
 
