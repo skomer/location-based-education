@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var dbHelper = require('./dbHelper');
+var firebaseHelper = require('./firebaseHelper');
 var app = express();
 
 
@@ -38,7 +39,7 @@ app.get('/quizzes', function(req, res){
 
 // POST
 app.post('/quizzes', function(req, res){
-  dbHelper.createQuiz(req.body.title, function( err ) {
+  firebaseHelper.createQuiz(req.body.title, function( err ) {
     if ( err ) {
       res.status( 500 ).end();
     }
