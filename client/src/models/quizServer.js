@@ -1,6 +1,6 @@
 var quizServer = {
   getAllQuizzes: function( callback ) {
-    var request = XMLHttpRequest();
+    var request = new XMLHttpRequest();
     var url = "http://localhost:3000/quizzes";
     request.open( 'GET', url );
     request.onload = function() {
@@ -15,3 +15,5 @@ var quizServer = {
     request.send();
   }
 };
+
+module.exports = quizServer;

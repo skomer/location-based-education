@@ -14,6 +14,11 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
+// GET
+app.get('/admin/quizzes', function(req, res) {
+  res.sendFile(path.join(__dirname + '/client/build/admin/index.html'));
+});
+
 // GET QUIZZES
 app.get('/quizzes', function(req, res){
   dbHelper.getAllQuizzes(function(err, allQuizzes){
@@ -33,7 +38,7 @@ app.post('/quizzes', function(req, res){
       res.status( 500 ).end();
     }
     else {
-      // ending the response, status 200 is succesful 
+      // ending the response, status 200 is succesful
       res.status( 200 ).end();
     }
   });

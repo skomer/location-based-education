@@ -1,8 +1,10 @@
 var config = {
-    entry: "./src/index.js",
+    entry: {
+      adminIndex: "./src/admin/index.js"
+    },
     output: {
-        filename: "bundle.js",
-        path: "./build"
+      path: "./build",
+      filename: "[name].bundle.js"
     },
     devtool: "source-map"
 };
