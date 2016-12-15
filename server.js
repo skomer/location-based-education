@@ -2,13 +2,31 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var dbHelper = require('./dbHelper');
+var firebase = require('firebase');
 var firebaseHelper = require('./firebaseHelper');
+var values = require('./values');
 var app = express();
 
 
 app.use(express.static('client/build'));
 // tell express to use bodyparser -- take the request body and put it as json on the req object
 app.use(bodyParser.json());
+
+// INITIALISE FIREBASE
+console.log( "Initialising firebase" );
+var config = {
+  apiKey: values.firebaseAPIKey,
+  authDomain: values.firebaseAuthDomain,
+  databaseURL: values.firebaseDatabaseUrl
+};
+this.app = firebase.initializeApp(config);
+
+firebase.auth().signInWithEmailAndPassword( values.userEmail, values.userPassword ).catch( function( err ) {
+  var errorCode = err.code;
+  var errorMessage = err.message;
+  console.error( "sign in to firebase failed, errorCode:%s, errorMessage:%s", errorCode, errorMessage );
+  callback( err );
+});
 
 // GET
 app.get('/', function(req, res) {
