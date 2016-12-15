@@ -38,7 +38,6 @@ app.get('/quizzes', function(req, res){
 
 // POST
 app.post('/quizzes', function(req, res){
-  console.log( "req.body:", req.body );
   dbHelper.createQuiz(req.body.title, function( err ) {
     if ( err ) {
       res.status( 500 ).end();
