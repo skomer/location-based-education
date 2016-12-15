@@ -4,23 +4,22 @@ var values = require('./values');
 var firebaseHelper = {
   app: null,
   iniitialiseApp: function() {
-    if ( !this.app ) {
-      var config = {
-        apiKey: values.firebaseAPIKey,
-        authDomain: values.firebaseAuthDomain,
-        databaseURL: values.firebaseDatabaseUrl
-      };
-      firebase.initializeApp(config);
-    }
+    console.log("initialising firebase app");
+    var config = {
+      apiKey: values.firebaseAPIKey,
+      authDomain: values.firebaseAuthDomain,
+      databaseURL: values.firebaseDatabaseUrl
+    };
+    this.app = firebase.initializeApp(config);
   },
   signInToFirebase: function( callback ) {
-    var currentUser = firebase.auth.currentUser;
+    if ( firebase.apps.length === 0 ) this.iniitialiseApp();
+    var currentUser = firebase.auth().currentUser;
     if ( currentUser ) {
-      console.log( "user already signed in:", currentUser.email );
+      // console.log( "user already signed in:", currentUser.email );
       callback( null );
     }
     else {
-      this.iniitialiseApp();
       firebase.auth().onAuthStateChanged( function( user ) {
         if ( user ) {
           console.log( "user signed in to firebase:", user.email );
@@ -60,6 +59,22 @@ var firebaseHelper = {
           title: title
         });
         callback( null );
+      }
+    });
+  },
+  getAllQuizzes: function( callback ) {
+    this.getQuizzesRef( function( err, quizzesRef ) {
+      if ( err ) {
+        callback( err, null );
+      }
+      else {
+        quizzesRef.once( 'value' ).then( function( snapshot ) {
+          var quizEntries = snapshot.val();
+          var quizzes = Object.keys( quizEntries ).map( function( key ) {
+            return quizEntries[key];
+          });
+          callback( null, quizzes );
+        });
       }
     });
   }

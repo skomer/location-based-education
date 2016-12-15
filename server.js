@@ -27,7 +27,7 @@ app.get('/admin/quizzes/new', function(req, res) {
 
 // GET QUIZZES
 app.get('/quizzes', function(req, res){
-  dbHelper.getAllQuizzes(function(err, allQuizzes){
+  firebaseHelper.getAllQuizzes(function(err, allQuizzes){
     if ( err ) {
       res.status( 500 ).end();
     }
