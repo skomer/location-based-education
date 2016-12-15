@@ -11,5 +11,6 @@ window.onload = function() {
       title: quizTitle
     };
     quizServer.createQuiz( quiz );
+    window.location.href = "http://localhost:3000/admin/quizzes";
   };
 };
