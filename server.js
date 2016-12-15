@@ -21,6 +21,14 @@ var config = {
 };
 this.app = firebase.initializeApp(config);
 
+firebase.auth().onAuthStateChanged( function( user ) {
+  if ( user ) {
+    console.log( "server signed in to firebase with account:", user.email );
+  } else {
+    console.log( "server signed out of firebase" );
+  }
+});
+
 firebase.auth().signInWithEmailAndPassword( values.userEmail, values.userPassword ).catch( function( err ) {
   var errorCode = err.code;
   var errorMessage = err.message;
