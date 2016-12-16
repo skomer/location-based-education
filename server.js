@@ -13,20 +13,25 @@ app.use(bodyParser.json());
 console.log( "Initialising firebase" );
 firebaseHelper.init();
 
-// GET
+// GET HOME
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-// GET
+// GET ADMIN QUIZZES
 app.get('/admin/quizzes', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/admin/index.html'));
 });
 
-// GET
+// GET QUIZ ADD EDIT
 app.get('/admin/quizzes/new', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/admin/addQuiz.html'));
 });
+
+
+/////////////////
+// QUIZZES API //
+/////////////////
 
 // GET QUIZZES
 app.get('/quizzes', function(req, res){
@@ -40,7 +45,7 @@ app.get('/quizzes', function(req, res){
   });
 });
 
-// POST
+// POST QUIZ
 app.post('/quizzes', function(req, res){
   firebaseHelper.createQuiz(req.body.title, function( err ) {
     if ( err ) {
