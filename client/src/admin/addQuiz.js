@@ -9,7 +9,7 @@ window.onload = function() {
   var newQuestionButton = document.getElementById( 'new-question-button' );
   var saveQuizButton = document.getElementById( 'save-quiz-button' );
   var questionListView = new QuestionListView();
-
+  questionListView.populateSelect();
 
   newQuestionButton.onclick = function() {
     var question = {
