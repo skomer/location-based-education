@@ -50,6 +50,18 @@ var firebaseHelper = {
         callback( null, quizzes );
       });
     });
+  },
+  getQuizById: function( quizId, callback ) {
+    this.getQuizzesRef( function( quizzesRef ) {
+      quizzesRef.orderByKey().equalTo( quizId ).once( 'value' ).then( function( snapshot ) {
+        if ( snapshot.val() ) {
+          callback( snapshot.val()[quizId] );
+        }
+        else {
+          callback( null );
+        }
+      });
+    });
   }
 };
 

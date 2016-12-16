@@ -75,6 +75,21 @@ app.get('/quizzes', function(req, res){
   });
 });
 
+// GET QUIZ
+app.get('/quizzes/:quiz_id', function( req, res ) {
+  var quizId = req.params.quiz_id;
+  firebaseHelper.getQuizById( quizId, function( quiz ) {
+    if ( quiz ) {
+      console.log( "quiz with id", quizId, ":", quiz );
+      res.json( JSON.stringify( quiz ) );
+    }
+    else {
+      console.log( "no quiz with id", quizId, "found" );
+      res.status( 404 ).end();
+    }
+  });
+});
+
 // POST QUIZ
 app.post('/quizzes', function(req, res){
   firebaseHelper.createQuiz(req.body.title, function( err ) {
