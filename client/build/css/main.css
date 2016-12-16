@@ -6,19 +6,23 @@ body {
   text-align: center;
 }
 
-input {
+button {
   display: inline-block;
   padding: 10px 20px;
   margin: 0;
   border: 1px solid #bbb;
   overflow: visible;
-  font: bold 15px sans-serif;
+  font-weight: bold;
+  font-size: 15px;
   white-space: nowrap;
   color: dimgrey;
   background-color: whitesmoke;
-  transition: background-color .2s ease-out;
   background-clip: padding-box;
   border-radius: 3px;
+}
+
+#quizzes-container {
+  margin-top: 30px;
 }
 
 .quiz-row {
@@ -27,10 +31,6 @@ input {
  align-items: center;
  justify-content: center;
  flex: 0 0 33.3333%;
- padding: 15px;
- margin: 15px;
- line-height:160px;
-/* flex-shrink: 1;*/
 }
 
 
@@ -41,12 +41,9 @@ input {
   border: 2px solid whitesmoke;
   background: whitesmoke;
   color: dimgrey;
-  flex: 0 0 33.3333%;
+  flex: 1 1 33.3333%;
   flex-wrap: wrap;
-  flex-shrink: 1;
-  margin: 30px;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin: 18px;
   font-weight: bold;
   font-size: 1.4em;
   text-align: center;
@@ -55,30 +52,15 @@ input {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  height: 160px;
+}
+
+.quiz-item:hover, button:hover {
+  background-color: gainsboro;
   cursor: pointer;
-}
-
-.quiz-item:hover {
-  background-color: #DDD;
-}
-
-button {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 0;
-  border: 1px solid #bbb;
-  overflow: visible;
-  font: bold 15px sans-serif;
-  white-space: nowrap;
-  color: dimgrey;
-  background-color: #ddd;
-  transition: background-color .2s ease-out;
-  background-clip: padding-box;
-  border-radius: 3px;
 }
 
 #user-login-button, #admin-login-button {
   font-size: 50px;
   margin: 20px;
-
 }
