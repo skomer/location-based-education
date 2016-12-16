@@ -5,19 +5,16 @@ window.onload = function() {
   console.log("Ready to add quizzes");
 
   var quizTitleInput = document.getElementById( 'quiz-title-input' );
-  var quizQuestionInput = document.getElementById( 'quiz-question-input' );
   var newQuestionButton = document.getElementById( 'new-question-button' );
   var countriesSelect = document.getElementById('countries-select');
   var saveQuizButton = document.getElementById( 'save-quiz-button' );
   var questionListView = new QuestionListView();
-  questionListView.populateSelect(countriesSelect);
 
   newQuestionButton.onclick = function() {
     var question = {
-      text: quizQuestionInput.value
+      text: ""
     };
     questionListView.addQuestion(question);
-    quizQuestionInput.value = "";
   };
 
   saveQuizButton.onclick = function() {

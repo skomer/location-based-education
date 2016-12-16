@@ -5,10 +5,9 @@ var QuestionListView = function() {
 
 QuestionListView.prototype = {
   addQuestion: function(question) {
+    var quizQuestionInput = document.createElement( 'input' );
     var qLi = document.createElement('li');
-    var qP = document.createElement('p');
-    qP.innerText = question.text;
-    qLi.appendChild(qP);
+    qLi.appendChild(quizQuestionInput);
 
     var answerSelect = document.createElement('select');
     this.populateSelect(answerSelect);
@@ -34,12 +33,10 @@ QuestionListView.prototype = {
     request.send();
   },
   addCountries: function(elementId, countries) {
-    countries.forEach( function( item, index ) {
-      item.index = index;
+    countries.forEach( function( country ) {
       var option = document.createElement('option');
-      option.value = index.toString();
-      option.innerText = item.name;
-
+      option.value = country.code;
+      option.innerText = country.name;
       elementId.appendChild(option);
     });
   }
