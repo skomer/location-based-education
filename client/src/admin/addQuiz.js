@@ -16,6 +16,7 @@ window.onload = function() {
       text: quizQuestionInput.value
     };
     questionListView.addQuestion(question);
+    quizQuestionInput.value = "";
   };
 
   saveQuizButton.onclick = function() {
