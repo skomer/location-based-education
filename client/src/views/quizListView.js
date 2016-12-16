@@ -33,6 +33,7 @@ QuizListView.prototype = {
   }
 };
 
+// required so that the item href for the item in scope during the iteration of the while loop is used -- scoping issue!
 var createClickHandler = function( url ) {
   return function() {
     window.location.href = url;
