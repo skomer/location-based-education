@@ -76,3 +76,9 @@ button {
   background-clip: padding-box;
   border-radius: 3px;
 }
+
+#user-login-button, #admin-login-button {
+  font-size: 50px;
+  margin: 20px;
+
+}
