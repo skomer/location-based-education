@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Add Quiz</title>
-    <link rel="stylesheet" href="/css/main.css"/>
-    <script src="/bundles/adminAddQuiz.bundle.js"></script>
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title>Add Quiz</title>
+  <link rel="stylesheet" href="/css/main.css"/>
+  <script src="/bundles/adminAddQuiz.bundle.js"></script>
+</head>
+<body>
+  <header>
     <h1>Add Quiz</h1>
     <input id="quiz-title-input" type="text" placeholder="Please enter a title"/><br />
-
+  </header>
+  
+  <div id="question-div">
     <ul id="questions-list"></ul>
     <input id="quiz-question-input" type="text" placeholder="Please enter a question"/>
     <button id="new-question-button" class="button">Add new question</button>
+  </div>
 
+  <div id="save-div">
     <button id="save-quiz-button" class="button">Save everything</button>
-
-  </body>
+  </div>
+</body>
 </html>
