@@ -2,6 +2,7 @@ var firebase = require('firebase');
 var values = require('./values');
 
 var firebaseHelper = {
+  database: null,
   init: function() {
     var config = {
       apiKey: values.firebaseAPIKey,
@@ -23,9 +24,10 @@ var firebaseHelper = {
       var errorMessage = err.message;
       console.error( "sign in to firebase failed, errorCode:%s, errorMessage:%s", errorCode, errorMessage );
     });
+    this.database = firebase.database();
   },
   getQuizzesRef: function( callback ) {
-    var quizzesRef = firebase.database().ref( 'quizzes' );
+    var quizzesRef = this.database.ref( 'quizzes' );
     callback( quizzesRef );
   },
   createQuiz: function( title ) {
