@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var firebaseHelper = require('./firebaseHelper');
+var fs = require( 'fs' );
 var app = express();
 
 
@@ -29,9 +30,17 @@ app.get('/admin/quizzes/new', function(req, res) {
 });
 
 
-/////////////////
-// QUIZZES API //
-/////////////////
+/////////
+// API //
+/////////
+
+// GET ALL COUNTRIES
+app.get('/countries', function(req, res){
+  var buffer = fs.readFileSync('data/countries.json');
+  var bufferString = buffer.toString();
+  var countries = JSON.parse( bufferString );
+  res.json( countries );
+})
 
 // GET QUIZZES
 app.get('/quizzes', function(req, res){
