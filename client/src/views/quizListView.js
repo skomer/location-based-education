@@ -17,6 +17,12 @@ QuizListView.prototype = {
         var div = document.createElement( 'div' );
         div.innerText = item.title;
         div.classList.add( 'quiz-item' );
+        if ( item.id ) {
+          div.id = item.id;
+        }
+        if ( item.href ) {
+          div.onclick = createClickHandler( item.href );
+        }
         rowDiv.appendChild( div );
         rowCount++;
         i++;
@@ -24,6 +30,12 @@ QuizListView.prototype = {
       this.container.appendChild( rowDiv );
       rowCount = 0;
     }
+  }
+};
+
+var createClickHandler = function( url ) {
+  return function() {
+    window.location.href = url;
   }
 };
 

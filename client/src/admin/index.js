@@ -10,6 +10,12 @@ window.onload = function() {
         title: quiz.title
       };
     });
+    var plusButtonItem = {
+      title: "+",
+      id: "add-quiz-button",
+      href: "quizzes/new"
+    };
+    listItems.unshift( plusButtonItem );
     var quizzesContainer = document.getElementById('quizzes-container');
     var quizListView = new QuizListView(quizzesContainer);
     quizListView.populate(listItems);
