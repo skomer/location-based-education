@@ -55,6 +55,11 @@ input {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.quiz-item:hover {
+  background-color: #DDD;
 }
 
 button {
