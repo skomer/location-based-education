@@ -2,12 +2,17 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 var dbHelper = require('./dbHelper');
+var firebaseHelper = require('./firebaseHelper');
 var app = express();
 
 
 app.use(express.static('client/build'));
 // tell express to use bodyparser -- take the request body and put it as json on the req object
 app.use(bodyParser.json());
+
+// INITIALISE FIREBASE
+console.log( "Initialising firebase" );
+firebaseHelper.init();
 
 // GET
 app.get('/', function(req, res) {
@@ -26,7 +31,7 @@ app.get('/admin/quizzes/new', function(req, res) {
 
 // GET QUIZZES
 app.get('/quizzes', function(req, res){
-  dbHelper.getAllQuizzes(function(err, allQuizzes){
+  firebaseHelper.getAllQuizzes(function(err, allQuizzes){
     if ( err ) {
       res.status( 500 ).end();
     }
@@ -38,7 +43,7 @@ app.get('/quizzes', function(req, res){
 
 // POST
 app.post('/quizzes', function(req, res){
-  dbHelper.createQuiz(req.body.title, function( err ) {
+  firebaseHelper.createQuiz(req.body.title, function( err ) {
     if ( err ) {
       res.status( 500 ).end();
     }
