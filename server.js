@@ -1,7 +1,6 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var dbHelper = require('./dbHelper');
 var firebaseHelper = require('./firebaseHelper');
 var app = express();
 
