@@ -11,10 +11,7 @@ window.onload = function() {
   var questionListView = new QuestionListView();
 
   newQuestionButton.onclick = function() {
-    var question = {
-      text: ""
-    };
-    questionListView.addQuestion(question);
+    questionListView.addQuestion();
   };
 
   saveQuizButton.onclick = function() {

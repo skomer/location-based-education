@@ -4,7 +4,7 @@ var QuestionListView = function() {
 };
 
 QuestionListView.prototype = {
-  addQuestion: function(question) {
+  addQuestion: function() {
     var quizQuestionInput = document.createElement('input');
     quizQuestionInput.placeholder = "Please enter your question:"
     var qLi = document.createElement('li');
