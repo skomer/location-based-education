@@ -25,6 +25,16 @@ button {
   border-radius: 3px;
 }
 
+#add-quiz-button:hover {
+  background-color: #c4ddba;
+  border-color: #c4ddba;
+}
+
+#add-quiz-button{
+  color: #77a366;
+  font-size: 100px;
+}
+
 #quizzes-container {
   margin-top: 30px;
 }
@@ -42,7 +52,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid whitesmoke;
   background: whitesmoke;
   color: dimgrey;
   flex: 1 1 33.3333%;
@@ -60,7 +69,7 @@ button {
 }
 
 .quiz-item:hover, button:hover {
-  background-color: gainsboro;
+  background-color: rgb(235,235,235);
   cursor: pointer;
 }
 
