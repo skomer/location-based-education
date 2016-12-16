@@ -32,7 +32,9 @@ var firebaseHelper = {
     this.getQuizzesRef( function( quizzesRef ) {
       var newQuizRef = quizzesRef.push();
       newQuizRef.set({
-        title: title
+        title: title,
+        createdAt: firebase.database.ServerValue.TIMESTAMP,
+        createdBy: values.userEmail
       });
     });
   },
