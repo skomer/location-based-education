@@ -1,3 +1,73 @@
 body {
-  background-color: dodgerblue;
+  background-color: gainsboro;
+  color: lightslategrey;
+  font-family: sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+input {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0;
+  border: 1px solid #bbb;
+  overflow: visible;
+  font: bold 15px sans-serif;
+  white-space: nowrap;
+  color: dimgrey;
+  background-color: whitesmoke;
+  transition: background-color .2s ease-out;
+  background-clip: padding-box;
+  border-radius: 3px;
+}
+
+.quiz-row {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+ flex: 0 0 33.3333%;
+ padding: 15px;
+ margin: 15px;
+ line-height:160px;
+/* flex-shrink: 1;*/
+}
+
+
+.quiz-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid whitesmoke;
+  background: whitesmoke;
+  color: dimgrey;
+  flex: 0 0 33.3333%;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+  margin: 30px;
+  margin-right: 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 1.4em;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0;
+  border: 1px solid #bbb;
+  overflow: visible;
+  font: bold 15px sans-serif;
+  white-space: nowrap;
+  color: dimgrey;
+  background-color: #ddd;
+  transition: background-color .2s ease-out;
+  background-clip: padding-box;
+  border-radius: 3px;
 }
