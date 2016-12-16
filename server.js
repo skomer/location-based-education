@@ -44,6 +44,12 @@ app.get('/user/quizzes', function(req, res){
   res.sendFile(path.join(__dirname + '/client/build/user/index.html'));
 });
 
+//GET QUESTIOn
+app.get('/user/quizzes/:quiz_id', function( req, res) {
+  var quizId = req.params.quiz_id;
+  console.log("quiz requested:", quizId);
+  res.sendFile(path.join(__dirname + '/client/build/user/question.html'));
+});
 
 /////////
 // API //
