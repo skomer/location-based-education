@@ -16,9 +16,6 @@ QuestionListView.prototype = {
 
     this.questionList.appendChild(qLi);
   },
-  addAnswer: function() {
-    console.log("bla");
-  },
   populateSelect: function(elementId) {
     var url = "http://localhost:3000/countries";
     var request = new XMLHttpRequest();
