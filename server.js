@@ -19,6 +19,11 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/home.html'));
 });
 
+
+///////////
+// ADMIN //
+///////////
+
 // GET ADMIN QUIZZES
 app.get('/admin/quizzes', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/admin/index.html'));
@@ -27,6 +32,16 @@ app.get('/admin/quizzes', function(req, res) {
 // GET QUIZ ADD EDIT
 app.get('/admin/quizzes/new', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/admin/addQuiz.html'));
+});
+
+
+//////////
+// USER //
+//////////
+
+//GET USER QUIZZES
+app.get('/user/quizzes', function(req, res){
+  res.sendFile(path.join(__dirname + '/client/build/user/index.html'));
 });
 
 
