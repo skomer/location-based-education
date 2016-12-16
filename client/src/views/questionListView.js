@@ -34,11 +34,14 @@ QuestionListView.prototype = {
     request.send();
   },
   addCountries: function(elementId, countries) {
-    for (country of countries) {
+    countries.forEach( function( item, index ) {
+      item.index = index;
       var option = document.createElement('option');
-      option.innerText = country.name;
+      option.value = index.toString();
+      option.innerText = item.name;
+
       elementId.appendChild(option);
-    }
+    });
   }
 };
 
