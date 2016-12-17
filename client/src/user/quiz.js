@@ -1,4 +1,5 @@
 var quizServer = require('../models/quizServer');
+var MapHelper = require('../helpers/mapHelper');
 
 window.onload = function() {
   var quizTitleP = document.getElementById('quiz-title');
@@ -16,6 +17,6 @@ window.onload = function() {
     console.log("fetched quiz:", quiz);
     globalQuiz = quiz;
     quizTitleP.innerText = quiz.title;
-
+    var mapHelper = new MapHelper(mapContainer, 55.9, -3.1, 1);
   });
 };
