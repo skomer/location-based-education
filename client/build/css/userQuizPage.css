@@ -2,6 +2,7 @@
   background-color: dodgerblue;
   height: 800px;
   width: 800px;
+  padding: 0px;
 }
 
 #main-container {
@@ -14,5 +15,5 @@
 }
 
 #map-container, #controls-container {
-  padding: 20px;
+  margin: 20px;
 }
