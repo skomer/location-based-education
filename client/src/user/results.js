@@ -22,7 +22,16 @@ window.onload = function() {
         var questionTextTd = document.createElement( 'td' );
         questionTextTd.innerText = questionText;
         var resultTd = document.createElement( 'td' );
-        resultTd.innerText = "user answer: " + userAnswer + ", correct answer: " + correctAnswer;
+
+        if ( userAnswer === correctAnswer ) {
+          resultTd.innerText = userAnswer + " ✔";
+          resultTd.classList.add( "correct-answer" );
+        }
+        else {
+          resultTd.innerText = userAnswer + " ✘\nCorrect Answer: " + correctAnswer;
+          resultTd.classList.add( "wrong-answer" );
+        }
+
         resultRow.appendChild( questionTextTd );
         resultRow.appendChild( resultTd );
         resultsTableBody.appendChild( resultRow );
