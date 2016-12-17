@@ -45,7 +45,9 @@ var firebaseHelper = {
       quizzesRef.once( 'value' ).then( function( snapshot ) {
         var quizEntries = snapshot.val();
         var quizzes = Object.keys( quizEntries ).map( function( key ) {
-          return quizEntries[key];
+          var quiz = quizEntries[key];
+          quiz.id = key;
+          return quiz;
         });
         callback( null, quizzes );
       });
