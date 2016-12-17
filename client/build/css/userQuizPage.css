@@ -17,3 +17,11 @@
 #map-container, #controls-container {
   margin: 20px;
 }
+
+.correct-answer {
+  color: green;
+}
+
+.wrong-answer {
+  color: tomato;
+}
