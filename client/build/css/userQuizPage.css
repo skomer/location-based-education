@@ -1,0 +1,19 @@
+#map-container {
+  background-color: dodgerblue;
+  height: 800px;
+  width: 800px;
+  padding: 0px;
+}
+
+#main-container {
+  display: flex;
+}
+
+#controls-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#map-container, #controls-container {
+  margin: 20px;
+}
