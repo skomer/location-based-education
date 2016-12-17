@@ -1,6 +1,6 @@
 var values = require( '../values.js' );
 
-var MapHelper = function(container, lat, lng, defaultZoom){
+var MapHelper = function(container, lat, lng, defaultZoom, helperCallback){
 
   // load gogle maps api
   var script = document.createElement( 'script' );
@@ -10,7 +10,7 @@ var MapHelper = function(container, lat, lng, defaultZoom){
   document.body.appendChild( script );
 
   // global function workaround
-  createMap = function() {
+  createMap = function( callback ) {
     var defaultCenter = {
       lat: lat,
       lng: lng
@@ -22,6 +22,7 @@ var MapHelper = function(container, lat, lng, defaultZoom){
         center: defaultCenter, zoom: defaultZoom
       }
     );
+    helperCallback();
   }
 };
 
