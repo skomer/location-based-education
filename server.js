@@ -51,6 +51,10 @@ app.get('/user/quizzes/:quiz_id', function( req, res) {
   res.sendFile(path.join(__dirname + '/client/build/user/quiz.html'));
 });
 
+app.get('/user/results', function( req, res ) {
+  res.sendFile(path.join(__dirname + '/client/build/user/results.html'));
+});
+
 /////////
 // API //
 /////////
