@@ -2,6 +2,7 @@ var quizServer = require( '../models/quizServer' );
 
 window.onload = function() {
   var quizTitleH2 = document.getElementById( 'quiz-title' );
+  var resultsTableBody = document.getElementById( 'results-table' );
 
   var answers = [ 'AF', 'BB', 'AF', 'FR' ];
   quizServer.getQuizById( '-KZCcaO1hToqpMhfHnls', function( quiz ) {
