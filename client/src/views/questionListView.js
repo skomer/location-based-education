@@ -1,3 +1,5 @@
+var CountriesServer = require('../models/countriesServer');
+
 var QuestionListView = function() {
   this.questionList = document.getElementById('questions-list');
   this.selectCountry = document.getElementById('countries-select');
@@ -17,19 +19,10 @@ QuestionListView.prototype = {
 
     this.questionList.appendChild(qLi);
   },
-  populateSelect: function(elementId) {
-    var url = "http://localhost:3000/countries";
-    var request = new XMLHttpRequest();
-    request.open('GET', url);
-    request.onload = function(event) {
-      if (event.target.status !== 200) {
-        console.log("load countries error");
-        return;
-      }
-      var countries = JSON.parse(event.target.responseText);
-      this.addCountries(elementId, countries);
-    }.bind(this);
-    request.send();
+  populateSelect: function( elementId ) {
+    var countriesServer = new CountriesServer( function() {
+      this.addCountries( elementId, countriesServer.countries );
+    }.bind(this) );
   },
   addCountries: function(elementId, countries) {
     countries.forEach( function( country ) {
