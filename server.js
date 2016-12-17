@@ -90,27 +90,27 @@ app.get('/quizzes/:quiz_id', function( req, res ) {
   });
 });
 
-//GET QUESTIOn
-app.get('/quizzes/:quiz_id/:question_index', function( req, res ) {
-  var quizId = req.params.quiz_id;
-  var questionIndex = req.params.question_index;
-  firebaseHelper.getQuizById( quizId, function( quiz ) {
-    if ( quiz ) {
-      console.log( "recieved quiz with id", quizId, ":\n", quiz );
-      if ( quiz.questions && quiz.questions[questionIndex] ) {
-        res.json( JSON.stringify( quiz.questions[questionIndex] ) );
-      }
-      else {
-        console.log( "quiz", quizId, "doesn't have a question at index", questionIndex );
-        res.status( 404 ).end();
-      }
-    }
-    else {
-      console.log( "no quiz with id", quizId, "found" );
-      res.status( 404 ).end();
-    }
-  });
-});
+// //GET QUESTIOn
+// app.get('/quizzes/:quiz_id/:question_index', function( req, res ) {
+//   var quizId = req.params.quiz_id;
+//   var questionIndex = req.params.question_index;
+//   firebaseHelper.getQuizById( quizId, function( quiz ) {
+//     if ( quiz ) {
+//       console.log( "recieved quiz with id", quizId, ":\n", quiz );
+//       if ( quiz.questions && quiz.questions[questionIndex] ) {
+//         res.json( JSON.stringify( quiz.questions[questionIndex] ) );
+//       }
+//       else {
+//         console.log( "quiz", quizId, "doesn't have a question at index", questionIndex );
+//         res.status( 404 ).end();
+//       }
+//     }
+//     else {
+//       console.log( "no quiz with id", quizId, "found" );
+//       res.status( 404 ).end();
+//     }
+//   });
+// });
 
 // POST QUIZ
 app.post('/quizzes', function(req, res){
