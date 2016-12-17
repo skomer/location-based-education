@@ -15,6 +15,13 @@ window.onload = function() {
   };
 
   saveQuizButton.onclick = function() {
+
+    var titleWarning = document.getElementById('title-warning');
+    titleWarning.style.display = "inline-block";
+
+    var ulWarning = document.getElementById('ul-warning');
+    ulWarning.style.display = "inline-block";
+
     var quizTitle = quizTitleInput.value;
     var quiz = {
       title: quizTitle
