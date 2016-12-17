@@ -3,7 +3,7 @@ var config = {
       adminIndex: "./src/admin/index.js",
       adminAddQuiz: "./src/admin/addQuiz.js",
       userIndex: "./src/user/index.js",
-      question: "./src/user/question.js"
+      quiz: "./src/user/quiz.js"
     },
     output: {
       path: "./build/bundles",
