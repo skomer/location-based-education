@@ -10,6 +10,7 @@ window.onload = function() {
   var saveQuizButton = document.getElementById( 'save-quiz-button' );
   var questionListView = new QuestionListView();
   var ulWarning = document.getElementById('ul-warning');
+  var ulTag = document.getElementById('questions-list');
 
 
   newQuestionButton.onclick = function() {
@@ -17,32 +18,75 @@ window.onload = function() {
     questionListView.addQuestion();
   };
 
-  saveQuizButton.onclick = function() {
-    var ulTag = document.getElementById('questions-list');
-    // --- //
-    var quizTitle = quizTitleInput.value;
+// checks that all the inputs are vlaid before saving quiz
+saveQuizButton.onclick = function() {
+  var warningFlag = false;
 
-    arrayOfQuestions = ulTag.children;
-    var questions = [];
 
-    for (var i = 0; i < arrayOfQuestions.length; i++) {
-      var text = arrayOfQuestions[i].firstChild.value;
-      var answerIndex = arrayOfQuestions[i].lastChild.selectedIndex;
-      var answer = arrayOfQuestions[i].lastChild[answerIndex].value;
-      var question = {
-        text: text,
-        answer: answer
-      };
-      questions.push(question);
-    }
+    // var liInputTag = document.getElementById('');
 
-    var quiz = {
-      title: quizTitle,
-      questions: questions
+        /* if (title input is empty) {
+          display title warning
+        }
+        else if (the questions list (ul) has no questions) {
+          display ul warning
+        }
+        else {
+          for all list items in ul list {
+            if (the list item input is empty) {
+              display list item warning for that input
+            }
+          }
+        }
+        */
+
+        // WORK IN PROGRESS - error messages for creating quiz
+        if (quizTitleInput.innerText === undefined) {
+          var titleWarning = document.getElementById('title-warning');
+          titleWarning.style.display = "inline-block";
+          warningFlag === true;
+        }
+        if (ulTag.children.length === 0) {
+          ulWarning.style.display = "inline-block";
+          warningFlag === true;
+        }
+        if ( ulTag.firstChild === null || ulTag.firstChild.firstChild.value === "" ) {
+          var questionWarning = document.getElementById('question-warning');
+          questionWarning.style.display = "inline-block";
+          warningFlag === true;
+        }
+        if (warningFlag === false){
+          console.log("saving the quiz");
+          saveQuiz()
+        }
+}
+
+
+// contacts quiz server to post the quiz to the db
+var saveQuiz = function(){
+  var quizTitle = quizTitleInput.value;
+
+  arrayOfQuestions = ulTag.children;
+  var questions = [];
+
+  for (var i = 0; i < arrayOfQuestions.length; i++) {
+    var text = arrayOfQuestions[i].firstChild.value;
+    var answerIndex = arrayOfQuestions[i].lastChild.selectedIndex;
+    var answer = arrayOfQuestions[i].lastChild[answerIndex].value;
+    var question = {
+      text: text,
+      answer: answer
     };
-    quizServer.createQuiz( quiz );
-    window.location.href = "http://localhost:3000/admin/quizzes";
+    questions.push(question);
+  }
+
+  var quiz = {
+    title: quizTitle,
+    questions: questions
   };
+  quizServer.createQuiz( quiz );
+  window.location.href = "http://localhost:3000/admin/quizzes";
+};
 };
 
 
