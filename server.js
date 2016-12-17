@@ -114,6 +114,7 @@ app.get('/quizzes/:quiz_id', function( req, res ) {
 
 // POST QUIZ
 app.post('/quizzes', function(req, res){
+  console.log( "posting quiz:", req.body );
   firebaseHelper.createQuiz(req.body.title, function( err ) {
     if ( err ) {
       res.status( 500 ).end();
