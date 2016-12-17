@@ -1,4 +1,4 @@
-var values = require( '../values.js' );
+var values = require( '../../../values.js' );
 
 var MapHelper = function(container, lat, lng, defaultZoom, helperCallback){
 
