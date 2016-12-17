@@ -1,0 +1,18 @@
+#map-container {
+  background-color: dodgerblue;
+  height: 800px;
+  width: 800px;
+}
+
+#main-container {
+  display: flex;
+}
+
+#controls-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#map-container, #controls-container {
+  padding: 20px;
+}
