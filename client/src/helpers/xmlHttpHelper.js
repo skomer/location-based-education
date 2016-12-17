@@ -22,6 +22,7 @@ var xmlHttpHelper = {
         console.error( "GET request to", url, "failed with status", this.status );
       }
     }
+    console.log("dataObject:", JSON.stringify( dataObject ));
     request.send( JSON.stringify( dataObject ) );
   }
 };

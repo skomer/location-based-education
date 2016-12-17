@@ -30,11 +30,12 @@ var firebaseHelper = {
     var quizzesRef = this.database.ref( 'quizzes' );
     callback( quizzesRef );
   },
-  createQuiz: function( title ) {
+  createQuiz: function( quiz ) {
     this.getQuizzesRef( function( quizzesRef ) {
       var newQuizRef = quizzesRef.push();
       newQuizRef.set({
-        title: title,
+        title: quiz.title,
+        questions: quiz.questions,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
         createdBy: values.userEmail
       });

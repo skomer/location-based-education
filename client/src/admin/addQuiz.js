@@ -9,24 +9,50 @@ window.onload = function() {
   var countriesSelect = document.getElementById('countries-select');
   var saveQuizButton = document.getElementById( 'save-quiz-button' );
   var questionListView = new QuestionListView();
+  var ulWarning = document.getElementById('ul-warning');
+
 
   newQuestionButton.onclick = function() {
+    ulWarning.style.display = "none";
     questionListView.addQuestion();
   };
 
   saveQuizButton.onclick = function() {
-
-    var titleWarning = document.getElementById('title-warning');
-    titleWarning.style.display = "inline-block";
-
-    var ulWarning = document.getElementById('ul-warning');
-    ulWarning.style.display = "inline-block";
-
+    var ulTag = document.getElementById('questions-list');
+    // --- //
     var quizTitle = quizTitleInput.value;
+
+    arrayOfQuestions = ulTag.children;
+    var questions = [];
+
+    for (var i = 0; i < arrayOfQuestions.length; i++) {
+      var text = arrayOfQuestions[i].firstChild.value;
+      var answerIndex = arrayOfQuestions[i].lastChild.selectedIndex;
+      var answer = arrayOfQuestions[i].lastChild[answerIndex].value;
+      var question = {
+        text: text,
+        answer: answer
+      };
+      questions.push(question);
+    }
+
     var quiz = {
-      title: quizTitle
+      title: quizTitle,
+      questions: questions
     };
     quizServer.createQuiz( quiz );
     window.location.href = "http://localhost:3000/admin/quizzes";
   };
 };
+
+
+
+
+
+
+
+
+
+
+
+

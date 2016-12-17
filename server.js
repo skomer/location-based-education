@@ -81,7 +81,7 @@ app.get('/quizzes/:quiz_id', function( req, res ) {
   firebaseHelper.getQuizById( quizId, function( quiz ) {
     if ( quiz ) {
       console.log( "receieved quiz with id", quizId, ":\n", quiz );
-      res.json( JSON.stringify( quiz ) );
+      res.json( quiz );
     }
     else {
       console.log( "no quiz with id", quizId, "found" );
@@ -115,7 +115,7 @@ app.get('/quizzes/:quiz_id', function( req, res ) {
 // POST QUIZ
 app.post('/quizzes', function(req, res){
   console.log( "posting quiz:", req.body );
-  firebaseHelper.createQuiz(req.body.title, function( err ) {
+  firebaseHelper.createQuiz(req.body, function( err ) {
     if ( err ) {
       res.status( 500 ).end();
     }
