@@ -19,6 +19,11 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/home.html'));
 });
 
+
+///////////
+// ADMIN //
+///////////
+
 // GET ADMIN QUIZZES
 app.get('/admin/quizzes', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/admin/index.html'));
@@ -29,6 +34,22 @@ app.get('/admin/quizzes/new', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/admin/addQuiz.html'));
 });
 
+
+//////////
+// USER //
+//////////
+
+//GET USER QUIZZES
+app.get('/user/quizzes', function(req, res){
+  res.sendFile(path.join(__dirname + '/client/build/user/index.html'));
+});
+
+//GET QUESTIOn
+app.get('/user/quizzes/:quiz_id', function( req, res) {
+  var quizId = req.params.quiz_id;
+  console.log("quiz requested:", quizId);
+  res.sendFile(path.join(__dirname + '/client/build/user/quiz.html'));
+});
 
 /////////
 // API //
@@ -54,8 +75,46 @@ app.get('/quizzes', function(req, res){
   });
 });
 
+// GET QUIZ
+app.get('/quizzes/:quiz_id', function( req, res ) {
+  var quizId = req.params.quiz_id;
+  firebaseHelper.getQuizById( quizId, function( quiz ) {
+    if ( quiz ) {
+      console.log( "receieved quiz with id", quizId, ":\n", quiz );
+      res.json( JSON.stringify( quiz ) );
+    }
+    else {
+      console.log( "no quiz with id", quizId, "found" );
+      res.status( 404 ).end();
+    }
+  });
+});
+
+// //GET QUESTIOn
+// app.get('/quizzes/:quiz_id/:question_index', function( req, res ) {
+//   var quizId = req.params.quiz_id;
+//   var questionIndex = req.params.question_index;
+//   firebaseHelper.getQuizById( quizId, function( quiz ) {
+//     if ( quiz ) {
+//       console.log( "recieved quiz with id", quizId, ":\n", quiz );
+//       if ( quiz.questions && quiz.questions[questionIndex] ) {
+//         res.json( JSON.stringify( quiz.questions[questionIndex] ) );
+//       }
+//       else {
+//         console.log( "quiz", quizId, "doesn't have a question at index", questionIndex );
+//         res.status( 404 ).end();
+//       }
+//     }
+//     else {
+//       console.log( "no quiz with id", quizId, "found" );
+//       res.status( 404 ).end();
+//     }
+//   });
+// });
+
 // POST QUIZ
 app.post('/quizzes', function(req, res){
+  console.log( "posting quiz:", req.body );
   firebaseHelper.createQuiz(req.body.title, function( err ) {
     if ( err ) {
       res.status( 500 ).end();
