@@ -47,7 +47,6 @@ window.onload = function() {
 
       var totalScoreTr = document.createElement( 'tr' );
       totalScoreTr.id = "total-score-row";
-      totalScoreTr.style.visibility = 'hidden';
       totalScoreTr.appendChild( totalTextTd );
       totalScoreTr.appendChild( scoreTd );
       resultsTableBody.appendChild( totalScoreTr );
@@ -55,26 +54,7 @@ window.onload = function() {
       var i = 1;
       for ( aMark of marks ) {
         (function( mark ) {
-          setTimeout( function() {
-            console.log("mark:", mark);
-            var td = mark.td;
-            var correct = mark.correct;
-            var correctAnswer = mark.correctAnswer;
-
-            if ( correct ) {
-              td.innerText += " ✔";
-              td.classList.add( "correct-answer" );
-            }
-            else {
-              td.innerText += " ✘";
-              td.classList.add( "wrong-answer" );
-              td.classList.add( "tooltip" );
-              var correctAnswerSpan = document.createElement( 'span' );
-              correctAnswerSpan.innerText = correctAnswer;
-              correctAnswerSpan.classList.add( 'tooltip-text' );
-              td.appendChild( correctAnswerSpan );
-            }
-          }, i * 1000 );
+          scoreQuestion( mark , i * 1000 );
         })( aMark );
         i++;
       }
@@ -82,6 +62,24 @@ window.onload = function() {
   });
 };
 
-var scoreQuestion = function( mark ) {
+function scoreQuestion( mark, timeoutLength ) {
+  setTimeout( function () {
+    var td = mark.td;
+    var correct = mark.correct;
+    var correctAnswer = mark.correctAnswer;
 
+    if ( correct ) {
+      td.innerText += " ✔";
+      td.classList.add( "correct-answer" );
+    }
+    else {
+      td.innerText += " ✘";
+      td.classList.add( "wrong-answer" );
+      td.classList.add( "tooltip" );
+      var correctAnswerSpan = document.createElement( 'span' );
+      correctAnswerSpan.innerText = correctAnswer;
+      correctAnswerSpan.classList.add( 'tooltip-text' );
+      td.appendChild( correctAnswerSpan );
+    }
+  }, timeoutLength);
 };
