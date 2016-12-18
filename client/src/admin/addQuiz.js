@@ -42,21 +42,21 @@ window.onload = function() {
       var titleWarning = document.getElementById('title-warning');
       titleWarning.style.display = "inline-block";
       warningFlag === true;
-    }
+    };
     if (ulTag.children.length === 0) {
       ulWarning.style.display = "inline-block";
       warningFlag === true;
-    }
+    };
     if ( ulTag.firstChild === null || ulTag.firstChild.firstChild.value === "" ) {
       var questionWarning = document.getElementById('question-warning');
       questionWarning.style.display = "inline-block";
       warningFlag === true;
-    }
+    };
     if (warningFlag === false){
       console.log("saving the quiz");
       saveQuiz()
-    }
-  }
+    };
+  };
 
   // contacts quiz server to post the quiz to the db
   var saveQuiz = function() {
@@ -74,7 +74,7 @@ window.onload = function() {
         answer: answer
       };
       questions.push(question);
-    }
+    };
 
     var quiz = {
       title: quizTitle,
@@ -83,6 +83,7 @@ window.onload = function() {
     quizServer.createQuiz( quiz );
     window.location.href = "http://localhost:3000/admin/quizzes";
   };
+
 };
 
 
