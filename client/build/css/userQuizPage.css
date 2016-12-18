@@ -59,7 +59,6 @@ td, .tooltip .tooltip-text {
 }
 
 .tooltip .tooltip-text {
-    visibility: hidden;
     width: 120px;
     background-color: white;
     color: green;
@@ -70,8 +69,4 @@ td, .tooltip .tooltip-text {
     z-index: 1;
     top: 0px;
     left: 110%;
-}
-
-.tooltip:hover .tooltip-text {
-    visibility: visible;
 }
