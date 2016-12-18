@@ -26,6 +26,10 @@
   color: tomato;
 }
 
+.correct-answer, .wrong-answer {
+  width: 150px;
+}
+
 table {
   border-collapse: separate;
   border-spacing: 20px;
@@ -34,6 +38,34 @@ table {
 
 td {
   background-color: white;
+}
+
+td, .tooltip .tooltip-text {
   border-radius: 10px;
   padding: 15px;
+}
+
+
+/* TOOLTIPS */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: white;
+    color: green;
+    text-align: center;
+    padding: 15px 0;
+
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 110%;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
 }

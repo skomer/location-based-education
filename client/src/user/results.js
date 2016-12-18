@@ -22,14 +22,20 @@ window.onload = function() {
         var questionTextTd = document.createElement( 'td' );
         questionTextTd.innerText = questionText;
         var resultTd = document.createElement( 'td' );
+        resultTd.innerText = userAnswer
 
         if ( userAnswer === correctAnswer ) {
-          resultTd.innerText = userAnswer + " ✔";
+          resultTd.innerText += " ✔";
           resultTd.classList.add( "correct-answer" );
         }
         else {
-          resultTd.innerText = userAnswer + " ✘\nCorrect Answer: " + correctAnswer;
+          resultTd.innerText += " ✘";
           resultTd.classList.add( "wrong-answer" );
+          resultTd.classList.add( "tooltip" );
+          var correctAnswerSpan = document.createElement( 'span' );
+          correctAnswerSpan.innerText = correctAnswer;
+          correctAnswerSpan.classList.add( 'tooltip-text' );
+          resultTd.appendChild( correctAnswerSpan );
         }
 
         resultRow.appendChild( questionTextTd );
