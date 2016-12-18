@@ -25,3 +25,14 @@
 .wrong-answer {
   color: tomato;
 }
+
+table {
+  border-collapse: separate;
+  border-spacing: 20px;
+}
+
+td {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+}
