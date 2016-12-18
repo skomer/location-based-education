@@ -32,8 +32,9 @@ window.onload = function() {
         var correctAnswer = countriesServer.nameForCode( question.answer );
 
         var resultRow = document.createElement( 'tr' );
-        var questionTextTd = document.createElement( 'td' );
         var questionNumber = (index + 1).toString();
+        resultRow.id = 'question-' + questionNumber;
+        var questionTextTd = document.createElement( 'td' );
         questionTextTd.innerText = "Q" + questionNumber + ". " + questionText;
         var resultTd = document.createElement( 'td' );
         resultTd.innerText = userAnswer;
@@ -44,6 +45,7 @@ window.onload = function() {
         resultsTableBody.appendChild( resultRow );
 
         marks[index] = {
+          questionNumber: questionNumber,
           td: resultTd,
           correct: userAnswer === correctAnswer,
           correctAnswer: correctAnswer
@@ -79,7 +81,7 @@ var updateScore = function( scoreIncrease ) {
     scoreP.classList.remove( 'pulse-green' );
     setTimeout( function() {
       scoreP.classList.add( 'pulse-green' );
-    }, 1 );
+    }, 10 );
   }
 };
 
@@ -88,6 +90,9 @@ var scoreQuestion = function( mark, timeoutLength ) {
     var td = mark.td;
     var correct = mark.correct;
     var correctAnswer = mark.correctAnswer;
+
+    window.location.href = "#";
+    window.location.href = "#question-" + mark.questionNumber;
 
     if ( correct ) {
       td.innerText += " ✔";
