@@ -70,6 +70,10 @@ window.onload = function() {
         })( aMark );
         i++;
       }
+
+      setTimeout( function() {
+        window.scrollTo( 0, 0 );
+      }, i * 1000 );
     });
   });
 };
