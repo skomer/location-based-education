@@ -6,7 +6,7 @@ var updateScoreTd;
 var scoreQuestion;
 
 // DOM elements
-var scoreTd;
+var scoreP;
 var scoreOutOf;
 
 // variables
@@ -53,14 +53,12 @@ window.onload = function() {
       var totalTextTd = document.createElement( 'td' );
       totalTextTd.classList.add( 'empty-cell' );
       totalTextTd.innerText = "";
-      scoreTd = document.createElement( 'td' );
-      scoreTd.id = "total-score-td";
+      scoreP = document.getElementById( 'score-p' );
       scoreOutOf = quiz.questions.length.toString();
-      updateScoreTd( 0 );
+      updateScore( 0 );
 
       var totalScoreTr = document.createElement( 'tr' );
       totalScoreTr.appendChild( totalTextTd );
-      totalScoreTr.appendChild( scoreTd );
       resultsTableBody.appendChild( totalScoreTr );
 
       var i = 1;
@@ -74,13 +72,13 @@ window.onload = function() {
   });
 };
 
-var updateScoreTd = function( scoreIncrease ) {
+var updateScore = function( scoreIncrease ) {
   score += scoreIncrease;
-  scoreTd.innerText = score.toString() + " / " + scoreOutOf;
+  scoreP.innerText = score.toString() + " / " + scoreOutOf;
   if ( scoreIncrease > 0 ) {
-    scoreTd.classList.remove( 'pulse-green' );
+    scoreP.classList.remove( 'pulse-green' );
     setTimeout( function() {
-      scoreTd.classList.add( 'pulse-green' );
+      scoreP.classList.add( 'pulse-green' );
     }, 1 );
   }
 };
@@ -94,7 +92,7 @@ var scoreQuestion = function( mark, timeoutLength ) {
     if ( correct ) {
       td.innerText += " ✔";
       td.classList.add( "correct-answer" );
-      updateScoreTd( 1 );
+      updateScore( 1 );
     }
     else {
       td.innerText += " ✘";

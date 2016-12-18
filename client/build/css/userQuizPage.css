@@ -46,12 +46,6 @@ td, .tooltip .tooltip-text {
   padding: 15px;
 }
 
-#total-score-td {
-  text-align: center;
-  font-size: 1.5em;
-  background-color: white;
-}
-
 td.empty-cell {
   background-color: inherit;
 }
@@ -77,16 +71,42 @@ td.empty-cell {
 
 @keyframes pulse {
   0% {
-    background: white;
+    background: gainsboro;
   }
   50% {
     background: limegreen;
   }
   100% {
-    background: white;
+    background: gainsboro;
   }
 }
 
 .pulse-green {
   animation: pulse 0.7s ease-in-out;
+}
+
+#padding-under-score-bar, #score-bar {
+  height: 100px;
+}
+
+#score-bar {
+  background-color: gainsboro;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid white;
+}
+
+#score-p {
+  display: inline-block;
+  background-color: white;
+  width: 200px;
+  border-radius: 10px;
+  font-size: 2em;
+  padding: 0px;
+  margin-top: 20px;;
 }
