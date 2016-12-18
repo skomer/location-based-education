@@ -45,6 +45,11 @@ td, .tooltip .tooltip-text {
   padding: 15px;
 }
 
+#total-score-row td {
+  background-color: inherit;
+  font-size: 1.5em;
+}
+
 
 /* TOOLTIPS */
 .tooltip {

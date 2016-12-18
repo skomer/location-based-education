@@ -13,6 +13,9 @@ window.onload = function() {
       console.log( "user answers:", userAnswers );
 
       quizTitleH2.innerText = quiz.title;
+
+      var score = 0;
+
       quiz.questions.forEach( function( question, index ) {
         var questionText = question.text;
         var userAnswer = countriesServer.nameForCode( userAnswers[index] );
@@ -27,6 +30,7 @@ window.onload = function() {
         if ( userAnswer === correctAnswer ) {
           resultTd.innerText += " ✔";
           resultTd.classList.add( "correct-answer" );
+          score += 1;
         }
         else {
           resultTd.innerText += " ✘";
@@ -42,6 +46,18 @@ window.onload = function() {
         resultRow.appendChild( resultTd );
         resultsTableBody.appendChild( resultRow );
       });
+
+      var totalTextTd = document.createElement( 'td' );
+      totalTextTd.innerText = "";
+      var scoreTd = document.createElement( 'td' );
+      var scoreOutOf = quiz.questions.length.toString();
+      scoreTd.innerText = score.toString() + " / " + scoreOutOf;
+
+      var totalScoreTr = document.createElement( 'tr' );
+      totalScoreTr.id = "total-score-row";
+      totalScoreTr.appendChild( totalTextTd );
+      totalScoreTr.appendChild( scoreTd );
+      resultsTableBody.appendChild( totalScoreTr );
     });
   });
 };
