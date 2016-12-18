@@ -21,10 +21,14 @@ window.onload = function() {
     questionListView.addQuestion();
   };
 
+
 // checks that all the inputs are valid before saving quiz
 saveQuizButton.onclick = function() {
   var warningFlag = false;
-  var checkQuiz = new Boolean;
+
+  var x = document.getElementById("check-publish").checked;
+  document.getElementById("save-div").innerHtml = x;
+
 
     // var liInputTag = document.getElementById('');
 
@@ -62,18 +66,19 @@ saveQuizButton.onclick = function() {
           console.log("saving the quiz");
           saveQuiz()
         }
+        
 }
+
 
 checkQuizType.onclick = function(){
-
-  var checkQuizType = new Boolean;
-
-  if(checkQuizType === true ){
-  console.log("quiz is selected");
-  }
-
-  saveQuiz()
+  var checkQuiz = new Boolean(true || false);
 }
+
+newQuestionButton.onclick = function() {
+  ulWarning.style.display = "none";
+  questionListView.addQuestion();
+};
+
 
 // contacts quiz server to post the quiz to the db
 var saveQuiz = function(){
@@ -82,9 +87,8 @@ var saveQuiz = function(){
   arrayOfQuestions = ulTag.children;
   var questions = [];
   // -----------------------------------------------------------
-  var isPublished = new Boolean(true);
+  var isPublished = new Boolean(true || false);
   // -----------------------------------------------------------
-
 
   for (var i = 0; i < arrayOfQuestions.length; i++) {
     var text = arrayOfQuestions[i].firstChild.value;
