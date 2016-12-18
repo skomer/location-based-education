@@ -16,7 +16,7 @@ window.onload = function() {
   var quizTitleH2 = document.getElementById( 'quiz-title' );
   var resultsTableBody = document.getElementById( 'results-table-body' );
 
-  var userAnswers = [ 'AF', 'BB', 'AF', 'FR' ];
+  var userAnswers = [ 'AF', 'BB', 'AF', 'FR', 'MA' ];
 
   var countriesServer = new CountriesServer( function() {
     quizServer.getQuizById( '-KZCcaO1hToqpMhfHnls', function( quiz ) {
@@ -51,6 +51,7 @@ window.onload = function() {
       });
 
       var totalTextTd = document.createElement( 'td' );
+      totalTextTd.classList.add( 'empty-cell' );
       totalTextTd.innerText = "";
       scoreTd = document.createElement( 'td' );
       scoreTd.id = "total-score-td";
@@ -58,7 +59,6 @@ window.onload = function() {
       updateScoreTd( 0 );
 
       var totalScoreTr = document.createElement( 'tr' );
-      totalScoreTr.id = "total-score-row";
       totalScoreTr.appendChild( totalTextTd );
       totalScoreTr.appendChild( scoreTd );
       resultsTableBody.appendChild( totalScoreTr );

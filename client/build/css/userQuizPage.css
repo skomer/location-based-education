@@ -46,13 +46,14 @@ td, .tooltip .tooltip-text {
   padding: 15px;
 }
 
-#total-score-row td {
-  background-color: inherit;
-  font-size: 1.5em;
-}
-
 #total-score-td {
   text-align: center;
+  font-size: 1.5em;
+  background-color: white;
+}
+
+td.empty-cell {
+  background-color: inherit;
 }
 
 /* TOOLTIPS */
