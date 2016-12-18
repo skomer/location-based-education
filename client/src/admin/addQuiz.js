@@ -24,6 +24,7 @@ window.onload = function() {
 // checks that all the inputs are valid before saving quiz
 saveQuizButton.onclick = function() {
   var warningFlag = false;
+  var checkQuiz = new Boolean;
 
     // var liInputTag = document.getElementById('');
 
@@ -63,6 +64,16 @@ saveQuizButton.onclick = function() {
         }
 }
 
+checkQuizType.onclick = function(){
+
+  var checkQuizType = new Boolean;
+
+  if(checkQuizType === true ){
+  console.log("quiz is selected");
+  }
+
+  saveQuiz()
+}
 
 // contacts quiz server to post the quiz to the db
 var saveQuiz = function(){
@@ -91,7 +102,7 @@ var saveQuiz = function(){
     title: quizTitle,
     questions: questions,
   // -----------------------------------------------------------
-    publishable: isPublished
+    publish: isPublished
   // -----------------------------------------------------------
 
   };
