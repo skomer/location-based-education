@@ -77,6 +77,12 @@ window.onload = function() {
 var updateScoreTd = function( scoreIncrease ) {
   score += scoreIncrease;
   scoreTd.innerText = score.toString() + " / " + scoreOutOf;
+  if ( scoreIncrease > 0 ) {
+    scoreTd.classList.remove( 'pulse-green' );
+    setTimeout( function() {
+      scoreTd.classList.add( 'pulse-green' );
+    }, 10 );
+  }
 };
 
 var scoreQuestion = function( mark, timeoutLength ) {

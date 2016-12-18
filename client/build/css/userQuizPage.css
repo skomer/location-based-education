@@ -74,3 +74,19 @@ td.empty-cell {
     top: 0px;
     left: 110%;
 }
+
+@keyframes pulse {
+  0% {
+    background: white;
+  }
+  50% {
+    background: limegreen;
+  }
+  100% {
+    background: white;
+  }
+}
+
+.pulse-green {
+  animation: pulse 0.7s ease-in-out;
+}
