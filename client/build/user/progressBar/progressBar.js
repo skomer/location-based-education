@@ -7,7 +7,7 @@ function progressBar() {
   var bgHeight = 500;
 
   nextButton.onclick = function() {
-    draw(10, 6);
+    draw(10, 4);
   };
 
   function draw(segments, position) {
@@ -24,10 +24,10 @@ function progressBar() {
 
     // progress rectangle
     ctx.fillStyle = 'green';
-    ctx.fillRect(0, bgHeight - pHeight * (segments - position), pWidth, pHeight * position);
+    ctx.fillRect(0, pHeight * (segments - position), pWidth, pHeight * position);
     console.log(
       "x: " + 0
-      + "\ny: " + (bgHeight - pHeight * (segments - position))
+      + "\ny: " + (pHeight * (segments - position))
       + "\npWidth: " + pWidth
       + "\npHeight*position: " + (pHeight * position)
       );
