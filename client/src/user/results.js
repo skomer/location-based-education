@@ -53,6 +53,7 @@ window.onload = function() {
       var totalTextTd = document.createElement( 'td' );
       totalTextTd.innerText = "";
       scoreTd = document.createElement( 'td' );
+      scoreTd.id = "total-score-td";
       scoreOutOf = quiz.questions.length.toString();
       updateScoreTd( 0 );
 

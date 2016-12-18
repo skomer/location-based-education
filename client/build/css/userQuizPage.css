@@ -51,6 +51,9 @@ td, .tooltip .tooltip-text {
   font-size: 1.5em;
 }
 
+#total-score-td {
+  text-align: center;
+}
 
 /* TOOLTIPS */
 .tooltip {
