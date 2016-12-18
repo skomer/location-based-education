@@ -1,27 +1,26 @@
 
+function progressBar() {
 
-window.onload = function() {
+  var nextButton = document.getElementById( 'pretend-next-button' );
+  
+  
+  
+  nextButton.onclick = function() {
+    draw(10, 6);
+  };
 
-  var canvas = document.getElementById('progress-bar');
-  var ctx = canvas.getContext('2d');
-
-  var progressBar = function() {
+  function draw(segments, position) {
+    var canvas = document.getElementById('progress-bar');
+    var ctx = canvas.getContext('2d');
 
     ctx.lineWidth = 3;
     ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, 45, 500);
-
-  }
-
-  var draw = function() {
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-    progressBar.draw();
-  }
-
-  canvas.onclick = progressBar;
-
-}
+  };
 
 
+};
+
+window.onload = progressBar;
 
 
