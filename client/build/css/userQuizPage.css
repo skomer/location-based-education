@@ -29,6 +29,7 @@
 table {
   border-collapse: separate;
   border-spacing: 20px;
+  margin: 0 auto;
 }
 
 td {
