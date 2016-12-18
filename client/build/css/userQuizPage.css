@@ -71,13 +71,13 @@ td.empty-cell {
 
 @keyframes pulse {
   0% {
-    background: gainsboro;
+    background: white;
   }
   50% {
     background: limegreen;
   }
   100% {
-    background: gainsboro;
+    background: white;
   }
 }
 
