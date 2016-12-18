@@ -11,6 +11,9 @@ window.onload = function() {
   var questionListView = new QuestionListView();
   var ulWarning = document.getElementById('ul-warning');
   var ulTag = document.getElementById('questions-list');
+  // -----------------------------------------------------------
+  var checkQuizType  = document.getElementById('check-publish');
+  // -----------------------------------------------------------
 
 
   newQuestionButton.onclick = function() {
@@ -18,10 +21,9 @@ window.onload = function() {
     questionListView.addQuestion();
   };
 
-// checks that all the inputs are vlaid before saving quiz
+// checks that all the inputs are valid before saving quiz
 saveQuizButton.onclick = function() {
   var warningFlag = false;
-
 
     // var liInputTag = document.getElementById('');
 
@@ -68,6 +70,10 @@ var saveQuiz = function(){
 
   arrayOfQuestions = ulTag.children;
   var questions = [];
+  // -----------------------------------------------------------
+  var isPublished = new Boolean(true);
+  // -----------------------------------------------------------
+
 
   for (var i = 0; i < arrayOfQuestions.length; i++) {
     var text = arrayOfQuestions[i].firstChild.value;
@@ -80,9 +86,14 @@ var saveQuiz = function(){
     questions.push(question);
   }
 
+
   var quiz = {
     title: quizTitle,
-    questions: questions
+    questions: questions,
+  // -----------------------------------------------------------
+    publishable: isPublished
+  // -----------------------------------------------------------
+
   };
   quizServer.createQuiz( quiz );
   window.location.href = "http://localhost:3000/admin/quizzes";
