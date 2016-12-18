@@ -23,9 +23,10 @@ window.onload = function() {
 
         var resultRow = document.createElement( 'tr' );
         var questionTextTd = document.createElement( 'td' );
-        questionTextTd.innerText = questionText;
+        var questionNumber = (index + 1).toString();
+        questionTextTd.innerText = "Q" + questionNumber + ". " + questionText;
         var resultTd = document.createElement( 'td' );
-        resultTd.innerText = userAnswer
+        resultTd.innerText = userAnswer;
 
         if ( userAnswer === correctAnswer ) {
           resultTd.innerText += " ✔";
