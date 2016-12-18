@@ -24,10 +24,13 @@ function progressBar() {
 
     // progress rectangle
     ctx.fillStyle = 'green';
-    ctx.fillRect(0, 0 + bgHeight - pHeight, pWidth, pHeight);
-
-
-
+    ctx.fillRect(0, bgHeight - pHeight * (segments - position), pWidth, pHeight * position);
+    console.log(
+      "x: " + 0
+      + "\ny: " + (bgHeight - pHeight * (segments - position))
+      + "\npWidth: " + pWidth
+      + "\npHeight*position: " + (pHeight * position)
+      );
 
   };
 
@@ -35,5 +38,10 @@ function progressBar() {
 };
 
 window.onload = progressBar;
+
+
+
+
+
 
 
