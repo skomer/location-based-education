@@ -1,6 +1,17 @@
 var CountriesServer = require('../models/countriesServer');
 var quizServer = require('../models/quizServer');
 
+// functions
+var updateScoreTd;
+var scoreQuestion;
+
+// DOM elements
+var scoreTd;
+var scoreOutOf;
+
+// variables
+var score = 0;
+
 window.onload = function() {
   var quizTitleH2 = document.getElementById( 'quiz-title' );
   var resultsTableBody = document.getElementById( 'results-table-body' );
@@ -41,9 +52,9 @@ window.onload = function() {
 
       var totalTextTd = document.createElement( 'td' );
       totalTextTd.innerText = "";
-      var scoreTd = document.createElement( 'td' );
-      var scoreOutOf = quiz.questions.length.toString();
-      scoreTd.innerText = 0 + " / " + scoreOutOf;
+      scoreTd = document.createElement( 'td' );
+      scoreOutOf = quiz.questions.length.toString();
+      updateScoreTd( 0 );
 
       var totalScoreTr = document.createElement( 'tr' );
       totalScoreTr.id = "total-score-row";
@@ -62,7 +73,12 @@ window.onload = function() {
   });
 };
 
-function scoreQuestion( mark, timeoutLength ) {
+var updateScoreTd = function( scoreIncrease ) {
+  score += scoreIncrease;
+  scoreTd.innerText = score.toString() + " / " + scoreOutOf;
+};
+
+var scoreQuestion = function( mark, timeoutLength ) {
   setTimeout( function () {
     var td = mark.td;
     var correct = mark.correct;
@@ -71,6 +87,7 @@ function scoreQuestion( mark, timeoutLength ) {
     if ( correct ) {
       td.innerText += " ✔";
       td.classList.add( "correct-answer" );
+      updateScoreTd( 1 );
     }
     else {
       td.innerText += " ✘";
