@@ -26,7 +26,7 @@
   color: tomato;
 }
 
-.correct-answer, .wrong-answer {
+.answer {
   width: 150px;
 }
 
@@ -38,6 +38,7 @@ table {
 
 td {
   background-color: white;
+  text-align: left;
 }
 
 td, .tooltip .tooltip-text {
