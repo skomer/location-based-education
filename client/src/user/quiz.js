@@ -21,14 +21,13 @@ var startQuiz = function( fetchedQuiz ) {
   console.log( "fetched quiz:", fetchedQuiz );
   var titleP = document.getElementById('quiz-title');
   titleP.innerText = fetchedQuiz.title;
-  var quizManager = new QuizManager( fetchedQuiz.questions );
+  var quizManager = new QuizManager( fetchedQuiz );
   quizManager.startQuiz( showResults );
 }
 
-var showResults = function( questions, userAnswers ) {
+var showResults = function( quiz ) {
   takeQuizDiv.style.display = 'none';
   resultsDiv.style.display = 'block';
-  console.log( "user answers:", userAnswers );
-  var resultsManager = new ResultsManager( questions, userAnswers );
+  var resultsManager = new ResultsManager( quiz );
   resultsManager.scoreQuiz();
 };

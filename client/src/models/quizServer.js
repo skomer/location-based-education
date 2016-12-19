@@ -1,4 +1,5 @@
 var xmlHttpHelper = require('../helpers/xmlHttpHelper');
+var Quiz = require('./quiz');
 
 var quizServer = {
   getAllQuizzes: function( callback ) {
@@ -17,8 +18,8 @@ var quizServer = {
   },
   getQuizById: function( id, callback ) {
     var url = "http://localhost:3000/quizzes/" + id;
-    xmlHttpHelper.makeGetRequest( url, function( quiz ) {
-      callback( quiz );
+    xmlHttpHelper.makeGetRequest( url, function( quizData ) {
+      callback( new Quiz( quizData ) );
     });
   },
   createQuiz: function( quiz ) {

@@ -1,11 +1,10 @@
-var ResultsManager = function( questions, userAnswers ) {
+var ResultsManager = function( quiz ) {
 
-  this.questions = questions;
-  this.userAnswers = userAnswers;
+  this.quiz = quiz;
 
   this.tableBody = document.getElementById( 'results-table-body' );
   this.scoreP = document.getElementById( 'score-p' );
-  this.scoreOutOf = questions.length.toString();
+  this.scoreOutOf = this.quiz.length().toString();
 
   var returnToQuizzesButton = document.getElementById( 'return-to-quizzes-button' );
   returnToQuizzesButton.onclick = function() {
@@ -13,7 +12,6 @@ var ResultsManager = function( questions, userAnswers ) {
   };
 
   this.score = 0;
-  this.marks = [];
 };
 
 ResultsManager.prototype = {
@@ -22,65 +20,51 @@ ResultsManager.prototype = {
     this.runScoringAnimation();
   },
   populateTable: function() {
-    this.questions.forEach( function( question, index ) {
-      var questionText = question.text;
-      var userCountryCode = this.userAnswers[index].countryCode;
-      var userCountryName = this.userAnswers[index].countryName;
-      var correctCountryCode = question.countryCode;
-      var correctCountryName = question.countryName;
-      var questionNumber = index + 1;
+    var questionNumber = 1;
+    this.quiz.questions.forEach( function( question ) {
 
-      var resultsRow = this.createResultsRow( questionNumber, questionText, userCountryName );
-      var userAnaswerTd = resultsRow.querySelector( '.answer' );
-      this.tableBody.appendChild( resultsRow );
+      var questionTextTd = document.createElement( 'td' );
+      questionTextTd.innerText = "Q" + questionNumber + ". " + question.text;
 
-      this.marks[index] = {
-        questionNumber: questionNumber,
-        td: userAnaswerTd,
-        correct: userCountryCode === correctCountryCode,
-        correctAnswer: correctCountryName
-      };
+      var userAnswerTd = document.createElement( 'td' );
+      userAnswerTd.innerText = question.userAnswer.countryName;
+      userAnswerTd.classList.add( 'answer' );
+      question.userAnswerTd = userAnswerTd;
+      question.number = questionNumber;
+
+      var resultRow = document.createElement( 'tr' );
+      resultRow.id = 'question-' + questionNumber;
+      resultRow.appendChild( questionTextTd );
+      resultRow.appendChild( userAnswerTd );
+
+      this.tableBody.appendChild( resultRow );
+      questionNumber++;
     }.bind( this ) );
-  },
-  createResultsRow: function( questionNumber, questionText, userAnswer ) {
-    var questionTextTd = document.createElement( 'td' );
-    questionTextTd.innerText = "Q" + questionNumber + ". " + questionText;
-
-    var userAnswerTd = document.createElement( 'td' );
-    userAnswerTd.innerText = userAnswer;
-    userAnswerTd.classList.add( 'answer' );
-
-    var resultRow = document.createElement( 'tr' );
-    resultRow.id = 'question-' + questionNumber;
-    resultRow.appendChild( questionTextTd );
-    resultRow.appendChild( userAnswerTd );
-    return resultRow;
   },
   runScoringAnimation: function() {
     this.updateScore( 0 );
     var i = 1;
-
-    for ( aMark of this.marks ) {
-      (function( mark ) {
+    this.quiz.questions.forEach( function( aQuestion ) {
+      (function( question ) {
         console.log("this:", this);
-        this.scoreQuestion( mark , i * 1000 );
-      }.bind( this ) )( aMark );
+        this.scoreQuestion( question , i * 1000 );
+      }.bind( this ) )( aQuestion );
       i++;
-    }
+    }.bind( this ) );
 
     // set timeout for scrolling back to top after all questions are marked
     setTimeout( function() {
       window.scrollTo( 0, 0 );
     }, i * 1000 );
   },
-  scoreQuestion: function( mark, timeoutLength ) {
+  scoreQuestion: function( question, timeoutLength ) {
     setTimeout( function () {
-      var td = mark.td;
+      var td = question.userAnswerTd;
 
       window.location.href = "#";
-      window.location.href = "#question-" + mark.questionNumber;
+      window.location.href = "#question-" + question.questionNumber;
 
-      if ( mark.correct ) {
+      if ( question.isCorrect() ) {
         td.innerText += " ✔";
         td.classList.add( "correct-answer" );
         this.updateScore( 1 );
@@ -89,7 +73,7 @@ ResultsManager.prototype = {
         td.innerText += " ✘";
         td.classList.add( "wrong-answer" );
         td.classList.add( "tooltip" );
-        this.createCorrectAnswerFor( td, mark.correctAnswer );
+        this.createCorrectAnswerFor( td, question.answer.countryName );
       }
     }.bind( this ), timeoutLength );
   },

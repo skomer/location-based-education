@@ -8,7 +8,16 @@ var Quiz = function(params){
   }
   else {
     this.title = params.title;
-    this.questions = params.questions;
+    this.questions = params.questions.map( function( question ) {
+      return questionObject = new Question({
+        text: question.text,
+        answer: {
+          countryCode: question.countryCode,
+          countryName: question.countryName
+        },
+        archived: question.archived
+      });
+    });
     this.published = params.published;
     this.currentQuestionIndex = 0;
   }
@@ -51,7 +60,7 @@ Quiz.prototype = {
     return this.currentQuestion();
   },
   onLastQuestion: function() {
-    return this.currentQuestionIndex === this.length() - 1;
+    return this.currentQuestionIndex === this.length();
   },
   length: function() {
     return this.questions.length;
