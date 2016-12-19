@@ -22,8 +22,23 @@ var MapHelper = function(container, lat, lng, defaultZoom, helperCallback){
         center: defaultCenter, zoom: defaultZoom
       }
     );
+    google.maps.event.addListener(this.map, "click", function(ev){
+      var latLng = {
+        lat: ev.latLng.lat(),
+        lng: ev.latLng.lng()
+      }
+      console.log("map clicked at", latLng);
+    });
+
     helperCallback();
-  }
+
+  };
 };
+
+MapHelper.prototype = {
+
+
+
+}
 
 module.exports = MapHelper;
