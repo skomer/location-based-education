@@ -12,6 +12,8 @@ window.onload = function() {
   var ulWarning = document.getElementById('ul-warning');
   var unArchivedQuestionsTag = document.getElementById('questions-list');
   var archivedQuestionsTag = document.getElementById('archive-list');
+  var archiveDiv = document.getElementById('archive-div');
+  archiveDiv.style.display = "none";
   var showArchiveButton = document.getElementById('show-archive-button');
   var published;
 
@@ -22,9 +24,8 @@ window.onload = function() {
 
   showArchiveButton.onclick = function() {
     console.log("showArchiveButton onclick");
-  }
-
-
+    archiveDiv.style.display === "none" ? archiveDiv.style.display = "inline-block" : archiveDiv.style.display = "none";
+  };
 
   // checks that all the inputs are valid before saving quiz
   saveQuizButton.onclick = function() {
