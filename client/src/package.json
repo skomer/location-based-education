@@ -1,7 +1,6 @@
 {
   "name": "src",
   "version": "1.0.0",
-  "description": "",
   "main": "values.js",
   "scripts": {
     "test": "mocha specs"
@@ -10,5 +9,6 @@
   "license": "ISC",
   "devDependencies": {
     "mocha": "^3.2.0"
-  }
+  },
+  "description": ""
 }

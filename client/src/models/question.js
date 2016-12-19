@@ -13,6 +13,13 @@ Question.prototype = {
     } else {
       return "Saved"
     }
+  },
+  save2: function(){
+    if(!this.countryName){
+      return "Not saved"
+    } else {
+      return "Saved"
+    }
   }
 };
     
