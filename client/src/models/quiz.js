@@ -1,3 +1,5 @@
+var Question = require('./question');
+
 var Quiz = function(params){
   if ( typeof( params ) === 'string' ) {
     this.title = params;
@@ -12,7 +14,15 @@ var Quiz = function(params){
 }
 
 Quiz.prototype = {
-  addQuestion: function( question ) {
+  addQuestion: function( text, countryCode, countryName, archived ) {
+    var question = new Question({
+      text: text,
+      answer: {
+        countryCode: countryCode,
+        countryName: countryName
+      },
+      archived: archived
+    });
     this.questions.push( question );
   },
   isSaveable: function() {
