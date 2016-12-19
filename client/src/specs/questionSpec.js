@@ -4,14 +4,16 @@ var Question = require('../models/question');
 
 describe("Question", function(){
   beforeEach(function(){
-    question = new Question("Country contains Paris", "France");
+    question = new Question("Country contains Paris", "France", "FR", "France");
   });
   
   it("should have text passed in constructor", function(){
     assert.equal("Country contains Paris", question.question);
   });
 
-  it("should have country code passed in constructor");
+  it("should have country code passed in constructor", function(){
+    assert.equal("FR", question.countryCode);
+  });
 
   it("should have country name passed in constructor");
 
