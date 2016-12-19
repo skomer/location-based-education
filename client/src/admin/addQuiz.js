@@ -14,38 +14,45 @@ window.onload = function() {
   var archivedQuestionsTag = document.getElementById('archive-list');
   var published;
 
-  // checks that all the inputs are vlaid before saving quiz
-  saveQuizButton.onclick = function() {
-    var warningFlag = false;
-
-    published = document.getElementById("check-publish").checked;
-
-    // WORK IN PROGRESS - error messages for creating quiz
-    if (quizTitleInput.innerText === undefined) {
-      var titleWarning = document.getElementById('title-warning');
-      titleWarning.style.display = "inline-block";
-      warningFlag === true;
-    };
-    if (unArchivedQuestionsTag.children.length === 0) {
-      ulWarning.style.display = "inline-block";
-      warningFlag === true;
-    };
-    if ( unArchivedQuestionsTag.firstChild === null || unArchivedQuestionsTag.firstChild.firstChild.value === "" ) {
-      var questionWarning = document.getElementById('question-warning');
-      questionWarning.style.display = "inline-block";
-      warningFlag === true;
-    };
-    if (warningFlag === false){
-      console.log("saving the quiz");
-      saveQuiz()
-    };
-  };
-
   newQuestionButton.onclick = function() {
     ulWarning.style.display = "none";
     questionListView.addQuestion();
   };
 
+  // checks that all the inputs are vlaid before saving quiz
+  saveQuizButton.onclick = function() {
+    var warningText = "";
+
+    published = document.getElementById("check-publish").checked;
+
+    // WORK IN PROGRESS - error messages for creating quiz
+    if (quizTitleInput.innerText === "") {
+      var titleWarning = document.getElementById('title-warning');
+      titleWarning.style.display = "inline-block";
+      warningText = "Please enter a quiz title";
+    };
+    if (unArchivedQuestionsTag.children.length === 0) {
+      ulWarning.style.display = "inline-block";
+      warningText = "PLease enter a question";
+    };
+    if (unArchivedQuestionsTag.children.length)
+
+      // loop through ul tag.children, if ultag.children[i] is undefined or empty, then display the warning!
+      for(var i = 0; i < ulTag.children.length; i++){
+        if ( ulTag.children[i] === undefined || ulTag.firstChild.firstChild.value === "" ) {
+          var questionWarning = document.getElementById('question-warning');
+          questionWarning.style.display = "inline-block";
+          warningText = "Enter something please!";
+        }
+      }
+      
+      if (warningText = ""){
+        alert("issue with data");
+      } else { 
+        console.log("saving the quiz");
+        // saveQuiz()
+      } 
+  };
 
 
   // contacts quiz server to post the quiz to the db
@@ -94,7 +101,6 @@ window.onload = function() {
       questions: questions,
       published: published
     };
-    console.log("whole quiz", quiz);
     quizServer.createQuiz( quiz );
     window.location.href = "http://localhost:3000/admin/quizzes";
   };
