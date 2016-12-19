@@ -19,7 +19,6 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       lng: ev.latLng.lng()
     };
     console.log("map clicked at", latLng);
-    console.log(this);
     this.decodeCountry(latLng, function( countryCode, countryName){
       mapClickCallback(countryCode, countryName);
     });
