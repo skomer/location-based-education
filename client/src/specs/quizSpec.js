@@ -3,15 +3,21 @@ var Quiz = require('../models/quiz');
 
 describe('Quiz', function(){
 beforeEach(function(){
-  quiz = new Quiz("quiz1");
+  quiz = new Quiz("quiz1" ,[]);
 })
   it("should have title of quiz passed into constructor", function(){
-    var quizDataStub = {
-      title: "test title"
-    };
-    var result = new Quiz(quizDataStub);
-    assert.equal("test title", result.title);
+    assert.equal("quiz1", quiz.title);
   });
+
+
+
+
+
+
+
+
+
+
 
   it("should have same number of questions passed into constructor");
 

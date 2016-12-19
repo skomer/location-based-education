@@ -1,5 +1,5 @@
-var Quiz = function(quizData){
-  this.title = quizData.title;
+var Quiz = function(title, questions){
+  this.title = title;
   this.questions = [];
 };
 
