@@ -15,7 +15,9 @@ describe("Question", function(){
     assert.equal("FR", question.countryCode);
   });
 
-  it("should have country name passed in constructor");
+  it("should have country name passed in constructor", function(){
+    assert.equal("France", question.countryName);
+  });
 
   it("should have archived boolean passed in constructor");
 
