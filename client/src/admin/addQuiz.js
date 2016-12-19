@@ -11,34 +11,18 @@ window.onload = function() {
   var questionListView = new QuestionListView();
   var ulWarning = document.getElementById('ul-warning');
   var ulTag = document.getElementById('questions-list');
-
+  var published;
 
   newQuestionButton.onclick = function() {
     ulWarning.style.display = "none";
     questionListView.addQuestion();
   };
 
-// checks that all the inputs are vlaid before saving quiz
+// checks that all the inputs are valid before saving quiz
 saveQuizButton.onclick = function() {
   var warningFlag = false;
-
-
-    // var liInputTag = document.getElementById('');
-
-        /* if (title input is empty) {
-          display title warning
-        }
-        else if (the questions list (ul) has no questions) {
-          display ul warning
-        }
-        else {
-          for all list items in ul list {
-            if (the list item input is empty) {
-              display list item warning for that input
-            }
-          }
-        }
-        */
+ 
+  published = document.getElementById("check-publish").checked;
 
         // WORK IN PROGRESS - error messages for creating quiz
         if (quizTitleInput.innerText === undefined) {
@@ -58,9 +42,13 @@ saveQuizButton.onclick = function() {
         if (warningFlag === false){
           console.log("saving the quiz");
           saveQuiz()
-        }
+        } 
 }
 
+newQuestionButton.onclick = function() {
+  ulWarning.style.display = "none";
+  questionListView.addQuestion();
+};
 
 // contacts quiz server to post the quiz to the db
 var saveQuiz = function(){
@@ -69,34 +57,29 @@ var saveQuiz = function(){
   arrayOfQuestions = ulTag.children;
   var questions = [];
 
+
   for (var i = 0; i < arrayOfQuestions.length; i++) {
     var text = arrayOfQuestions[i].firstChild.value;
     var answerIndex = arrayOfQuestions[i].lastChild.selectedIndex;
-    var answer = arrayOfQuestions[i].lastChild[answerIndex].value;
+    var answerCode = arrayOfQuestions[i].lastChild[answerIndex].value;
+    var answerFullName = arrayOfQuestions[i].lastChild[answerIndex].innerText;
+
     var question = {
       text: text,
-      answer: answer
+      countryCode: answerCode,
+      countryName: answerFullName  
+
     };
     questions.push(question);
   }
 
   var quiz = {
     title: quizTitle,
-    questions: questions
+    questions: questions,
+    published: published
+
   };
   quizServer.createQuiz( quiz );
   window.location.href = "http://localhost:3000/admin/quizzes";
 };
 };
-
-
-
-
-
-
-
-
-
-
-
-
