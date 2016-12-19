@@ -5,6 +5,7 @@ var Question = require('../models/question');
 describe("Question", function(){
   beforeEach(function(){
     question = new Question("Country contains Paris", "France", "FR", "France");
+    questionWithBlankCode = new Question("Country contains Paris", "France", "", "France");
   });
   
   it("should have text passed in constructor", function(){
@@ -28,7 +29,9 @@ describe("Question", function(){
 
   // SAVEABLE
 
-  it("should not be saveable if country code is blank");
+  it("should not be saveable if country code is blank", function() {
+    assert.equal( "Not saved", questionWithBlankCode.save() );
+  });
 
   it("should not be saveable if country name is blank");
 

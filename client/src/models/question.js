@@ -6,4 +6,15 @@ var Question = function(question, answer, countryCode, countryName){
   this.archived = true;
 };
 
+Question.prototype = {
+  save: function(){
+    if(!this.countryCode){
+      return "Not saved"
+    } else {
+      return "Saved"
+    }
+  }
+};
+    
+
 module.exports = Question;
