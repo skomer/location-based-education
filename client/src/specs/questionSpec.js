@@ -7,6 +7,7 @@ describe("Question", function(){
     question = new Question("Country contains Paris", "France", "FR", "France");
     qNoCountryCode = new Question("Country contains Paris", "France", "", "France");
     qNoCountryName = new Question("Country contains Paris", "France", "FR", "");
+    qNoText = new Question("", "Italy", "IT", "Italy");
   });
   
   it("should have text passed in constructor", function(){
@@ -38,6 +39,8 @@ describe("Question", function(){
     assert.equal( "Not saved", qNoCountryName.save2()  );
   });
 
-  it("should not be saveable if text is blank");
+  it("should not be saveable if text is blank", function(){
+    assert.equal( "Not saved", qNoText.save3() );
+  });
 
 });

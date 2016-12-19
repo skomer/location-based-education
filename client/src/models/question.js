@@ -20,6 +20,13 @@ Question.prototype = {
     } else {
       return "Saved"
     }
+  },
+  save3: function(){
+    if(!this.question){
+      return "Not saved"
+    } else {
+      return "Saved"
+    }
   }
 };
     
