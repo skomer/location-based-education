@@ -19,7 +19,12 @@ describe("Question", function(){
     assert.equal("France", question.countryName);
   });
 
-  it("should have archived boolean passed in constructor");
+  it("should have archived boolean passed in constructor", function(){
+    question.archived = false;
+    assert.equal(false, question.archived);
+    question.archived = true;
+    assert.equal(true, question.archived);
+  });
 
   // SAVEABLE
 
