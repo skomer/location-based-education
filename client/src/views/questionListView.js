@@ -3,6 +3,7 @@ var CountriesServer = require('../models/countriesServer');
 var QuestionListView = function() {
   this.questionList = document.getElementById('questions-list');
   this.selectCountry = document.getElementById('countries-select');
+  this.archiveList = document.getElementById('archive-list');
 };
 
 QuestionListView.prototype = {
@@ -19,9 +20,12 @@ QuestionListView.prototype = {
 
     var archiveButton = document.createElement('button');
     archiveButton.quizQuestionInput = quizQuestionInput;
+    archiveButton.className = 'archive-button';
     archiveButton.innerText = "Archive this question";
+    archiveButton.onclick = function() {
+      this.archiveList.appendChild(archiveButton.parentNode);
+    }.bind(this);
     qLi.appendChild(archiveButton);
-
     this.questionList.appendChild(qLi);
   },
   populateSelect: function( elementId ) {
@@ -36,7 +40,20 @@ QuestionListView.prototype = {
       option.innerText = country.name;
       elementId.appendChild(option);
     });
+  },
+  archiveQuestion: function() {
+
   }
+
 };
 
 module.exports = QuestionListView;
+
+
+
+
+
+
+
+
+

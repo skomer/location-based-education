@@ -14,12 +14,12 @@ window.onload = function() {
   var published;
 
 
+
   // checks that all the inputs are vlaid before saving quiz
   saveQuizButton.onclick = function() {
     var warningFlag = false;
 
     published = document.getElementById("check-publish").checked;
-
 
     // WORK IN PROGRESS - error messages for creating quiz
     if (quizTitleInput.innerText === undefined) {
@@ -47,6 +47,8 @@ window.onload = function() {
     questionListView.addQuestion();
   };
 
+
+
   // contacts quiz server to post the quiz to the db
   var saveQuiz = function() {
     var quizTitle = quizTitleInput.value;
@@ -59,12 +61,12 @@ window.onload = function() {
       var answerIndex = arrayOfQuestions[i].lastChild.selectedIndex;
       var answerCode = arrayOfQuestions[i].lastChild[answerIndex].value;
       var answerFullName = arrayOfQuestions[i].lastChild[answerIndex].innerText;
+      var answerPublished = arrayOfQuestions[i]
       
       var question = {
         text: text,
         countryCode: answerCode,
         countryName: answerFullName
-
       };
       questions.push(question);
     };
@@ -73,7 +75,6 @@ window.onload = function() {
       title: quizTitle,
       questions: questions,
       published: published
-
     };
     quizServer.createQuiz( quiz );
     window.location.href = "http://localhost:3000/admin/quizzes";
