@@ -69,8 +69,24 @@ describe("Question", function(){
     assert.equal( false, qNoText.isSaveable() );
   });
 
-  if("should be saveable if everything is filled in", function() {
+  it("should be saveable if everything is filled in", function() {
     assert.equal( true, completeQuestion.isSaveable() );
+  });
+
+  it("should set user properties passed to setUserAnswer()", function() {
+    completeQuestion.setUserAnswer( "FR", "France" );
+    assert.equal( "FR", completeQuestion.userAnswer.countryCode );
+    assert.equal( "France", completeQuestion.userAnswer.countryName );
+  });
+
+  it("should return false from isCorrect() when user country code does not match question country code", function() {
+    completeQuestion.userAnswer.countryCode = "UK";
+    assert.equal( false, completeQuestion.isCorrect() );
+  });
+
+  it("should return true from isCorrect() when user country code does not match question country code", function() {
+    completeQuestion.userAnswer.countryCode = "FR";
+    assert.equal( true, completeQuestion.isCorrect() );
   });
 
 });
