@@ -12,6 +12,7 @@ QuestionListView.prototype = {
     quizQuestionInput.type = 'text';
     quizQuestionInput.placeholder = "Please enter your question:"
     var qLi = document.createElement('li');
+    qLi.setAttribute("archived", "false");
     qLi.appendChild(quizQuestionInput);
 
     var answerSelect = document.createElement('select');
@@ -24,8 +25,11 @@ QuestionListView.prototype = {
     archiveButton.innerText = "Archive this question";
     archiveButton.onclick = function() {
       this.archiveList.appendChild(archiveButton.parentNode);
+      console.log("qLi:", qLi);
+      qLi.setAttribute("archived", "true");
     }.bind(this);
     qLi.appendChild(archiveButton);
+    
     this.questionList.appendChild(qLi);
   },
   populateSelect: function( elementId ) {

@@ -13,8 +13,6 @@ window.onload = function() {
   var ulTag = document.getElementById('questions-list');
   var published;
 
-
-
   // checks that all the inputs are vlaid before saving quiz
   saveQuizButton.onclick = function() {
     var warningFlag = false;
@@ -58,15 +56,19 @@ window.onload = function() {
 
     for (var i = 0; i < arrayOfQuestions.length; i++) {
       var text = arrayOfQuestions[i].firstChild.value;
-      var answerIndex = arrayOfQuestions[i].lastChild.selectedIndex;
-      var answerCode = arrayOfQuestions[i].lastChild[answerIndex].value;
-      var answerFullName = arrayOfQuestions[i].lastChild[answerIndex].innerText;
-      var answerPublished = arrayOfQuestions[i]
+      var answerIndex = arrayOfQuestions[i].children[1].selectedIndex;
+      console.dir(arrayOfQuestions[i].children[1]);
+      var answerCode = arrayOfQuestions[i].children[1][answerIndex].value;
+      var answerFullName = arrayOfQuestions[i].children[1][answerIndex].innerText;
+      var archived = arrayOfQuestions[i].getAttribute("archived");
+      console.log("archived:", archived);
+
       
       var question = {
         text: text,
         countryCode: answerCode,
-        countryName: answerFullName
+        countryName: answerFullName,
+        archived: archived
       };
       questions.push(question);
     };
