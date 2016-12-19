@@ -1,11 +1,13 @@
 var quizServer = require('../models/quizServer');
 var MapHelper = require('../helpers/mapHelper');
 
+var answerTextP;
+
 window.onload = function() {
   var quizTitleP = document.getElementById('quiz-title');
   var mapContainer = document.getElementById('map-container');
   var questionTextP = document.getElementById('question-text');
-  var answerTextP = document.getElementById('answer-text');
+  answerTextP = document.getElementById('answer-text');
   var progressTextP = document.getElementById('progress-text');
   var nextResultsButton = document.getElementById('next-results-button');
 
@@ -17,6 +19,10 @@ window.onload = function() {
     console.log("fetched quiz:", quiz);
     globalQuiz = quiz;
     quizTitleP.innerText = quiz.title;
-    var mapHelper = new MapHelper(mapContainer, 55.9, -3.1, 4);  
+    var mapHelper = new MapHelper(mapContainer, 55.9, -3.1, 4, mapClicked);  
   });
 };
+
+var mapClicked = function(countryCode, countryName){
+  answerTextP.innerText = "Your answer is: " + countryName;
+}

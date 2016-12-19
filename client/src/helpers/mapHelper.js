@@ -1,6 +1,6 @@
 var values = require( '../values.js' );
 
-var MapHelper = function(container, lat, lng, defaultZoom){
+var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
   this.geocoder = new google.maps.Geocoder();
   var defaultCenter = {
     lat: lat,
@@ -20,8 +20,8 @@ var MapHelper = function(container, lat, lng, defaultZoom){
     };
     console.log("map clicked at", latLng);
     console.log(this);
-    this.decodeCountry(latLng, function(){
-
+    this.decodeCountry(latLng, function( countryCode, countryName){
+      mapClickCallback(countryCode, countryName);
     });
   }.bind(this));
 };
@@ -38,6 +38,7 @@ MapHelper.prototype = {
           var countryCode = lastResult.address_components[0].short_name;
           var countryName = lastResult.address_components[0].long_name; 
           console.log("country clicked: ", countryName, countryCode);
+          callback(countryCode, countryName);
         } else {
           console.error("No reverse geocoding results found");
         }
