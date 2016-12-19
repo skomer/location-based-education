@@ -4,9 +4,20 @@ var Quiz = require('../models/quiz');
 describe('Quiz', function(){
 
   var blankQuiz;
+  var populatedQuiz;
 
   beforeEach(function(){
     blankQuiz = new Quiz( "Blank Quiz" );
+
+    quizWithQuestions = new Quiz({
+      title: "Test Quiz with Questions",
+      questions: [
+        "first question",
+        "second question",
+        "third questions"
+      ],
+      archived: false
+    });
   });
 
   // ************* TESTS FOR INITIALISING WITH DATA
@@ -41,6 +52,30 @@ describe('Quiz', function(){
     assert.deepEqual( testQuestionsStub, testQuiz.questions );
   });
 
+  it("should start on question 1", function() {
+    assert.equal( "first question", quizWithQuestions.currentQuestion() );
+  });
+
+  it("should return next question", function() {
+    assert.equal( "second question", quizWithQuestions.nextQuestion() );
+  });
+
+  it("should increment currentQuestion when nextQuestion() called", function() {
+    quizWithQuestions.nextQuestion();
+    assert.equal( "second question", quizWithQuestions.currentQuestion() );
+  });
+
+  it("should return false when not on last question from onLastQuestion()", function() {
+    assert.equal( false, quizWithQuestions.onLastQuestion() );
+    quizWithQuestions.nextQuestion();
+    assert.equal( false, quizWithQuestions.onLastQuestion() );
+  });
+
+  it("should return true when on last question from onLastQuestion()", function() {
+    quizWithQuestions.nextQuestion();
+    quizWithQuestions.nextQuestion();
+    assert.equal( true, quizWithQuestions.onLastQuestion() );
+  });
 
   // ******** TEST FOR BLANK QUIZ
   it("should start as published === false", function() {
@@ -108,8 +143,6 @@ describe('Quiz', function(){
   it("should be saveable if title and questions are entered", function() {
     blankQuiz.addQuestion( "Test question text", "AF", "Afghanistan", false );
     blankQuiz.addQuestion( "Test question text 2", "GB", "Great Britain", false );
-    console.log(blankQuiz.questions[0].isSaveable());
-    console.log(blankQuiz.questions[1].isSaveable());
     assert.equal( true, blankQuiz.isSaveable() );
   });
 
