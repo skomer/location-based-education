@@ -35,7 +35,8 @@ saveQuizButton.onclick = function() {
           ulWarning.style.display = "inline-block";
           warningFlag === true;
         }
-        if ( ulTag.firstChild === null || ulTag.firstChild.firstChild.value === "" ) {
+        // loop through ul tag.children, if ultag.children[i] is undefined or empty, then display the warning!
+        if ( ulTag.firstChild === undefined || ulTag.firstChild.firstChild.value === "" ) {
           var questionWarning = document.getElementById('question-warning');
           questionWarning.style.display = "inline-block";
           warningFlag === true;
