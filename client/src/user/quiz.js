@@ -1,10 +1,12 @@
 var quizServer = require('../models/quizServer');
 var MapHelper = require('../helpers/mapHelper');
 var ProgressBarView = require('../views/progressBarView');
+var InfoBoxView = require('../views/infoBoxView');
 
 // Main divs
 var takeQuizDiv;
 var resultsDiv;
+var infoBoxView;
 
 // TAKE QUIZ DIV
 var answerTextP;
@@ -32,6 +34,7 @@ window.onload = function() {
   var takeQuizDiv = document.getElementById( 'take-quiz-container' );
   var resultsDiv = document.getElementById( 'results-container' );
   resultsDiv.style.display = 'none';
+  infoBoxView = new InfoBoxView();
 
   var quizTitleP = document.getElementById('quiz-title');
   var mapContainer = document.getElementById('map-container');
@@ -69,12 +72,16 @@ window.onload = function() {
 };
 
 var mapClicked = function(countryCode, countryName){
-  answerTextP.innerText = "Your answer is: " + countryName;
-  nextResultsButton.disabled = false;
-  currentAnswer = {
-    countryCode: countryCode,
-    countryName: countryName
-  };
+  if ( countryCode && countryName ) {
+    answerTextP.innerText = "Your answer is: " + countryName;
+    nextResultsButton.disabled = false;
+    currentAnswer = {
+      countryCode: countryCode,
+      countryName: countryName
+    };
+  } else {
+    infoBoxView.showWithText( "That is not a country, please click a country" );
+  }
 };
 
 var loadQuestion = function(questionIndex){
