@@ -60,6 +60,14 @@ describe('Quiz', function(){
     assert.equal( 1, blankQuiz.questions.length );
   });
 
+  it("should create question with passed text, country code, country name and archived status", function() {
+    blankQuiz.addQuestion( "Test question text", "AF", "Afghanistan", true );
+    assert.equal( "Test question text", blankQuiz.questions[0].text );
+    assert.equal( "AF", blankQuiz.questions[0].answer.countryCode );
+    assert.equal( "Afghanistan", blankQuiz.questions[0].answer.countryName );
+    assert.equal( true, blankQuiz.questions[0].archived );
+  });
+
   it("should not be saveable if title is empty", function() {
     var testQuiz = new Quiz( "" );
     assert.equal( false, testQuiz.isSaveable() );
@@ -98,13 +106,10 @@ describe('Quiz', function(){
   });
 
   it("should be saveable if title and questions are entered", function() {
-    var saveableQuestionStub = {
-      isSaveable: function() {
-        return true;
-      }
-    }
-    blankQuiz.addQuestion( saveableQuestionStub );
-    blankQuiz.addQuestion( saveableQuestionStub );
+    blankQuiz.addQuestion( "Test question text", "AF", "Afghanistan", false );
+    blankQuiz.addQuestion( "Test question text 2", "GB", "Great Britain", false );
+    console.log(blankQuiz.questions[0].isSaveable());
+    console.log(blankQuiz.questions[1].isSaveable());
     assert.equal( true, blankQuiz.isSaveable() );
   });
 

@@ -15,7 +15,7 @@ Question.prototype = {
     if(!this.answer.countryName){
       return false;
     }
-    if(!this.question){
+    if(!this.text){
       return false;
     }
 
