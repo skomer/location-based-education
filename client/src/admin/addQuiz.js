@@ -19,11 +19,11 @@ window.onload = function() {
     questionListView.addQuestion();
   };
 
-  // checks that all the inputs are vlaid before saving quiz
+  // checks that all the inputs are valid before saving quiz
   saveQuizButton.onclick = function() {
     var warningText = "";
-
-    published = document.getElementById("check-publish").checked;
+ 
+    published = document.getElementById("check-publish").checked; 
 
     // WORK IN PROGRESS - error messages for creating quiz
     if (quizTitleInput.innerText === "") {
@@ -33,27 +33,25 @@ window.onload = function() {
     };
     if (unArchivedQuestionsTag.children.length === 0) {
       ulWarning.style.display = "inline-block";
-      warningText = "PLease enter a question";
+      warningText = "Please enter a question";
     };
-    if (unArchivedQuestionsTag.children.length)
 
-      // loop through ul tag.children, if ultag.children[i] is undefined or empty, then display the warning!
-      for(var i = 0; i < ulTag.children.length; i++){
-        if ( ulTag.children[i] === undefined || ulTag.firstChild.firstChild.value === "" ) {
-          var questionWarning = document.getElementById('question-warning');
-          questionWarning.style.display = "inline-block";
-          warningText = "Enter something please!";
-        }
-      }
-      
+    // loop through ul tag.children, if ultag.children[i] is undefined or empty, then display the warning!
+    for(var i = 0; i < unArchivedQuestionsTag.children.length; i++){
+      if ( unArchivedQuestionsTag.children[i] === undefined || unArchivedQuestionsTag.firstChild.firstChild.value === "" ) {
+        var questionWarning = document.getElementById('question-warning');
+        questionWarning.style.display = "inline-block";
+        warningText = "Enter something please!";
+        };
+      };
+     
       if (warningText = ""){
         alert("issue with data");
       } else { 
         console.log("saving the quiz");
         // saveQuiz()
       } 
-  };
-
+}
 
   // contacts quiz server to post the quiz to the db
   var saveQuiz = function() {
