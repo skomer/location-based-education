@@ -22,7 +22,7 @@ window.onload = function() {
 saveQuizButton.onclick = function() {
   var warningFlag = false;
  
-  published = document.getElementById("check-publish").checked;
+  published = document.getElementById("check-publish").checked; 
 
         // WORK IN PROGRESS - error messages for creating quiz
         if (quizTitleInput.innerText === undefined) {
