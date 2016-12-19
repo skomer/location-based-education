@@ -42,6 +42,10 @@ window.onload = function() {
   questionTextP = document.getElementById('question-text');
   answerTextP = document.getElementById('answer-text');
   nextResultsButton = document.getElementById('next-results-button');
+  var returnToQuizzesButton = document.getElementById( 'return-to-quizzes-button' );
+  returnToQuizzesButton.onclick = function() {
+    window.location.replace( '/user/quizzes' );
+  };
 
   var lastSlashIndex = window.location.href.lastIndexOf( '/' );
   var quizId = window.location.href.substr( lastSlashIndex + 1 );

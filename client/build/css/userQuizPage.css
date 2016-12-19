@@ -105,6 +105,12 @@ td.empty-cell {
   border-top: 2px solid white;
 }
 
+#return-to-quizzes-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
 #score-p {
   display: inline-block;
   background-color: white;
@@ -112,5 +118,5 @@ td.empty-cell {
   border-radius: 10px;
   font-size: 2em;
   padding: 0px;
-  margin-top: 20px;;
+  margin-top: 20px;
 }
