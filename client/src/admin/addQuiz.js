@@ -22,7 +22,7 @@ window.onload = function() {
   // checks that all the inputs are valid before saving quiz
   saveQuizButton.onclick = function() {
     var warningText = "";
- 
+
     published = document.getElementById("check-publish").checked; 
 
     // WORK IN PROGRESS - error messages for creating quiz
@@ -42,16 +42,16 @@ window.onload = function() {
         var questionWarning = document.getElementById('question-warning');
         questionWarning.style.display = "inline-block";
         warningText = "Enter something please!";
-        };
       };
-     
-      if (warningText = ""){
-        alert("issue with data");
-      } else { 
-        console.log("saving the quiz");
-        saveQuiz()
-      } 
-}
+    };
+
+    if (warningText = ""){
+      alert("issue with data");
+    } else { 
+      console.log("saving the quiz");
+      saveQuiz();
+    };
+  };
 
   // contacts quiz server to post the quiz to the db
   var saveQuiz = function() {
