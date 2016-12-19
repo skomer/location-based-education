@@ -4,6 +4,10 @@ var Question = function( params ){
     countryCode: params.answer.countryCode,
     countryName: params.answer.countryName
   };
+  this.userAnswer = {
+    countryCode: null,
+    countryName: null
+  };
   this.archived = params.archived;
 };
 
@@ -20,6 +24,13 @@ Question.prototype = {
     }
 
     return true;
+  },
+  setUserAnswer: function( countryCode, countryName ) {
+    this.userAnswer.countryCode = countryCode;
+    this.userAnswer.countryName = countryName;
+  },
+  isCorrect: function() {
+    return this.answer.countryCode === this.userAnswer.countryCode;
   }
 };
 
