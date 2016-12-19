@@ -68,6 +68,7 @@ ResultsManager.prototype = {
       i++;
     }
 
+    // set timeout for scrolling back to top after all questions are marked
     setTimeout( function() {
       window.scrollTo( 0, 0 );
     }, i * 1000 );
