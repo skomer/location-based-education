@@ -1,6 +1,15 @@
-var Quiz = function(title, questions){
+var Quiz = function(title, question){
   this.title = title;
-  this.questions = [];
-};
+  this.question ={
+    question: this.question,
+    answer: this.answer,
+    countryCode: this.countryCode,
+    countryName: this.countryName,
+    archived: true,
+    published: false
+  };
+  this.quizQuestions = [];
+}
 
+  
 module.exports = Quiz;

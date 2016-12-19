@@ -2,15 +2,15 @@ var assert = require('assert');
 var Quiz = require('../models/quiz');
 
 describe('Quiz', function(){
-beforeEach(function(){
-  quiz = new Quiz("quiz1" ,[]);
-})
+beforeEach(function(){ 
+  quiz1 = new Quiz( "title of quiz", "Portuguese tarts come from?", "Portugal",  "PT", "Portugal" , true, false);
+});
+
   it("should have title of quiz passed into constructor", function(){
-    assert.equal("quiz1", quiz.title);
+    assert.equal("title of quiz", quiz1.title);
   });
 
-
-
+  
 
 
 
@@ -21,16 +21,15 @@ beforeEach(function(){
 
   it("should have same number of questions passed into constructor");
 
+  it("should have a published boolean passed into the constructor");
 
-  it("should have a published boolean pssed into the constructor");
-
-  it("should have same first question is passed into constructor");
+  it("should have same first question passed into constructor");
 
   it("should have same last question passed into the constructor");
 
   // ******** tests for empty quiz
 
-  it("should have no questions when created with no data");
+  
 
   it("should have empty string title when created with no data");
 
