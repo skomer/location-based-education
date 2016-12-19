@@ -17,6 +17,7 @@ var currentQuestionIndex = 0;
 var userAnswers = [];
 var currentAnswer;
 var progressBarView;
+var numberOfQuestions;
 
 // RESULTS DIV
 // functions
@@ -48,7 +49,7 @@ window.onload = function() {
 
   quizServer.getQuizById( quizId, function(fetchedQuiz){
     quiz = fetchedQuiz;
-    var numberOfQuestions = quiz.questions.length;
+    numberOfQuestions = quiz.questions.length;
     console.log("numberOfQuestions:", numberOfQuestions);
     var progressBarView = new ProgressBarView( numberOfQuestions );
     console.log("fetched quiz:", quiz);
@@ -62,6 +63,7 @@ window.onload = function() {
       if(currentQuestionIndex < numberOfQuestions){
         loadQuestion(currentQuestionIndex);
         progressBarView.nextQuestion();
+
       } else {
         takeQuizDiv.style.display = 'none';
         resultsDiv.style.display = 'block';
@@ -75,6 +77,9 @@ var mapClicked = function(countryCode, countryName){
   if ( countryCode && countryName ) {
     answerTextP.innerText = "Your answer is: " + countryName;
     nextResultsButton.disabled = false;
+    if( currentQuestionIndex === numberOfQuestions - 1 ) {
+      nextResultsButton.innerText = "Complete Quiz";
+    }
     currentAnswer = {
       countryCode: countryCode,
       countryName: countryName
