@@ -17,8 +17,13 @@ describe('Quiz', function(){
      quizQuestions = [];
   });
 
-  it("should have same number of questions passed into constructor");
+  it("should have title parameter when initialised with data", function() {
+    var quizDataStub = { title: "Test title" };
+    var testQuiz = new Quiz( quizDataStub );
+    assert.equal( "Test title", testQuiz.title );
+  });
 
+  it("should have same number of questions passed into constructor");
 
   it("should have a published boolean passed into the constructor");
 
@@ -33,7 +38,7 @@ describe('Quiz', function(){
     var testQuiz = new Quiz( "title of quiz" );
     assert.equal( "title of quiz", testQuiz.title );
   });
-  
+
   it("should have no questions when created with no data");
 
   it("should have empty string title when created with no data");
