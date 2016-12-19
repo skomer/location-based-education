@@ -10,18 +10,10 @@ Question.prototype = {
   save: function(){
     if(!this.countryCode){
       return "Not saved"
-    } else {
-      return "Saved"
-    }
-  },
-  save2: function(){
+    } 
     if(!this.countryName){
       return "Not saved"
-    } else {
-      return "Saved"
-    }
-  },
-  save3: function(){
+    } 
     if(!this.question){
       return "Not saved"
     } else {
@@ -30,5 +22,4 @@ Question.prototype = {
   }
 };
     
-
 module.exports = Question;

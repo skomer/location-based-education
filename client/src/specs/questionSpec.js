@@ -36,11 +36,11 @@ describe("Question", function(){
   });
 
   it("should not be saveable if country name is blank", function(){
-    assert.equal( "Not saved", qNoCountryName.save2()  );
+    assert.equal( "Not saved", qNoCountryName.save()  );
   });
 
   it("should not be saveable if text is blank", function(){
-    assert.equal( "Not saved", qNoText.save3() );
+    assert.equal( "Not saved", qNoText.save() );
   });
 
 });
