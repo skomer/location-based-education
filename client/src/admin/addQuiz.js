@@ -25,9 +25,12 @@ window.onload = function() {
 // checks that all the inputs are valid before saving quiz
 saveQuizButton.onclick = function() {
   var warningFlag = false;
+ 
+ // -----------------------------------------------------------
+  // var x = document.getElementById("check-publish").checked;
+  // document.getElementById("save-quiz-button").innerHTML = x;
+ // -----------------------------------------------------------
 
-  var x = document.getElementById("check-publish").checked;
-  document.getElementById("save-div").innerHtml = x;
 
 
     // var liInputTag = document.getElementById('');
@@ -69,10 +72,11 @@ saveQuizButton.onclick = function() {
         
 }
 
-
+// ----------------------------------------------------------
 checkQuizType.onclick = function(){
   var checkQuiz = new Boolean(true || false);
 }
+// ---------------------------------------------------------
 
 newQuestionButton.onclick = function() {
   ulWarning.style.display = "none";
@@ -93,14 +97,21 @@ var saveQuiz = function(){
   for (var i = 0; i < arrayOfQuestions.length; i++) {
     var text = arrayOfQuestions[i].firstChild.value;
     var answerIndex = arrayOfQuestions[i].lastChild.selectedIndex;
-    var answer = arrayOfQuestions[i].lastChild[answerIndex].value;
+    var answerCode = arrayOfQuestions[i].lastChild[answerIndex].value;
+  // ---------------------------------------------------------------
+    var answerFullName = arrayOfQuestions[i].lastChild[answerIndex].innerText;
+  // ---------------------------------------------------------------
+
     var question = {
       text: text,
-      answer: answer
+      answer: answerCode,
+  // ---------------------------------------------------------------
+      answerFull: answerFullName
+  // ---------------------------------------------------------------
+
     };
     questions.push(question);
   }
-
 
   var quiz = {
     title: quizTitle,
@@ -114,15 +125,3 @@ var saveQuiz = function(){
   window.location.href = "http://localhost:3000/admin/quizzes";
 };
 };
-
-
-
-
-
-
-
-
-
-
-
-
