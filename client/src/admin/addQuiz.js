@@ -12,6 +12,9 @@ window.onload = function() {
   var ulWarning = document.getElementById('ul-warning');
   var unArchivedQuestionsTag = document.getElementById('questions-list');
   var archivedQuestionsTag = document.getElementById('archive-list');
+  var archiveDiv = document.getElementById('archive-div');
+  archiveDiv.style.display = "none";
+  var showArchiveButton = document.getElementById('show-archive-button');
   var published;
 
   newQuestionButton.onclick = function() {
@@ -19,10 +22,17 @@ window.onload = function() {
     questionListView.addQuestion();
   };
 
+  showArchiveButton.onclick = function() {
+    console.log("showArchiveButton onclick");
+    archiveDiv.style.display === "none" ? 
+      (archiveDiv.style.display = "inline-block", showArchiveButton.innerText = "Hide archived questions") : 
+      (archiveDiv.style.display = "none", showArchiveButton.innerText = "Show archived questions" );
+  };
+
   // checks that all the inputs are valid before saving quiz
   saveQuizButton.onclick = function() {
     var warningText = "";
- 
+
     published = document.getElementById("check-publish").checked; 
 
     // WORK IN PROGRESS - error messages for creating quiz
@@ -42,16 +52,16 @@ window.onload = function() {
         var questionWarning = document.getElementById('question-warning');
         questionWarning.style.display = "inline-block";
         warningText = "Enter something please!";
-        };
       };
-     
-      if (warningText = ""){
-        alert("issue with data");
-      } else { 
-        console.log("saving the quiz");
-        saveQuiz()
-      } 
-}
+    };
+
+    if (warningText = ""){
+      alert("issue with data");
+    } else { 
+      console.log("saving the quiz");
+      saveQuiz();
+    };
+  };
 
   // contacts quiz server to post the quiz to the db
   var saveQuiz = function() {

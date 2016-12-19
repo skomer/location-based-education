@@ -24,8 +24,15 @@ QuestionListView.prototype = {
     archiveButton.className = 'archive-button';
     archiveButton.innerText = "Archive this question";
     archiveButton.onclick = function() {
-      this.archiveList.appendChild(archiveButton.parentNode);
-      qLi.setAttribute("archived", "true");
+      if (qLi.getAttribute("archived") === "false") {
+        this.archiveList.appendChild(archiveButton.parentNode);
+        qLi.setAttribute("archived", "true");
+        archiveButton.innerText = "Unarchive this question";
+      } else {
+        this.questionList.appendChild(archiveButton.parentNode);
+        qLi.setAttribute("archived", "false");
+        archiveButton.innerText = "Archive this question";
+      };
     }.bind(this);
     qLi.appendChild(archiveButton);
     
@@ -43,9 +50,6 @@ QuestionListView.prototype = {
       option.innerText = country.name;
       elementId.appendChild(option);
     });
-  },
-  archiveQuestion: function() {
-
   }
 
 };
