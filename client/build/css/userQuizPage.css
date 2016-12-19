@@ -9,6 +9,10 @@
   display: flex;
 }
 
+#take-quiz-container {
+  display: flex;
+}
+
 #controls-container {
   display: flex;
   flex-direction: column;
