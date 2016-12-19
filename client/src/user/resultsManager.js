@@ -45,10 +45,8 @@ ResultsManager.prototype = {
     this.updateScore( 0 );
     var i = 1;
     this.quiz.questions.forEach( function( aQuestion ) {
-      (function( question ) {
-        console.log("this:", this);
-        this.scoreQuestion( question , i * 1000 );
-      }.bind( this ) )( aQuestion );
+      console.log("this:", this);
+      this.scoreQuestion( aQuestion , i * 1000 );
       i++;
     }.bind( this ) );
 
