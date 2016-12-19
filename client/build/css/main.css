@@ -94,8 +94,10 @@ button:disabled {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: calc( 100% - 16px);
   z-index: 100;
+  margin: 8px;
+  border-radius: 12px;
 }
 
 #infobox-close-button {
@@ -108,6 +110,8 @@ button:disabled {
   padding: 10px 15px;
   margin: 15px;
   cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.3em;
 }
 
 #infobox-close-button:hover {
@@ -116,4 +120,5 @@ button:disabled {
 
 #infobox-text {
   flex-grow: 1;
+  font-size: 1.3em;
 }
