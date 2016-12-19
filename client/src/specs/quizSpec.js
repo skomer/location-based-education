@@ -17,11 +17,6 @@ describe('Quiz', function(){
      quizQuestions = [];
   });
 
-  it("should have title of quiz passed into constructor", function(){
-    var testQuiz = new Quiz( "title of quiz" );
-    assert.equal( "title of quiz", testQuiz.title );
-  });
-
   it("should have same number of questions passed into constructor");
 
 
@@ -32,8 +27,13 @@ describe('Quiz', function(){
 
   it("should have same last question passed into the constructor");
 
-  // ******** tests for empty quiz
 
+  // ******** TEST FOR BLANK QUIZ
+  it("should have title of quiz passed into constructor when initialised with only a title", function(){
+    var testQuiz = new Quiz( "title of quiz" );
+    assert.equal( "title of quiz", testQuiz.title );
+  });
+  
   it("should have no questions when created with no data");
 
   it("should have empty string title when created with no data");
