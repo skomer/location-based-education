@@ -23,7 +23,13 @@ describe('Quiz', function(){
     assert.equal( "Test title", testQuiz.title );
   });
 
-  it("should have same number of questions passed into constructor");
+  it("should have same number of questions passed into constructor", function() {
+    var quizDataStub = {
+      questions: [ 1, 2, 3, 4 ]
+    };
+    var testQuiz = new Quiz( quizDataStub );
+    assert.equal( 4, testQuiz.questions.length );
+  });
 
   it("should have a published boolean passed into the constructor");
 
