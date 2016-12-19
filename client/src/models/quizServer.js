@@ -7,6 +7,14 @@ var quizServer = {
       callback( allQuizzes );
     });
   },
+  getPublishedQuizzes: function( callback ) {
+    this.getAllQuizzes( function( allQuizzes ) {
+      var publishedQuizzes = allQuizzes.filter( function( quiz ) {
+        return quiz.published;
+      });
+      callback( publishedQuizzes );
+    });
+  },
   getQuizById: function( id, callback ) {
     var url = "http://localhost:3000/quizzes/" + id;
     xmlHttpHelper.makeGetRequest( url, function( quiz ) {

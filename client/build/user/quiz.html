@@ -5,19 +5,29 @@
   <title>Take Quiz</title>
   <link rel="stylesheet" href="/css/main.css"/>
   <link rel="stylesheet" href="/css/userQuizPage.css"/>
-  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWDIqK_NkNZ6uMyKWWsjXcCw6r0Bvb0mY"></script> -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWDIqK_NkNZ6uMyKWWsjXcCw6r0Bvb0mY"></script>
   <script src="/bundles/quiz.bundle.js"></script>
 </head>
 <body>
   <h1>Take Quiz</h1>
   <h2 id="quiz-title"></h2>
-  <div id="main-container">
+  <div id="take-quiz-container">
     <div id="map-container"></div>
     <div id="controls-container">
-      <p id="question-text">Question</p>
-      <p id="answer-text">Your answer is: </p>
-      <p id= "progress-text">You are on Question</p>
+      <p id="question-text"></p>
+      <p id="answer-text"></p>
+      <p id="progress-text">You are on Question </p>
       <button id="next-results-button">Next Question</button>
+    </div>
+  </div>
+  <div id="results-container">
+    <table>
+      <tbody id="results-table-body"></tbody>
+    </table>
+
+    <div id="padding-under-score-bar"></div>
+    <div id="score-bar">
+      <p id="score-p"></p>
     </div>
   </div>
 </body>

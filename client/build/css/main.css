@@ -71,7 +71,11 @@ button, input {
   height: 160px;
 }
 
-.quiz-item:hover, button:hover {
+button:disabled {
+  color: lightgrey;
+}
+
+.quiz-item:hover:not([disabled]), button:hover:not([disabled]) {
   background-color: rgb(235,235,235);
   cursor: pointer;
 }
@@ -80,4 +84,3 @@ button, input {
   font-size: 50px;
   margin: 20px;
 }
-

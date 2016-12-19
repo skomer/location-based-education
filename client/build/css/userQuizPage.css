@@ -9,6 +9,10 @@
   display: flex;
 }
 
+#take-quiz-container {
+  display: flex;
+}
+
 #controls-container {
   display: flex;
   flex-direction: column;
@@ -24,4 +28,89 @@
 
 .wrong-answer {
   color: tomato;
+}
+
+.answer {
+  width: 150px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 20px;
+  margin: 0 auto;
+}
+
+td {
+  background-color: white;
+  text-align: left;
+}
+
+td, .tooltip .tooltip-text {
+  border-radius: 10px;
+  padding: 15px;
+}
+
+td.empty-cell {
+  background-color: inherit;
+}
+
+/* TOOLTIPS */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    width: 120px;
+    background-color: white;
+    color: green;
+    text-align: center;
+    padding: 15px 0;
+
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 110%;
+}
+
+@keyframes pulse {
+  0% {
+    background: white;
+  }
+  50% {
+    background: limegreen;
+  }
+  100% {
+    background: white;
+  }
+}
+
+.pulse-green {
+  animation: pulse 0.7s ease-in-out;
+}
+
+#padding-under-score-bar, #score-bar {
+  height: 100px;
+}
+
+#score-bar {
+  background-color: gainsboro;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid white;
+}
+
+#score-p {
+  display: inline-block;
+  background-color: white;
+  width: 200px;
+  border-radius: 10px;
+  font-size: 2em;
+  padding: 0px;
+  margin-top: 20px;;
 }
