@@ -5,6 +5,7 @@ var Quiz = function(params){
   else {
     this.title = params.title;
     this.questions = params.questions;
+    this.published = params.published;
   }
 }
 

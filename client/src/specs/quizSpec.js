@@ -3,20 +3,13 @@ var Quiz = require('../models/quiz');
 
 describe('Quiz', function(){
 
+  var blankQuiz;
+
   beforeEach(function(){
-    var fullAnswers = {
-      question: "Portuguese tarts come from?",
-      answer: "Portugal",
-      countryCode: "PT",
-      countryName: "Portugal",
-      archived: true
-
-    };
-
-     quiz1 = new Quiz( "title of quiz", fullAnswers);
-     quizQuestions = [];
+    blankQuiz = new Quiz( "Blank Quiz" );
   });
 
+  // ************* TESTS FOR INITIALISING WITH DATA
   it("should have title parameter when initialised with data", function() {
     var quizDataStub = { title: "Test title" };
     var testQuiz = new Quiz( quizDataStub );
@@ -31,18 +24,27 @@ describe('Quiz', function(){
     assert.equal( 4, testQuiz.questions.length );
   });
 
-  it("should have a published boolean passed into the constructor");
+  it("should have a published boolean passed into the constructor", function() {
+    var quizDataStub = {
+      published: true
+    };
+    var testQuiz = new Quiz( quizDataStub );
+    assert.equal( true, testQuiz.published );
+  });
 
-  it("should have same first question passed into constructor");
-
-
-  it("should have same last question passed into the constructor");
+  it("should have same questions passed into constructor", function() {
+    var testQuestionsStub = [ "First question", "Second question", "Third question" ];
+    var quizDataStub = {
+      questions: testQuestionsStub
+    };
+    var testQuiz = new Quiz( quizDataStub );
+    assert.deepEqual( testQuestionsStub, testQuiz.questions );
+  });
 
 
   // ******** TEST FOR BLANK QUIZ
   it("should have title of quiz passed into constructor when initialised with only a title", function(){
-    var testQuiz = new Quiz( "title of quiz" );
-    assert.equal( "title of quiz", testQuiz.title );
+    assert.equal( "Blank Quiz", blankQuiz.title );
   });
 
   it("should have no questions when created with no data");
