@@ -77,6 +77,7 @@ var loadQuestion = function(questionIndex){
   var currentQuestionText = quiz.questions[questionIndex].text;
   questionTextP.innerText = currentQuestionText;
   nextResultsButton.disabled = true;
+  answerTextP.innerText = "Click map to select answer";
 };
 
 var showResults = function() {
