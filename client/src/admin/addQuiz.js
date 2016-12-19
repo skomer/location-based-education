@@ -10,6 +10,7 @@ window.onload = function() {
   var saveQuizButton = document.getElementById( 'save-quiz-button' );
   var questionListView = new QuestionListView();
   var ulWarning = document.getElementById('ul-warning');
+  // var titleWarning = document.getElementById('title-warning');
   var ulTag = document.getElementById('questions-list');
   var published;
 
@@ -20,35 +21,37 @@ window.onload = function() {
 
 // checks that all the inputs are valid before saving quiz
 saveQuizButton.onclick = function() {
-  var warningFlag = false;
+  var warningText = "";
  
-  published = document.getElementById("check-publish").checked;
+  published = document.getElementById("check-publish").checked; 
 
         // WORK IN PROGRESS - error messages for creating quiz
-        if (quizTitleInput.innerText === undefined) {
+        if (quizTitleInput.innerText === "") {
           var titleWarning = document.getElementById('title-warning');
           titleWarning.style.display = "inline-block";
-          warningFlag === true;
+          warningText = "Please enter a quiz title";
         }
         if (ulTag.children.length === 0) {
           ulWarning.style.display = "inline-block";
-          warningFlag === true;
+          warningText = "PLease enter a question";
         }
-        if ( ulTag.firstChild === null || ulTag.firstChild.firstChild.value === "" ) {
-          var questionWarning = document.getElementById('question-warning');
-          questionWarning.style.display = "inline-block";
-          warningFlag === true;
+
+        // loop through ul tag.children, if ultag.children[i] is undefined or empty, then display the warning!
+        for(var i = 0; i < ulTag.children.length; i++){
+          if ( ulTag.children[i] === undefined || ulTag.firstChild.firstChild.value === "" ) {
+            var questionWarning = document.getElementById('question-warning');
+            questionWarning.style.display = "inline-block";
+            warningText = "Enter something please!";
+          }
         }
-        if (warningFlag === false){
+     
+        if (warningText = ""){
+          alert("issue with data");
+        } else { 
           console.log("saving the quiz");
-          saveQuiz()
+          // saveQuiz()
         } 
 }
-
-newQuestionButton.onclick = function() {
-  ulWarning.style.display = "none";
-  questionListView.addQuestion();
-};
 
 // contacts quiz server to post the quiz to the db
 var saveQuiz = function(){
