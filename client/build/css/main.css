@@ -85,8 +85,17 @@ button:disabled {
   margin: 20px;
 }
 
-
 /*Add quiz page*/
 #title-warning, #ul-warning, #question-warning {
   display: none;
 }
+
+#archive-div {
+  display: none;
+}
+
+
+
+
+
+

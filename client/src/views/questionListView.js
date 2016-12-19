@@ -50,9 +50,6 @@ QuestionListView.prototype = {
       option.innerText = country.name;
       elementId.appendChild(option);
     });
-  },
-  archiveQuestion: function() {
-
   }
 
 };

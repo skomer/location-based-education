@@ -12,12 +12,19 @@ window.onload = function() {
   var ulWarning = document.getElementById('ul-warning');
   var unArchivedQuestionsTag = document.getElementById('questions-list');
   var archivedQuestionsTag = document.getElementById('archive-list');
+  var showArchiveButton = document.getElementById('show-archive-button');
   var published;
 
   newQuestionButton.onclick = function() {
     ulWarning.style.display = "none";
     questionListView.addQuestion();
   };
+
+  showArchiveButton.onclick = function() {
+    console.log("showArchiveButton onclick");
+  }
+
+
 
   // checks that all the inputs are valid before saving quiz
   saveQuizButton.onclick = function() {
