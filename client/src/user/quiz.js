@@ -17,8 +17,8 @@ window.onload = function() {
     console.log("fetched quiz:", quiz);
     globalQuiz = quiz;
     quizTitleP.innerText = quiz.title;
-    var mapHelper = new MapHelper(mapContainer, 55.9, -3.1, 4,, function() {
-      
+    var mapHelper = new MapHelper(mapContainer, 55.9, -3.1, 4, function() {
+
     });  
   });
 };
