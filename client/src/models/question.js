@@ -1,25 +1,26 @@
-var Question = function(question, answer, countryCode, countryName){
-  this.question = question;
-  this.answer = answer;
-  this.countryCode = countryCode;
-  this.countryName = countryName;
-  this.archived = true;
+var Question = function( params ){
+  this.text = params.text;
+  this.answer = {
+    countryCode: params.answer.countryCode,
+    countryName: params.answer.countryName
+  };
+  this.archived = params.archived;
 };
 
 Question.prototype = {
-  save: function(){
-    if(!this.countryCode){
-      return "Not saved"
-    } 
-    if(!this.countryName){
-      return "Not saved"
-    } 
-    if(!this.question){
-      return "Not saved"
-    } else {
-      return "Saved"
+  isSaveable: function(){
+    if(!this.answer.countryCode){
+      return false;
     }
+    if(!this.answer.countryName){
+      return false;
+    }
+    if(!this.question){
+      return false;
+    }
+
+    return true;
   }
 };
-    
+
 module.exports = Question;
