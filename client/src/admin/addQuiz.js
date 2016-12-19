@@ -49,7 +49,7 @@ window.onload = function() {
         alert("issue with data");
       } else { 
         console.log("saving the quiz");
-        // saveQuiz()
+        saveQuiz()
       } 
 }
 

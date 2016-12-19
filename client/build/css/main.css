@@ -14,7 +14,7 @@ h1 {
   font-size: 70px;
 }
 
-button {
+button, input {
   display: inline-block;
   padding: 10px 20px;
   margin: 0;
