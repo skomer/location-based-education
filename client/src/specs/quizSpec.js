@@ -43,24 +43,69 @@ describe('Quiz', function(){
 
 
   // ******** TEST FOR BLANK QUIZ
+  it("should start as published === false", function() {
+    assert.equal( false, blankQuiz.published );
+  });
+
   it("should have title of quiz passed into constructor when initialised with only a title", function(){
     assert.equal( "Blank Quiz", blankQuiz.title );
   });
 
-  it("should have no questions when created with no data");
+  it("should have empty questions array when created with no data", function() {
+    assert.equal( 0, blankQuiz.questions.length );
+  });
 
-  it("should have empty string title when created with no data");
+  it("should increase question count when question added", function() {
+    blankQuiz.addQuestion( 'stub question' );
+    assert.equal( 1, blankQuiz.questions.length );
+  });
 
-  it("should have publish === false when created with no data");
+  it("should not be saveable if title is empty", function() {
+    var testQuiz = new Quiz( "" );
+    assert.equal( false, testQuiz.isSaveable() );
+  });
 
-  it("should increase question count when question added");
+  it("should not be saveable if the question list is empty", function() {
+    assert.equal( false, blankQuiz.isSaveable() );
+  });
 
-  it("should not be saveable if title is empty");
+  it("should not be saveable if any questions are not saveable", function() {
+    var saveableQuestionStub = {
+      isSaveable: function() {
+        return true;
+      }
+    }
+    var notSaveableQuestionStub = {
+      isSaveable: function() {
+        return false;
+      }
+    }
+    blankQuiz.addQuestion( saveableQuestionStub );
+    blankQuiz.addQuestion( notSaveableQuestionStub );
+    assert.equal( false, blankQuiz.isSaveable() );
+  });
 
-  it("should not be saveable if the question list is empty");
+  it("should not be saveable if all questions are not saveable", function() {
+    var notSaveableQuestionStub = {
+      isSaveable: function() {
+        return false;
+      }
+    }
+    blankQuiz.addQuestion( notSaveableQuestionStub );
+    blankQuiz.addQuestion( notSaveableQuestionStub );
+    blankQuiz.addQuestion( notSaveableQuestionStub );
+    assert.equal( false, blankQuiz.isSaveable() );
+  });
 
-  it("should not be saveable if any questions don't have text");
-
-  it("should be saveable if title and questions are entered");
+  it("should be saveable if title and questions are entered", function() {
+    var saveableQuestionStub = {
+      isSaveable: function() {
+        return true;
+      }
+    }
+    blankQuiz.addQuestion( saveableQuestionStub );
+    blankQuiz.addQuestion( saveableQuestionStub );
+    assert.equal( true, blankQuiz.isSaveable() );
+  });
 
 });
