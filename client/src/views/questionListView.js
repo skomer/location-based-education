@@ -25,7 +25,6 @@ QuestionListView.prototype = {
     archiveButton.innerText = "Archive this question";
     archiveButton.onclick = function() {
       this.archiveList.appendChild(archiveButton.parentNode);
-      console.log("qLi:", qLi);
       qLi.setAttribute("archived", "true");
     }.bind(this);
     qLi.appendChild(archiveButton);
