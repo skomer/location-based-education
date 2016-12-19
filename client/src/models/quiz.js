@@ -10,6 +10,7 @@ var Quiz = function(params){
     this.title = params.title;
     this.questions = params.questions;
     this.published = params.published;
+    this.currentQuestionIndex = 0;
   }
 }
 
@@ -41,6 +42,16 @@ Quiz.prototype = {
     return this.questions.every( function(question) {
       return question.isSaveable();
     });
+  },
+  currentQuestion: function() {
+    return this.questions[this.currentQuestionIndex];
+  },
+  nextQuestion: function() {
+    this.currentQuestionIndex++;
+    return this.currentQuestion();
+  },
+  onLastQuestion: function() {
+    return this.currentQuestionIndex === this.questions.length - 1;
   }
 };
 
