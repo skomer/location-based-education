@@ -1,5 +1,6 @@
 var quizServer = require('../models/quizServer');
 var MapHelper = require('../helpers/mapHelper');
+var ProgressBarView = require('../views/progressBarView');
 
 // Main divs
 var takeQuizDiv;
@@ -13,6 +14,7 @@ var quiz;
 var currentQuestionIndex = 0;
 var userAnswers = [];
 var currentAnswer;
+var progressBarView;
 
 // RESULTS DIV
 // functions
@@ -35,7 +37,6 @@ window.onload = function() {
   var mapContainer = document.getElementById('map-container');
   questionTextP = document.getElementById('question-text');
   answerTextP = document.getElementById('answer-text');
-  var progressTextP = document.getElementById('progress-text');
   nextResultsButton = document.getElementById('next-results-button');
 
   var lastSlashIndex = window.location.href.lastIndexOf( '/' );
@@ -45,15 +46,19 @@ window.onload = function() {
   quizServer.getQuizById( quizId, function(fetchedQuiz){
     quiz = fetchedQuiz;
     var numberOfQuestions = quiz.questions.length;
+    console.log("numberOfQuestions:", numberOfQuestions);
+    var progressBarView = new ProgressBarView( numberOfQuestions );
     console.log("fetched quiz:", quiz);
     quizTitleP.innerText = quiz.title;
     var mapHelper = new MapHelper(mapContainer, 55.9, -3.1, 4, mapClicked);
     loadQuestion(currentQuestionIndex);
+    progressBarView.draw( 1 );
     nextResultsButton.onclick = function(){
       userAnswers.push( currentAnswer );
       currentQuestionIndex++;
       if(currentQuestionIndex < numberOfQuestions){
         loadQuestion(currentQuestionIndex);
+        progressBarView.nextQuestion();
       } else {
         takeQuizDiv.style.display = 'none';
         resultsDiv.style.display = 'block';

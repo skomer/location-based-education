@@ -18,7 +18,7 @@
   flex-direction: column;
 }
 
-#map-container, #controls-container {
+#map-container, #controls-container, #progress-bar {
   margin: 20px;
 }
 
