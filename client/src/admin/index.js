@@ -7,7 +7,8 @@ window.onload = function() {
   quizServer.getAllQuizzes( function( allQuizzes ) {
     var listItems = allQuizzes.map(function(quiz){
       return {
-        title: quiz.title
+        title: quiz.title,
+          href: "http://localhost:3000/admin/quizzes/" + quiz.id
       };
     });
     var plusButtonItem = {
