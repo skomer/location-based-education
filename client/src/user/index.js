@@ -5,7 +5,7 @@ window.onload = function() {
 
   var allQuizzes;
 
-  quizServer.getAllQuizzes( function( allQuizzes ) {
+  quizServer.getPublishedQuizzes( function( allQuizzes ) {
     var listItems = allQuizzes.map(function(quiz){
       return {
         title: quiz.title,

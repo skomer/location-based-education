@@ -36,14 +36,16 @@ MapHelper.prototype = {
         if(results[0]){
           var lastResult = results[results.length -1 ];
           var countryCode = lastResult.address_components[0].short_name;
-          var countryName = lastResult.address_components[0].long_name; 
+          var countryName = lastResult.address_components[0].long_name;
           console.log("country clicked: ", countryName, countryCode);
           callback(countryCode, countryName);
         } else {
           console.error("No reverse geocoding results found");
+          callback( null, null );
         }
       } else {
         console.error("Geocoder failed due to:", status);
+        callback( null, null );
       }
     });
 

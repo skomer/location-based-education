@@ -1,9 +1,12 @@
 var quizServer = require('../models/quizServer');
 var MapHelper = require('../helpers/mapHelper');
+var ProgressBarView = require('../views/progressBarView');
+var InfoBoxView = require('../views/infoBoxView');
 
 // Main divs
 var takeQuizDiv;
 var resultsDiv;
+var infoBoxView;
 
 // TAKE QUIZ DIV
 var answerTextP;
@@ -13,6 +16,7 @@ var quiz;
 var currentQuestionIndex = 0;
 var userAnswers = [];
 var currentAnswer;
+var progressBarView;
 
 // RESULTS DIV
 // functions
@@ -30,12 +34,12 @@ window.onload = function() {
   var takeQuizDiv = document.getElementById( 'take-quiz-container' );
   var resultsDiv = document.getElementById( 'results-container' );
   resultsDiv.style.display = 'none';
+  infoBoxView = new InfoBoxView();
 
   var quizTitleP = document.getElementById('quiz-title');
   var mapContainer = document.getElementById('map-container');
   questionTextP = document.getElementById('question-text');
   answerTextP = document.getElementById('answer-text');
-  var progressTextP = document.getElementById('progress-text');
   nextResultsButton = document.getElementById('next-results-button');
 
   var lastSlashIndex = window.location.href.lastIndexOf( '/' );
@@ -45,15 +49,19 @@ window.onload = function() {
   quizServer.getQuizById( quizId, function(fetchedQuiz){
     quiz = fetchedQuiz;
     var numberOfQuestions = quiz.questions.length;
+    console.log("numberOfQuestions:", numberOfQuestions);
+    var progressBarView = new ProgressBarView( numberOfQuestions );
     console.log("fetched quiz:", quiz);
     quizTitleP.innerText = quiz.title;
     var mapHelper = new MapHelper(mapContainer, 55.9, -3.1, 4, mapClicked);
     loadQuestion(currentQuestionIndex);
+    progressBarView.draw( 1 );
     nextResultsButton.onclick = function(){
       userAnswers.push( currentAnswer );
       currentQuestionIndex++;
       if(currentQuestionIndex < numberOfQuestions){
         loadQuestion(currentQuestionIndex);
+        progressBarView.nextQuestion();
       } else {
         takeQuizDiv.style.display = 'none';
         resultsDiv.style.display = 'block';
@@ -64,12 +72,16 @@ window.onload = function() {
 };
 
 var mapClicked = function(countryCode, countryName){
-  answerTextP.innerText = "Your answer is: " + countryName;
-  nextResultsButton.disabled = false;
-  currentAnswer = {
-    countryCode: countryCode,
-    countryName: countryName
-  };
+  if ( countryCode && countryName ) {
+    answerTextP.innerText = "Your answer is: " + countryName;
+    nextResultsButton.disabled = false;
+    currentAnswer = {
+      countryCode: countryCode,
+      countryName: countryName
+    };
+  } else {
+    infoBoxView.showWithText( "That is not a country, please click a country" );
+  }
 };
 
 var loadQuestion = function(questionIndex){

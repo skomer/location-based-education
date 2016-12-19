@@ -11,10 +11,10 @@ ul {
 }
 
 h1 {
-  font-size: 70px;
+  font-size: 55px;
 }
 
-button {
+button, input {
   display: inline-block;
   padding: 10px 20px;
   margin: 0;
@@ -85,8 +85,40 @@ button:disabled {
   margin: 20px;
 }
 
+#infobox-div {
+  border: 3px solid tomato;
+  background-color: white;
+  box-sizing: border-box;
+  display: none; /* always hidden at start */
+  color: tomato;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: calc( 100% - 16px);
+  z-index: 100;
+  margin: 8px;
+  border-radius: 12px;
+}
 
-/*Add quiz page*/
-#title-warning, #ul-warning, #question-warning {
-  display: none;
+#infobox-close-button {
+  display: inline-block;
+  border: 1.5px solid tomato;
+  background-color: white;
+  color: tomato;
+  top: 10px;
+  right: 95%;
+  padding: 10px 15px;
+  margin: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.3em;
+}
+
+#infobox-close-button:hover {
+  font-weight: bold;
+}
+
+#infobox-text {
+  flex-grow: 1;
+  font-size: 1.3em;
 }

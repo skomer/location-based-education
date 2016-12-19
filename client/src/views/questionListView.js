@@ -3,6 +3,7 @@ var CountriesServer = require('../models/countriesServer');
 var QuestionListView = function() {
   this.questionList = document.getElementById('questions-list');
   this.selectCountry = document.getElementById('countries-select');
+  this.archiveList = document.getElementById('archive-list');
 };
 
 QuestionListView.prototype = {
@@ -11,12 +12,30 @@ QuestionListView.prototype = {
     quizQuestionInput.type = 'text';
     quizQuestionInput.placeholder = "Please enter your question:"
     var qLi = document.createElement('li');
+    qLi.setAttribute("archived", "false");
     qLi.appendChild(quizQuestionInput);
 
     var answerSelect = document.createElement('select');
     this.populateSelect(answerSelect);
     qLi.appendChild(answerSelect);
 
+    var archiveButton = document.createElement('button');
+    archiveButton.quizQuestionInput = quizQuestionInput;
+    archiveButton.className = 'archive-button';
+    archiveButton.innerText = "Archive this question";
+    archiveButton.onclick = function() {
+      if (qLi.getAttribute("archived") === "false") {
+        this.archiveList.appendChild(archiveButton.parentNode);
+        qLi.setAttribute("archived", "true");
+        archiveButton.innerText = "Unarchive this question";
+      } else {
+        this.questionList.appendChild(archiveButton.parentNode);
+        qLi.setAttribute("archived", "false");
+        archiveButton.innerText = "Archive this question";
+      };
+    }.bind(this);
+    qLi.appendChild(archiveButton);
+    
     this.questionList.appendChild(qLi);
   },
   populateSelect: function( elementId ) {
@@ -32,6 +51,16 @@ QuestionListView.prototype = {
       elementId.appendChild(option);
     });
   }
+
 };
 
 module.exports = QuestionListView;
+
+
+
+
+
+
+
+
+
