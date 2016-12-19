@@ -3,7 +3,6 @@ var CountriesServer = require('../models/countriesServer');
 var QuestionListView = function() {
   this.questionList = document.getElementById('questions-list');
   this.selectCountry = document.getElementById('countries-select');
-  this.questionCounter = 0;
 };
 
 QuestionListView.prototype = {
@@ -19,8 +18,7 @@ QuestionListView.prototype = {
     qLi.appendChild(answerSelect);
 
     var archiveButton = document.createElement('button');
-    archiveButton.id = this.questionCounter;
-    this.questionCounter++;
+    archiveButton.quizQuestionInput = quizQuestionInput;
     archiveButton.innerText = "Archive this question";
     qLi.appendChild(archiveButton);
 
