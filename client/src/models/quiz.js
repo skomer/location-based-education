@@ -1,5 +1,7 @@
 var Quiz = function(params){
-  this.title = params.title;
+  if ( typeof( params ) === 'string' ) {
+    this.title = params;
+  }
 }
 
 Quiz.prototype = {

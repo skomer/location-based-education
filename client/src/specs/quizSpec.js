@@ -18,19 +18,14 @@ describe('Quiz', function(){
   });
 
   it("should have title of quiz passed into constructor", function(){
-    var quizDataStub = { title: "title of quiz" };
-    var testQuiz = new Quiz( quizDataStub );
+    var testQuiz = new Quiz( "title of quiz" );
     assert.equal( "title of quiz", testQuiz.title );
   });
 
-  // it("should have same number of questions passed into constructor", function(){
-  //   quizQuestions.add(quiz1);
-  //   assert.equal( 1, quizQuestions.length);
-  // });
+  it("should have same number of questions passed into constructor");
 
 
-  // it("should have a published boolean passed into the constructor");
-  // assert.equal( false, quiz1.published);
+  it("should have a published boolean passed into the constructor");
 
   it("should have same first question passed into constructor");
 
