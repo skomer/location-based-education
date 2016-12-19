@@ -77,6 +77,10 @@ describe('Quiz', function(){
     assert.equal( true, quizWithQuestions.onLastQuestion() );
   });
 
+  it("should return number of questions from length()", function() {
+    assert.equal( 3, quizWithQuestions.length() );
+  });
+
   // ******** TEST FOR BLANK QUIZ
   it("should start as published === false", function() {
     assert.equal( false, blankQuiz.published );
