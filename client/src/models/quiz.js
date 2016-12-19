@@ -51,7 +51,10 @@ Quiz.prototype = {
     return this.currentQuestion();
   },
   onLastQuestion: function() {
-    return this.currentQuestionIndex === this.questions.length - 1;
+    return this.currentQuestionIndex === this.length() - 1;
+  },
+  length: function() {
+    return this.questions.length;
   }
 };
 
