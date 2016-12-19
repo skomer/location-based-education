@@ -22,10 +22,17 @@ window.onload = function() {
 
   quizServer.getQuizById( quizId, function(fetchedQuiz){
     quiz = fetchedQuiz;
+    var numberOfQuestions = quiz.questions.length;
     console.log("fetched quiz:", quiz);
     quizTitleP.innerText = quiz.title;
     var mapHelper = new MapHelper(mapContainer, 55.9, -3.1, 4, mapClicked); 
     loadQuestion(currentQuestionIndex); 
+    nextResultsButton.onclick = function(){
+      currentQuestionIndex++;
+      if(currentQuestionIndex < numberOfQuestions){
+        loadQuestion(currentQuestionIndex);
+      }
+    }
   });
 };
 
