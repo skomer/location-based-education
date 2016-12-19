@@ -60,7 +60,7 @@ QuizManager.prototype = {
       this.progressBarView.nextQuestion();
 
     } else {
-      this.quizFinishedCallback( this.userAnswers );
+      this.quizFinishedCallback( this.questions, this.userAnswers );
     }
   },
   onLastQuestion: function() {
