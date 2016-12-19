@@ -85,7 +85,7 @@ var updateScore = function( scoreIncrease ) {
     scoreP.classList.remove( 'pulse-green' );
     setTimeout( function() {
       scoreP.classList.add( 'pulse-green' );
-    }, 10 );
+    }, 100 );
   }
 };
 
