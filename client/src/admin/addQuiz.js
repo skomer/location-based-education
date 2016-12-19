@@ -10,6 +10,7 @@ window.onload = function() {
   var saveQuizButton = document.getElementById( 'save-quiz-button' );
   var questionListView = new QuestionListView();
   var ulWarning = document.getElementById('ul-warning');
+  // var titleWarning = document.getElementById('title-warning');
   var ulTag = document.getElementById('questions-list');
   var published;
 
@@ -25,7 +26,7 @@ saveQuizButton.onclick = function() {
   published = document.getElementById("check-publish").checked; 
 
         // WORK IN PROGRESS - error messages for creating quiz
-        if (quizTitleInput.innerText === undefined) {
+        if (quizTitleInput.innerText === undefined || quizTitleInput.innerText === "") {
           var titleWarning = document.getElementById('title-warning');
           titleWarning.style.display = "inline-block";
           warningFlag === true;
@@ -41,14 +42,9 @@ saveQuizButton.onclick = function() {
         }
         if (warningFlag === false){
           console.log("saving the quiz");
-          saveQuiz()
+          // saveQuiz()
         } 
 }
-
-newQuestionButton.onclick = function() {
-  ulWarning.style.display = "none";
-  questionListView.addQuestion();
-};
 
 // contacts quiz server to post the quiz to the db
 var saveQuiz = function(){
