@@ -69,7 +69,7 @@ describe("Question", function(){
     assert.equal( false, qNoText.isSaveable() );
   });
 
-  if("should be saveable if everything is filled in", function() {
+  it("should be saveable if everything is filled in", function() {
     assert.equal( true, completeQuestion.isSaveable() );
   });
 
