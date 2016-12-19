@@ -1,107 +1,38 @@
+var miscHelper = require('../helpers/miscHelpers');
 var quizServer = require('../models/quizServer');
-var MapHelper = require('../helpers/mapHelper');
-var ProgressBarView = require('../views/progressBarView');
-var InfoBoxView = require('../views/infoBoxView');
+var QuizManager = require('./quizManager');
+var ResultsManager = require('./resultsManager');
 
-// Main divs
 var takeQuizDiv;
 var resultsDiv;
-var infoBoxView;
 
-// TAKE QUIZ DIV
-var answerTextP;
-var questionTextP;
-var nextResultsButton;
 var quiz;
-var currentQuestionIndex = 0;
-var userAnswers = [];
-var currentAnswer;
-var progressBarView;
-var numberOfQuestions;
-
-// RESULTS DIV
-// functions
-var updateScoreTd;
-var scoreQuestion;
-
-// DOM elements
-var scoreP;
-var scoreOutOf;
-
-// variables
 var score = 0;
 
 window.onload = function() {
-  var takeQuizDiv = document.getElementById( 'take-quiz-container' );
-  var resultsDiv = document.getElementById( 'results-container' );
+  takeQuizDiv = document.getElementById( 'take-quiz-container' );
+  resultsDiv = document.getElementById( 'results-container' );
   resultsDiv.style.display = 'none';
-  infoBoxView = new InfoBoxView();
 
-  var quizTitleP = document.getElementById('quiz-title');
-  var mapContainer = document.getElementById('map-container');
-  questionTextP = document.getElementById('question-text');
-  answerTextP = document.getElementById('answer-text');
-  nextResultsButton = document.getElementById('next-results-button');
-  var returnToQuizzesButton = document.getElementById( 'return-to-quizzes-button' );
-  returnToQuizzesButton.onclick = function() {
-    window.location.replace( '/user/quizzes' );
-  };
+  var quizId = miscHelper.getLastUrlElement();
+  console.log("loading quiz with id '" + quizId + "'");
 
-  var lastSlashIndex = window.location.href.lastIndexOf( '/' );
-  var quizId = window.location.href.substr( lastSlashIndex + 1 );
-  console.log("quiz id:", quizId);
-
-  quizServer.getQuizById( quizId, function(fetchedQuiz){
-    quiz = fetchedQuiz;
-    numberOfQuestions = quiz.questions.length;
-    console.log("numberOfQuestions:", numberOfQuestions);
-    var progressBarView = new ProgressBarView( numberOfQuestions );
-    console.log("fetched quiz:", quiz);
-    quizTitleP.innerText = quiz.title;
-    var mapHelper = new MapHelper(mapContainer, 55.9, -3.1, 4, mapClicked);
-    loadQuestion(currentQuestionIndex);
-    progressBarView.draw( 1 );
-    nextResultsButton.onclick = function(){
-      userAnswers.push( currentAnswer );
-      currentQuestionIndex++;
-      if(currentQuestionIndex < numberOfQuestions){
-        loadQuestion(currentQuestionIndex);
-        progressBarView.nextQuestion();
-
-      } else {
-        takeQuizDiv.style.display = 'none';
-        resultsDiv.style.display = 'block';
-        showResults();
-      }
-    }
-  });
+  quizServer.getQuizById( quizId, startQuiz );
 };
 
-var mapClicked = function(countryCode, countryName){
-  if ( countryCode && countryName ) {
-    answerTextP.innerText = "Your answer is: " + countryName;
-    nextResultsButton.disabled = false;
-    if( currentQuestionIndex === numberOfQuestions - 1 ) {
-      nextResultsButton.innerText = "Complete Quiz";
-    }
-    currentAnswer = {
-      countryCode: countryCode,
-      countryName: countryName
-    };
-  } else {
-    infoBoxView.showWithText( "That is not a country, please click a country" );
-  }
-};
+var startQuiz = function( fetchedQuiz ) {
+  quiz = fetchedQuiz;
+  console.log("fetched quiz:", quiz);
+  var titleP = document.getElementById('quiz-title');
+  titleP.innerText = quiz.title;
+  var quizManager = new QuizManager( quiz.questions );
+  quizManager.startQuiz( showResults );
+}
 
-var loadQuestion = function(questionIndex){
-  console.log("loading question:", questionIndex);
-  var currentQuestionText = quiz.questions[questionIndex].text;
-  questionTextP.innerText = currentQuestionText;
-  nextResultsButton.disabled = true;
-  answerTextP.innerText = "Click map to select answer";
-};
+var showResults = function( userAnswers ) {
 
-var showResults = function() {
+  takeQuizDiv.style.display = 'none';
+  resultsDiv.style.display = 'block';
   var resultsTableBody = document.getElementById( 'results-table-body' );
 
   console.log( "user answers:", userAnswers );
