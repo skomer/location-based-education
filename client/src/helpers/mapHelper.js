@@ -1,4 +1,5 @@
 var values = require( '../values.js' );
+var latLng;
 
 var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
   this.geocoder = new google.maps.Geocoder();
@@ -14,7 +15,7 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
     }
   );
   google.maps.event.addListener(this.map, "click", function(ev){
-    var latLng = {
+    latLng = {
       lat: ev.latLng.lat(),
       lng: ev.latLng.lng()
     };
@@ -24,6 +25,14 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       mapClickCallback(countryCode, countryName);
     });
   }.bind(this));
+
+  var iconBase = '../../build/images/';
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: this.map,
+      icon: iconBase + 'anchor.png'
+    });
+
 };
 
 MapHelper.prototype = {
