@@ -6,13 +6,10 @@ var Quiz = require('../models/quiz.js');
 window.onload = function() {
   console.log("Ready to add quizzes");
 
-// snip off quiz id from url
-// see user/quiz.js
-// write function populate addQuiz.html page
-
   var quizTitleInput = document.getElementById( 'quiz-title-input' );
   var newQuestionButton = document.getElementById( 'new-question-button' );
   var countriesSelect = document.getElementById('countries-select');
+  var checkPublish = document.getElementById('check-publish');
   var saveQuizButton = document.getElementById( 'save-quiz-button' );
   var questionListView = new QuestionListView();
   var ulWarning = document.getElementById('ul-warning');
@@ -23,12 +20,6 @@ window.onload = function() {
   var showArchiveButton = document.getElementById('show-archive-button');
   var published;
 
-  // 'Existing quiz' values
-  var eQuizId;
-  var eQuizTitle;
-  var eQuizQuestions;
-  var eQuizPublished;
-
   var newOrExistingQuiz = function() {
     var lastUrlElement = miscHelper.getLastUrlElement();
     if (lastUrlElement != 'new') {
@@ -38,15 +29,31 @@ window.onload = function() {
     }
   };
 
-  var populateExistingQuiz = function(quiz) {
-    eQuizTitle = quiz.title;
-    eQuizQuestions = quiz.questions;
-    eQuizPublished = quiz.published;
-    eQuizId = quiz.id;
+  newOrExistingQuiz();
+  
+  var populateExistingQuiz = function(quiz) {    
+    quizTitleInput.value = quiz.title;
+    checkPublish.checked = quiz.published;
+    buildQuestionLists(quiz);
   };
 
-  newOrExistingQuiz();
-
+  var buildQuestionLists = function(quiz) {
+    var eQuestions = [];
+    for (var i = 0; i < quiz.questions.length; i++) {
+      var emptyQuestion = {
+        text: quiz.questions[i].text,
+        countryCode: quiz.questions[i].countryCode,
+        countryName: quiz.questions[i].countryName,
+        archived: quiz.questions[i].archived
+      };
+      eQuestions.push(emptyQuestion);
+    }
+    // for (var i = 0; i < quiz.questions.length; i++) {
+    //   if (quiz.questions[i].archived === 'true') {
+    //     console.log("this is a true question");
+    //   }
+    // }
+  };
 
   newQuestionButton.onclick = function() {
     ulWarning.style.display = "none";
