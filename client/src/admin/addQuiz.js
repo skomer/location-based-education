@@ -98,10 +98,11 @@ window.onload = function() {
     
     var q1 = addQuestions(arrayOfQuestions);
     var q2 = addQuestions(archivedQuestions);
+    var q3 = q1.concat(q2);
 
     var quiz = {
       title: quizTitle,
-      questions: q1 + q2,
+      questions: q3,
       published: published
     }
 
