@@ -36,8 +36,10 @@ var firebaseHelper = {
       newQuizRef.set({
         title: quiz.title,
         questions: quiz.questions,
+        published: quiz.published,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
-        createdBy: values.userEmail
+        createdBy: values.userEmail,
+        published: quiz.published
       });
     });
   },
@@ -51,12 +53,17 @@ var firebaseHelper = {
     this.getQuizzesRef( function( quizzesRef ) {
       quizzesRef.once( 'value' ).then( function( snapshot ) {
         var quizEntries = snapshot.val();
-        var quizzes = Object.keys( quizEntries ).map( function( key ) {
-          var quiz = quizEntries[key];
-          quiz.id = key;
-          return quiz;
-        });
-        callback( null, quizzes );
+        if ( quizEntries !== null ) {
+          var quizzes = Object.keys( quizEntries ).map( function( key ) {
+            var quiz = quizEntries[key];
+            quiz.id = key;
+            return quiz;
+          });
+          callback( quizzes );
+        }
+        else {
+          callback( [] );
+        }
       });
     });
   },
