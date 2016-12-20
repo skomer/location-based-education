@@ -64,8 +64,9 @@ window.onload = function() {
     } else { 
       console.log("saving the quiz");
       saveQuiz();
-    };
+    }
   };
+
 
   // contacts quiz server to post the quiz to the db
   var saveQuiz = function() {
