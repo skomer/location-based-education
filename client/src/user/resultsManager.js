@@ -97,11 +97,14 @@ ResultsManager.prototype = {
     this.scoreP.innerText = this.score.toString() + " / " + this.scoreOutOf;
   },
   flashScore: function( colour ) {
+    if( this.lastPulseCssClass ) {
+      this.scoreP.classList.remove( this.lastPulseCssClass );
+    }
     var cssClass = 'pulse-' + colour;
-    this.scoreP.classList.remove( cssClass );
     setTimeout( function() {
       this.scoreP.classList.add( cssClass );
     }.bind( this ), 100 );
+    this.lastPulseCssClass = cssClass;
   }
 };
 
