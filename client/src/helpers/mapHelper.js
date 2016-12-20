@@ -14,7 +14,9 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
   this.map = new google.maps.Map(
     container,
     {
-      center: defaultCenter, zoom: defaultZoom
+      center: defaultCenter,
+      zoom: defaultZoom,
+      disableDefaultUI: true
     }
   );
   google.maps.event.addListener(this.map, "click", function(ev){
