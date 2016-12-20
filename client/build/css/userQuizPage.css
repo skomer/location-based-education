@@ -1,7 +1,7 @@
 #map-container {
-  background-color: dodgerblue;
-  height: 800px;
-  width: 800px;
+  background-color: snow;
+  height: 700px;
+  width: 700px;
   padding: 0px;
 }
 
@@ -94,7 +94,7 @@ td.empty-cell {
 }
 
 #score-bar {
-  background-color: gainsboro;
+  background-color: skyblue;
   position: fixed;
   z-index: 100;
   bottom: 0;
@@ -103,14 +103,19 @@ td.empty-cell {
   margin: 0;
   padding: 0;
   border-top: 2px solid white;
+  color: #343434;
 }
 
 #score-p {
   display: inline-block;
-  background-color: white;
+  background-color: skyblue;
   width: 200px;
   border-radius: 10px;
   font-size: 2em;
   padding: 0px;
   margin-top: 20px;;
+}
+
+tr{
+  color: #343434;
 }
