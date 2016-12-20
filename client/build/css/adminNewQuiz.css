@@ -34,3 +34,20 @@ select {
  white-space: nowrap;
  width: 300px;
 }
+
+#padding-under-questions, #publish-bar {
+  height: 100px;
+}
+
+#publish-bar {
+  background-color: skyblue;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-top: 2px solid white;
+  color: #343434;
+}
