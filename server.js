@@ -5,6 +5,7 @@ var firebaseHelper = require('./firebaseHelper');
 var fs = require( 'fs' );
 var app = express();
 
+// var icon;
 
 app.use(express.static('client/build'));
 // tell express to use bodyparser -- take the request body and put it as json on the req object
@@ -34,6 +35,11 @@ app.get('/admin/quizzes/new', function(req, res) {
   res.sendFile(path.join(__dirname + '/client/build/admin/addQuiz.html'));
 });
 
+// GET EDIT QUIZ
+app.get('/admin/quizzes/:quiz_id', function(req, res) {
+  res.sendFile(path.join(__dirname + '/client/build/admin/addQuiz.html'));
+});
+
 
 //////////
 // USER //
@@ -44,7 +50,7 @@ app.get('/user/quizzes', function(req, res){
   res.sendFile(path.join(__dirname + '/client/build/user/index.html'));
 });
 
-//GET QUESTIOn
+//GET QUESTION
 app.get('/user/quizzes/:quiz_id', function( req, res) {
   var quizId = req.params.quiz_id;
   console.log("quiz requested:", quizId);
@@ -81,6 +87,7 @@ app.get('/quizzes', function(req, res){
 
 // GET QUIZ
 app.get('/quizzes/:quiz_id', function( req, res ) {
+  console.log("here in GET QUIZ server function");
   var quizId = req.params.quiz_id;
   firebaseHelper.getQuizById( quizId, function( quiz ) {
     if ( quiz ) {
@@ -93,28 +100,6 @@ app.get('/quizzes/:quiz_id', function( req, res ) {
     }
   });
 });
-
-// //GET QUESTIOn
-// app.get('/quizzes/:quiz_id/:question_index', function( req, res ) {
-//   var quizId = req.params.quiz_id;
-//   var questionIndex = req.params.question_index;
-//   firebaseHelper.getQuizById( quizId, function( quiz ) {
-//     if ( quiz ) {
-//       console.log( "recieved quiz with id", quizId, ":\n", quiz );
-//       if ( quiz.questions && quiz.questions[questionIndex] ) {
-//         res.json( JSON.stringify( quiz.questions[questionIndex] ) );
-//       }
-//       else {
-//         console.log( "quiz", quizId, "doesn't have a question at index", questionIndex );
-//         res.status( 404 ).end();
-//       }
-//     }
-//     else {
-//       console.log( "no quiz with id", quizId, "found" );
-//       res.status( 404 ).end();
-//     }
-//   });
-// });
 
 // POST QUIZ
 app.post('/quizzes', function(req, res){

@@ -1,4 +1,36 @@
-
 #title-warning, #ul-warning, #question-warning {
   display: none;
+}
+
+#publish-div, #checkbox {
+  margin: 15px;
+  padding: 10px;
+}
+
+div{
+  align-content: center;
+  text-align: center;
+}
+
+#save-quiz-button, #show-archive-button{
+  margin: 15px;
+}
+
+select {
+ -webkit-appearance: button;
+ -webkit-border-radius: 2px;
+ -webkit-padding-end: 20px;
+ -webkit-padding-start: 2px;
+ -webkit-user-select: none;
+ background-image: url(http://i62.tinypic.com/15xvbd5.png);
+ background-position: 97% center;
+ background-repeat: no-repeat; /*stops image repeating*/
+ color: dimgrey;
+ font-size: 24px;
+ margin: 20px;
+ overflow: hidden;
+ padding: 5px;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ width: 300px;
 }
