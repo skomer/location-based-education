@@ -1,7 +1,10 @@
 var values = require( '../values.js' );
+var iconImage = require('../models/iconImage');
 var latLng;
 
+
 var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
+  this.iconImageUrl = iconImage.getIconImageUrl();
   this.geocoder = new google.maps.Geocoder();
   var defaultCenter = {
     lat: lat,
@@ -20,11 +23,14 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       lng: ev.latLng.lng()
     };
     var icon = {
-      url: '/images/anchor.png',
+      url: this.iconImageUrl,
       size: new google.maps.Size(128, 128),
-      scaledSize: new google.maps.Size(20, 20)
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(22.5, 22.5),
+      scaledSize: new google.maps.Size(45, 45)
     };
-    var marker = new google.maps.Marker({
+    if ( this.marker ) this.marker.setMap( null );
+    this.marker = new google.maps.Marker({
       // scaledSize: new google.maps.Size(20, 20),
       position: latLng,
       map: this.map,
@@ -36,8 +42,6 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       mapClickCallback(countryCode, countryName);
     });
   }.bind(this));
-
-
 };
 
 MapHelper.prototype = {
