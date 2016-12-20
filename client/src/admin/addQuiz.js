@@ -1,5 +1,7 @@
 var quizServer = require('../models/quizServer.js');
+var miscHelper = require('../helpers/miscHelpers');
 var QuestionListView = require('../views/questionListView.js');
+var Quiz = require('../models/quiz.js');
 
 window.onload = function() {
   console.log("Ready to add quizzes");
@@ -21,6 +23,31 @@ window.onload = function() {
   var showArchiveButton = document.getElementById('show-archive-button');
   var published;
 
+  // 'Existing quiz' values
+  var eQuizId;
+  var eQuizTitle;
+  var eQuizQuestions;
+  var eQuizPublished;
+
+  var newOrExistingQuiz = function() {
+    var lastUrlElement = miscHelper.getLastUrlElement();
+    if (lastUrlElement != 'new') {
+      var requestedQuiz = quizServer.getQuizById(lastUrlElement, function(quiz) {
+        populateExistingQuiz(quiz);
+      });
+    }
+  };
+
+  var populateExistingQuiz = function(quiz) {
+    eQuizTitle = quiz.title;
+    eQuizQuestions = quiz.questions;
+    eQuizPublished = quiz.published;
+    eQuizId = quiz.id;
+  };
+
+  newOrExistingQuiz();
+
+
   newQuestionButton.onclick = function() {
     ulWarning.style.display = "none";
     questionListView.addQuestion();
@@ -38,6 +65,7 @@ window.onload = function() {
     var warningText = "";
 
     published = document.getElementById("check-publish").checked; 
+    console.log("published:", published);
 
     // WORK IN PROGRESS - error messages for creating quiz
     if (quizTitleInput.innerText === "") {
@@ -66,7 +94,6 @@ window.onload = function() {
       saveQuiz();
     }
   };
-
 
   // contacts quiz server to post the quiz to the db
   var saveQuiz = function() {
