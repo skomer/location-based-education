@@ -1,11 +1,16 @@
 var quizServer = require('../models/quizServer');
 var QuizListView = require('../views/quizListView');
 var IconListView = require('../views/iconListView');
+var iconImage = require('../models/iconImage');
 
 window.onload = function() {
 
+  var iconImageUrl = iconImage.getIconImageUrl();
   var iconListView = new IconListView( iconSelected );
   var selectIconButton = document.getElementById( 'select-icon-button' );
+  var imageSetting = "url('" + iconImageUrl + "')";
+  console.log( "imageSetting;", imageSetting );
+  selectIconButton.style.backgroundImage = imageSetting;
   selectIconButton.onclick = function() {
     iconListView.show();
   };
