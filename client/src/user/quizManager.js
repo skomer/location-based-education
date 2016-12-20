@@ -27,7 +27,9 @@ QuizManager.prototype = {
     this.progressBarView.draw( 1 );
   },
   askQuestion: function(){
-    console.log("this.quiz.currentQuestion():", this.quiz.currentQuestion() );
+    console.log("this.quiz.currentQuestion():",
+    this.quiz.currentQuestion() );
+    this.mapHelper.clearMarker();
     this.questionTextP.innerText = this.quiz.currentQuestion().text;
     this.nextQuestionButton.disabled = true;
     this.answerTextP.innerText = "Click map to select answer";
