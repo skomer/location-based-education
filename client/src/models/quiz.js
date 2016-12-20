@@ -7,6 +7,7 @@ var Quiz = function(params){
     this.published = false;
   }
   else {
+    this.id = params.id;
     this.title = params.title;
     this.questions = params.questions.map( function( question ) {
       return questionObject = new Question({
