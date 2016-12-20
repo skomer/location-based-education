@@ -15,7 +15,7 @@ ul {
 }
 
 h1 {
-  font-size: 55px;
+  font-size: 40px;
 }
 
 button, input {
@@ -33,8 +33,8 @@ button, input {
   border-radius: 3px;
 }
 
-img {
-  opacity: 0.9;
+#home-page-image {
+  height: auto;
 }
 
 #add-quiz-button:hover {
@@ -71,13 +71,14 @@ img {
   margin: 18px;
   font-weight: bold;
   font-size: 1.4em;
+  /*font-size: 8vw;*/
   text-align: center;
   border-radius: 10px;
   overflow: hidden;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
   height: 160px;
+  width: 50%;
 }
 
 button:disabled {
@@ -90,7 +91,7 @@ button:disabled {
 }
 
 #user-login-button, #admin-login-button {
-  font-size: 50px;
+  font-size: 40px;
   margin: 20px;
 }
 
@@ -130,4 +131,19 @@ button:disabled {
 #infobox-text {
   flex-grow: 1;
   font-size: 1.3em;
+}
+
+#logo-corner{
+  position:absolute;
+  right:1px;
+  top: 1px;
+  padding: 5px;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-hide {
+  visibility: hidden;
 }
