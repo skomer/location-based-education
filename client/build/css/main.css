@@ -35,6 +35,7 @@ button, input {
 
 img {
   opacity: 0.9;
+  height: auto;
 }
 
 #add-quiz-button:hover {
