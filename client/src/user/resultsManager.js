@@ -71,7 +71,7 @@ ResultsManager.prototype = {
         td.innerText += " ✘";
         td.classList.add( "wrong-answer" );
         td.classList.add( "tooltip" );
-        this.createCorrectAnswerFor( td, question.answer.countryName );
+        this.createCorrectAnswerFor( td, question.countryName );
       }
     }.bind( this ), timeoutLength );
   },

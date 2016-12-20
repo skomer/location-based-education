@@ -27,6 +27,7 @@ QuizManager.prototype = {
     this.progressBarView.draw( 1 );
   },
   askQuestion: function(){
+    console.log("this.quiz.currentQuestion():", this.quiz.currentQuestion() );
     this.questionTextP.innerText = this.quiz.currentQuestion().text;
     this.nextQuestionButton.disabled = true;
     this.answerTextP.innerText = "Click map to select answer";
@@ -45,11 +46,11 @@ QuizManager.prototype = {
     }
   },
   handleNextQuestionButtonClicked: function() {
-    this.quiz.nextQuestion();
     if( this.quiz.onLastQuestion() ){
       this.quizFinishedCallback( this.quiz );
     }
     else {
+      this.quiz.nextQuestion();
       this.askQuestion();
       this.progressBarView.nextQuestion();
     }
