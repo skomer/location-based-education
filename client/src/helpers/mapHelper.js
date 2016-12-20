@@ -14,7 +14,9 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
   this.map = new google.maps.Map(
     container,
     {
-      center: defaultCenter, zoom: defaultZoom
+      center: defaultCenter,
+      zoom: defaultZoom,
+      disableDefaultUI: true
     }
   );
   google.maps.event.addListener(this.map, "click", function(ev){
@@ -22,6 +24,7 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       lat: ev.latLng.lat(),
       lng: ev.latLng.lng()
     };
+    this.clearMarker();
     var icon = {
       url: this.iconImageUrl,
       size: new google.maps.Size(128, 128),
@@ -29,9 +32,7 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       anchor: new google.maps.Point(22.5, 22.5),
       scaledSize: new google.maps.Size(45, 45)
     };
-    if ( this.marker ) this.marker.setMap( null );
     this.marker = new google.maps.Marker({
-      // scaledSize: new google.maps.Size(20, 20),
       position: latLng,
       map: this.map,
       icon: icon
@@ -67,8 +68,11 @@ MapHelper.prototype = {
       }
     });
 
+  },
+  clearMarker: function() {
+    if ( this.marker ) this.marker.setMap( null );
+    this.marker = null;
   }
-
 }
 
 module.exports = MapHelper;
