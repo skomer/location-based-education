@@ -36,10 +36,6 @@ body, html{
   color: tomato;
 }
 
-.answer {
-  width: 150px;
-}
-
 table {
   border-collapse: separate;
   border-spacing: 20px;
@@ -60,23 +56,9 @@ td.empty-cell {
   background-color: inherit;
 }
 
-/* TOOLTIPS */
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltip .tooltip-text {
-    width: 120px;
+.correct-answer-cell {
     background-color: white;
     color: green;
-    text-align: center;
-    padding: 15px 0;
-
-    position: absolute;
-    z-index: 1;
-    top: 0px;
-    left: 110%;
 }
 
 @keyframes pulse {

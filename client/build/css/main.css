@@ -33,8 +33,7 @@ button, input {
   border-radius: 3px;
 }
 
-img {
-  opacity: 0.9;
+#home-page-image {
   height: auto;
 }
 
@@ -139,4 +138,12 @@ button:disabled {
   right:1px;
   top: 1px;
   padding: 5px;
+}
+
+.display-none {
+  display: none;
+}
+
+.display-hide {
+  visibility: hidden;
 }
