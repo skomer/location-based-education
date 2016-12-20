@@ -1,22 +1,34 @@
 var Question = require('./question');
 
 var Quiz = function(params){
+  this.questions = [];
+  this.archivedQuestions = [];
+
   if ( typeof( params ) === 'string' ) {
     this.title = params;
-    this.questions = [];
     this.published = false;
   }
   else {
     this.id = params.id;
     this.title = params.title;
-    this.questions = params.questions.map( function( question ) {
-      return questionObject = new Question({
+    params.questions.forEach( function( question ) {
+      var questionObject = new Question({
         text: question.text,
         countryCode: question.countryCode,
         countryName: question.countryName,
         archived: question.archived
       });
-    });
+
+      if ( question.archived ) {
+        this.archivedQuestions.push( questionObject );
+      }
+      else {
+        this.questions.push( questionObject );
+      }
+
+      return questionObject;
+    }.bind( this ) );
+
     this.published = params.published;
     this.currentQuestionIndex = 0;
   }

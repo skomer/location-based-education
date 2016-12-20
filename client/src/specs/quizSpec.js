@@ -6,32 +6,64 @@ describe('Quiz', function(){
 
   var blankQuiz;
   var populatedQuiz;
+  var firstQuestion_active;
+  var secondQuestion;
+  var thirdQuestion_active;
+  var fourthQuestion_active;
+  var fifthQuestion;
+  var nullUserAnswer;
 
   beforeEach(function(){
     blankQuiz = new Quiz( "Blank Quiz" );
+    nullUserAnswer = {
+      countryCode: null,
+      countryName: null
+    };
+
+    firstQuestion_active = {
+      text: "first question",
+      countryCode: "AF",
+      countryName: "Afghanistan",
+      archived: false
+    };
+
+    secondQuestion = {
+      text: "second question",
+      countryCode: "FR",
+      countryName: "France",
+      archived: true
+    };
+
+    thirdQuestion_active = {
+      text: "third question",
+      countryCode: "GR",
+      countryName: "Germany",
+      archived: false
+    };
+
+    fourthQuestion_active = {
+      text: "fourth question",
+      countryCode: "BL",
+      countryName: "Belrus",
+      archived: false
+    };
+
+    fifthQuestion = {
+      text: "fifth question",
+      countryCode: "RS",
+      countryName: "Russia",
+      archived: true
+    }
 
     quizWithQuestions = new Quiz({
       id: '-testId',
       title: "Test Quiz with Questions",
       questions: [
-        {
-          text: "first question",
-          countryCode: "AF",
-          countryName: "Afghanistan",
-          archived: false
-        },
-        {
-          text: "second question",
-          countryCode: "FR",
-          countryName: "France",
-          archived: true
-        },
-        {
-          text: "third question",
-          countryCode: "GR",
-          countryName: "Germany",
-          archived: true
-        }
+        firstQuestion_active,
+        secondQuestion,
+        thirdQuestion_active,
+        fourthQuestion_active,
+        fifthQuestion
       ],
       published: true
     });
@@ -39,6 +71,7 @@ describe('Quiz', function(){
 
   // ************* TESTS FOR INITIALISING WITH DATA
   it("should have id parameter when initialised with data", function() {
+    console.log(quizWithQuestions);
     assert.equal( "-testId", quizWithQuestions.id );
   });
 
@@ -46,7 +79,7 @@ describe('Quiz', function(){
     assert.equal( "Test Quiz with Questions", quizWithQuestions.title );
   });
 
-  it("should have same number of questions passed into constructor", function() {
+  it("should have same number of active questions passed into constructor", function() {
     assert.equal( 3, quizWithQuestions.length() );
   });
 
@@ -54,55 +87,30 @@ describe('Quiz', function(){
     assert.equal( true, quizWithQuestions.published );
   });
 
-  it("should have same first question passed into constructor", function() {
-    var expected = new Question({
-      text: "first question",
-      countryCode: "AF",
-      countryName: "Afghanistan",
-      archived: false
-    });
-    assert.deepEqual( expected, quizWithQuestions.questions[0] );
+  it("should have same first active question passed into constructor", function() {
+  firstQuestion_active.userAnswer = nullUserAnswer;
+    assert.deepEqual( firstQuestion_active, quizWithQuestions.questions[0] );
   });
 
-  it("should have same last question passed into constructor", function() {
-    var expected = new Question({
-      text: "third question",
-      countryCode: "GR",
-      countryName: "Germany",
-      archived: true
-    });
-    assert.deepEqual( expected, quizWithQuestions.questions[2] );
+  it("should have same last active question passed into constructor", function() {
+    fourthQuestion_active.userAnswer = nullUserAnswer;
+    assert.deepEqual( fourthQuestion_active, quizWithQuestions.questions[2] );
   });
 
   it("should start on question 1", function() {
-    var expected = new Question({
-      text: "first question",
-      countryCode: "AF",
-      countryName: "Afghanistan",
-      archived: false
-    });
-    assert.deepEqual( expected, quizWithQuestions.currentQuestion() );
+    firstQuestion_active.userAnswer = nullUserAnswer;
+    assert.deepEqual( firstQuestion_active, quizWithQuestions.currentQuestion() );
   });
 
-  it("should return next question", function() {
-    var expected = new Question({
-      text: "second question",
-      countryCode: "FR",
-      countryName: "France",
-      archived: true
-    });
-    assert.deepEqual( expected, quizWithQuestions.nextQuestion() );
+  it("should return next active question", function() {
+    thirdQuestion_active.userAnswer = nullUserAnswer;
+    assert.deepEqual( thirdQuestion_active, quizWithQuestions.nextQuestion() );
   });
 
-  it("should increment currentQuestion when nextQuestion() called", function() {
-    var expected = new Question({
-      text: "second question",
-      countryCode: "FR",
-      countryName: "France",
-      archived: true
-    });
+  it("should go to next active question when nextQuestion() called", function() {
+  thirdQuestion_active.userAnswer = nullUserAnswer;
     quizWithQuestions.nextQuestion();
-    assert.deepEqual( expected, quizWithQuestions.currentQuestion() );
+    assert.deepEqual( thirdQuestion_active, quizWithQuestions.currentQuestion() );
   });
 
   it("should return false when not on last question from onLastQuestion()", function() {
