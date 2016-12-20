@@ -5,7 +5,7 @@ body, html{
 
 #map-container {
   background-color: snow;
-  height: calc( 100vh - 130px );
+  height: calc( 100vh - 160px );
   width: 100%;
   padding: 0px;
   position: relative;
@@ -22,6 +22,7 @@ body, html{
 #controls-container {
   display: flex;
   flex-direction: column;
+  width: 300px;
 }
 
 #map-container, #controls-container, #progress-bar {
@@ -66,7 +67,7 @@ td.empty-cell {
     color: green;
 }
 
-@keyframes pulse {
+@keyframes pulse-green-animation {
   0% {
     background: white;
   }
@@ -79,7 +80,23 @@ td.empty-cell {
 }
 
 .pulse-green {
-  animation: pulse 0.7s ease-in-out;
+  animation: pulse-green-animation 0.7s ease-in-out;
+}
+
+@keyframes pulse-red-animation {
+  0% {
+    background: white;
+  }
+  50% {
+    background: tomato;
+  }
+  100% {
+    background: white;
+  }
+}
+
+.pulse-red {
+  animation: pulse-red-animation 0.7s ease-in-out;
 }
 
 #padding-under-score-bar, #score-bar {
