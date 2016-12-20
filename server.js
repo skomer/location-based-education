@@ -112,6 +112,12 @@ app.post('/quizzes', function(req, res){
   });
 });
 
+app.put('/quizzes', function( req, res ) {
+  console.log( "updating quiz:", req.body.id );
+  firebaseHelper.updateQuiz( req.body );
+  res.status( 200 ).end();
+});
+
 var server = app.listen(3000, function() {
   var host = server.address().address;
   var port = server.address().port;

@@ -41,6 +41,12 @@ var firebaseHelper = {
       });
     });
   },
+  updateQuiz: function( quiz ) {
+    this.getQuizzesRef( function( quizzesRef ) {
+      var quizRef = quizzesRef.child( quiz.id );
+      quizRef.set( quiz );
+    });
+  },
   getAllQuizzes: function( callback ) {
     this.getQuizzesRef( function( quizzesRef ) {
       quizzesRef.once( 'value' ).then( function( snapshot ) {
