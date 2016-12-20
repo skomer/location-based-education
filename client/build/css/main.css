@@ -18,6 +18,8 @@ h1 {
   font-size: 40px;
   text-align: center;
   flex-grow: 1;
+  margin-top: 45px;
+  margin-bottom: 45px;
 }
 
 button, input {
