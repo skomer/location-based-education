@@ -1,7 +1,10 @@
 var values = require( '../values.js' );
+var iconImage = require('../models/iconImage');
 var latLng;
 
+
 var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
+  this.iconImageUrl = iconImage.getIconImageUrl();
   this.geocoder = new google.maps.Geocoder();
   var defaultCenter = {
     lat: lat,
@@ -20,7 +23,7 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       lng: ev.latLng.lng()
     };
     var icon = {
-      url: '/images/anchor.png',
+      url: this.iconImageUrl,
       size: new google.maps.Size(128, 128),
       origin: new google.maps.Point(0, 0),
       anchor: new google.maps.Point(10, 10),
