@@ -26,8 +26,8 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       url: this.iconImageUrl,
       size: new google.maps.Size(128, 128),
       origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(10, 10),
-      scaledSize: new google.maps.Size(20, 20)
+      anchor: new google.maps.Point(22.5, 22.5),
+      scaledSize: new google.maps.Size(45, 45)
     };
     if ( this.marker ) this.marker.setMap( null );
     this.marker = new google.maps.Marker({
