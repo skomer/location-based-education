@@ -50,4 +50,30 @@ select {
   padding: 0;
   border-top: 2px solid white;
   color: #343434;
+  display: flex;
 }
+
+#check-publish{
+  font-size: x-large;
+}
+
+ #save-quiz-button{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+#archive-div{
+  opacity: 0.7;
+}
+
+#quiz-title-input{
+  color: dimgrey;
+}
+
+/*.archive-button-div {
+  background:url(/images/folder.png) no-repeat;
+  cursor: pointer;
+  background-size: 100% 100%;
+  border: none;
+}*/

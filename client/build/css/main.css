@@ -22,16 +22,31 @@ h1 {
   margin-bottom: 45px;
 }
 
-button, input {
+button {
   display: inline-block;
   padding: 10px 20px;
   margin: 0;
   border-style: none;
   overflow: visible;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 20px;
   white-space: nowrap;
   color: skyblue;
+  background-color: white;
+  background-clip: padding-box;
+  border-radius: 3px;
+}
+
+input{
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0;
+  border-style: none;
+  overflow: visible;
+  font-weight: bold;
+  font-size: 20px;
+  white-space: nowrap;
+  color: dimgrey;
   background-color: white;
   background-clip: padding-box;
   border-radius: 3px;
