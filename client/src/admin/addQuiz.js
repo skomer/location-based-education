@@ -30,7 +30,7 @@ window.onload = function() {
   };
 
   newOrExistingQuiz();
-  
+
   var populateExistingQuiz = function(quiz) {    
     quizTitleInput.value = quiz.title;
     checkPublish.checked = quiz.published;
@@ -48,20 +48,17 @@ window.onload = function() {
       };
       eQuestions.push(emptyQuestion);
     }
-    // for (var i = 0; i < quiz.questions.length; i++) {
-    //   if (quiz.questions[i].archived === 'true') {
-    //     console.log("this is a true question");
-    //   }
-    // }
+    for (var i = 0; i < quiz.questions.length; i++) {
+      questionListView.addQuestion(quiz.questions[i]);
+    }
   };
 
   newQuestionButton.onclick = function() {
     ulWarning.style.display = "none";
-    questionListView.addQuestion();
+    questionListView.addQuestion(null);
   };
 
   showArchiveButton.onclick = function() {
-    console.log("showArchiveButton onclick");
     archiveDiv.style.display === "none" ? 
       (archiveDiv.style.display = "inline-block", showArchiveButton.innerText = "Hide archived questions") : 
       (archiveDiv.style.display = "none", showArchiveButton.innerText = "Show archived questions" );
