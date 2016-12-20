@@ -36,6 +36,7 @@ var firebaseHelper = {
       newQuizRef.set({
         title: quiz.title,
         questions: quiz.questions,
+        published: quiz.published,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
         createdBy: values.userEmail,
         published: quiz.published
