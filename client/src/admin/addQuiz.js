@@ -100,53 +100,47 @@ window.onload = function() {
   };
 
   // contacts quiz server to post the quiz to the db
+   var addQuestions = function(questionArray){
+    var questions = [];
+
+    for (var i = 0; i < questionArray.length; i++) {
+      var text = questionArray[i].firstChild.value;
+      var answerIndex = questionArray[i].children[1].selectedIndex;
+      var answerCode = questionArray[i].children[1][answerIndex].value;
+      var answerFullName = questionArray[i].children[1][answerIndex].innerText;
+      var archived = questionArray[i].getAttribute("archived");
+      console.log("archived:", archived);
+
+      var question = {
+        text: text,
+        countryCode: answerCode,
+        countryName: answerFullName,
+        archived: archived
+      };
+      questions.push(question);
+      return questions;
+    };
+   };
+
+  // contacts quiz server to post the quiz to the db
   var saveQuiz = function() {
     var quizTitle = quizTitleInput.value;
 
     arrayOfQuestions = unArchivedQuestionsTag.children;
     archivedQuestions = archivedQuestionsTag.children;
-    var questions = [];
-
-    for (var i = 0; i < arrayOfQuestions.length; i++) {
-      var text = arrayOfQuestions[i].firstChild.value;
-      var answerIndex = arrayOfQuestions[i].children[1].selectedIndex;
-      var answerCode = arrayOfQuestions[i].children[1][answerIndex].value;
-      var answerFullName = arrayOfQuestions[i].children[1][answerIndex].innerText;
-      var archived = arrayOfQuestions[i].getAttribute("archived");
-      console.log("archived:", archived);
-
-      var question = {
-        text: text,
-        countryCode: answerCode,
-        countryName: answerFullName,
-        archived: archived
-      };
-      questions.push(question);
-    };
-    for (var i = 0; i < archivedQuestions.length; i++) {
-      var text = archivedQuestions[i].firstChild.value;
-      var answerIndex = archivedQuestions[i].children[1].selectedIndex;
-      var answerCode = archivedQuestions[i].children[1][answerIndex].value;
-      var answerFullName = archivedQuestions[i].children[1][answerIndex].innerText;
-      var archived = archivedQuestions[i].getAttribute("archived");
-      console.log("archived:", archived);
-
-      var question = {
-        text: text,
-        countryCode: answerCode,
-        countryName: answerFullName,
-        archived: archived
-      };
-      questions.push(question);
-    };
+    
+    var q1 = addQuestions(arrayOfQuestions);
+    var q2 = addQuestions(archivedQuestions);
+    var q3 = q1.concat(q2);
 
     var quiz = {
       title: quizTitle,
-      questions: questions,
+      questions: q3,
       published: published
-    };
+    }
+
+    console.log(quiz);
     quizServer.createQuiz( quiz );
     window.location.href = "http://localhost:3000/admin/quizzes";
   };
-
 };
