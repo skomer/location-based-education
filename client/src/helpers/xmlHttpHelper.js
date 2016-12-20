@@ -19,10 +19,20 @@ var xmlHttpHelper = {
     request.setRequestHeader( 'Content-Type', 'application/json' );
     request.onload = function() {
       if ( this.status !== 200 ) {
-        console.error( "GET request to", url, "failed with status", this.status );
+        console.error( "POST request to", url, "failed with status", this.status );
       }
     }
-    console.log("dataObject:", JSON.stringify( dataObject ));
+    request.send( JSON.stringify( dataObject ) );
+  },
+  makePutRequest: function( url, dataObject ) {
+    var request = new XMLHttpRequest();
+    request.open( 'PUT', url );
+    request.setRequestHeader( 'Content-Type', 'application/json' );
+    request.onload = function() {
+      if ( this.status !== 200 ) {
+        console.error( "PUT request to", url, "failed with status", this.status );
+      }
+    }
     request.send( JSON.stringify( dataObject ) );
   }
 };

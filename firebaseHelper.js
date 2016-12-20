@@ -41,6 +41,12 @@ var firebaseHelper = {
       });
     });
   },
+  updateQuiz: function( quiz ) {
+    this.getQuizzesRef( function( quizzesRef ) {
+      var quizRef = quizzesRef.child( quiz.id );
+      quizRef.set( quiz );
+    });
+  },
   getAllQuizzes: function( callback ) {
     this.getQuizzesRef( function( quizzesRef ) {
       quizzesRef.once( 'value' ).then( function( snapshot ) {
@@ -57,8 +63,11 @@ var firebaseHelper = {
   getQuizById: function( quizId, callback ) {
     this.getQuizzesRef( function( quizzesRef ) {
       quizzesRef.orderByKey().equalTo( quizId ).once( 'value' ).then( function( snapshot ) {
-        if ( snapshot.val() ) {
-          callback( snapshot.val()[quizId] );
+        var responseData = snapshot.val();
+        if ( responseData && responseData[quizId] ) {
+          var quiz = responseData[quizId];
+          quiz.id = quizId
+          callback( quiz );
         }
         else {
           callback( null );

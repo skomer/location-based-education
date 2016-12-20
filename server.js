@@ -5,8 +5,6 @@ var firebaseHelper = require('./firebaseHelper');
 var fs = require( 'fs' );
 var app = express();
 
-// var icon;
-
 app.use(express.static('client/build'));
 // tell express to use bodyparser -- take the request body and put it as json on the req object
 app.use(bodyParser.json());
@@ -50,7 +48,7 @@ app.get('/user/quizzes', function(req, res){
   res.sendFile(path.join(__dirname + '/client/build/user/index.html'));
 });
 
-//GET QUESTION
+//GET QUESTIOn
 app.get('/user/quizzes/:quiz_id', function( req, res) {
   var quizId = req.params.quiz_id;
   console.log("quiz requested:", quizId);
@@ -87,7 +85,6 @@ app.get('/quizzes', function(req, res){
 
 // GET QUIZ
 app.get('/quizzes/:quiz_id', function( req, res ) {
-  console.log("here in GET QUIZ server function");
   var quizId = req.params.quiz_id;
   firebaseHelper.getQuizById( quizId, function( quiz ) {
     if ( quiz ) {
@@ -115,7 +112,11 @@ app.post('/quizzes', function(req, res){
   });
 });
 
-
+app.put('/quizzes', function( req, res ) {
+  console.log( "updating quiz:", req.body.id );
+  firebaseHelper.updateQuiz( req.body );
+  res.status( 200 ).end();
+});
 
 var server = app.listen(3000, function() {
   var host = server.address().address;

@@ -11,6 +11,7 @@ describe('Quiz', function(){
     blankQuiz = new Quiz( "Blank Quiz" );
 
     quizWithQuestions = new Quiz({
+      id: '-testId',
       title: "Test Quiz with Questions",
       questions: [
         {
@@ -37,6 +38,10 @@ describe('Quiz', function(){
   });
 
   // ************* TESTS FOR INITIALISING WITH DATA
+  it("should have id parameter when initialised with data", function() {
+    assert.equal( "-testId", quizWithQuestions.id );
+  });
+
   it("should have title parameter when initialised with data", function() {
     assert.equal( "Test Quiz with Questions", quizWithQuestions.title );
   });
