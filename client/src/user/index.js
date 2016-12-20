@@ -1,10 +1,16 @@
 var quizServer = require('../models/quizServer');
 var QuizListView = require('../views/quizListView');
+var IconListView = require('../views/iconListView');
 
 window.onload = function() {
 
-  var allQuizzes;
+  var iconListView = new IconListView( iconSelected );
+  var selectIconButton = document.getElementById( 'select-icon-button' );
+  selectIconButton.onclick = function() {
+    iconListView.show();
+  };
 
+  var allQuizzes;
   quizServer.getPublishedQuizzes( function( allQuizzes ) {
     var listItems = allQuizzes.map(function(quiz){
       return {
@@ -16,4 +22,8 @@ window.onload = function() {
     var quizListView = new QuizListView(quizzesContainer);
     quizListView.populate(listItems);
   });
+};
+
+var iconSelected = function( iconUrl ) {
+  console.log( "icon selected:", iconUrl );
 };
