@@ -22,6 +22,7 @@ body, html{
 #controls-container {
   display: flex;
   flex-direction: column;
+  width: 300px;
 }
 
 #map-container, #controls-container, #progress-bar {
