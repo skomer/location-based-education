@@ -4,6 +4,10 @@ var QuestionListView = require('../views/questionListView.js');
 window.onload = function() {
   console.log("Ready to add quizzes");
 
+// snip off quiz id from url
+// see user/quiz.js
+// write function populate addQuiz.html page
+
   var quizTitleInput = document.getElementById( 'quiz-title-input' );
   var newQuestionButton = document.getElementById( 'new-question-button' );
   var countriesSelect = document.getElementById('countries-select');

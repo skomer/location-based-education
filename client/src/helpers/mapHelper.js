@@ -19,19 +19,27 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       lat: ev.latLng.lat(),
       lng: ev.latLng.lng()
     };
+    var icon = {
+      url: 'anchor.png',
+      size: new google.maps.Size(128, 128),
+      scaledSize: new google.maps.Size(20, 20)
+    };
+    var iconBase = '/images/';
+      var marker = new google.maps.Marker({
+        // scaledSize: new google.maps.Size(20, 20),
+        position: latLng,
+        map: this.map,
+        icon: icon
+      });
+
     console.log("map clicked at", latLng);
     console.log(this);
+    console.log(marker.icon);
     this.decodeCountry(latLng, function( countryCode, countryName){
       mapClickCallback(countryCode, countryName);
     });
   }.bind(this));
 
-  var iconBase = '../../build/images/';
-    var marker = new google.maps.Marker({
-      position: latLng,
-      map: this.map,
-      icon: iconBase + 'anchor.png'
-    });
 
 };
 
