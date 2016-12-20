@@ -11,10 +11,8 @@ var Quiz = function(params){
     this.questions = params.questions.map( function( question ) {
       return questionObject = new Question({
         text: question.text,
-        answer: {
-          countryCode: question.countryCode,
-          countryName: question.countryName
-        },
+        countryCode: question.countryCode,
+        countryName: question.countryName,
         archived: question.archived
       });
     });
@@ -27,10 +25,8 @@ Quiz.prototype = {
   addQuestion: function( text, countryCode, countryName, archived ) {
     var question = new Question({
       text: text,
-      answer: {
-        countryCode: countryCode,
-        countryName: countryName
-      },
+      countryCode: countryCode,
+      countryName: countryName,
       archived: archived
     });
     this.questions.push( question );
@@ -60,7 +56,7 @@ Quiz.prototype = {
     return this.currentQuestion();
   },
   onLastQuestion: function() {
-    return this.currentQuestionIndex === this.length();
+    return this.currentQuestionIndex === this.length() - 1;
   },
   length: function() {
     return this.questions.length;

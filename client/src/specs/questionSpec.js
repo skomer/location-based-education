@@ -6,34 +6,26 @@ describe("Question", function(){
   beforeEach(function(){
     completeQuestion = new Question({
       text: "Country contains Paris",
-      answer: {
-        countryCode: "FR",
-        countryName: "France"
-      },
+      countryCode: "FR",
+      countryName: "France",
       archived: false
     });
     qNoCountryCode = new Question({
       text: "Country contains Paris",
-      answer: {
-        countryCode: "",
-        countryName: "France"
-      },
+      countryCode: "",
+      countryName: "France",
       archived: true
     });
     qNoCountryName = new Question({
       text: "Country contains Paris",
-      answer: {
-        countryCode: "FR",
-        countryName: ""
-      },
+      countryCode: "FR",
+      countryName: "",
       archived: true
     });
     qNoText = new Question({
       text: "",
-      answer: {
-        countryCode: "IT",
-        countryName: "Italy"
-      },
+      countryCode: "IT",
+      countryName: "Italy",
       archived: false
     });
   });
@@ -44,11 +36,11 @@ describe("Question", function(){
   });
 
   it("should have country code passed in constructor", function(){
-    assert.equal("FR", completeQuestion.answer.countryCode);
+    assert.equal("FR", completeQuestion.countryCode);
   });
 
   it("should have answer country name passed in constructor", function(){
-    assert.equal("France", completeQuestion.answer.countryName);
+    assert.equal("France", completeQuestion.countryName);
   });
 
   it("should have archived boolean passed in constructor", function(){

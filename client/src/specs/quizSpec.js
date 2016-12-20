@@ -1,5 +1,6 @@
 var assert = require('assert');
 var Quiz = require('../models/quiz');
+var Question = require('../models/question');
 
 describe('Quiz', function(){
 
@@ -12,57 +13,91 @@ describe('Quiz', function(){
     quizWithQuestions = new Quiz({
       title: "Test Quiz with Questions",
       questions: [
-        "first question",
-        "second question",
-        "third questions"
+        {
+          text: "first question",
+          countryCode: "AF",
+          countryName: "Afghanistan",
+          archived: false
+        },
+        {
+          text: "second question",
+          countryCode: "FR",
+          countryName: "France",
+          archived: true
+        },
+        {
+          text: "third question",
+          countryCode: "GR",
+          countryName: "Germany",
+          archived: true
+        }
       ],
-      archived: false
+      published: true
     });
   });
 
   // ************* TESTS FOR INITIALISING WITH DATA
   it("should have title parameter when initialised with data", function() {
-    var quizDataStub = { title: "Test title" };
-    var testQuiz = new Quiz( quizDataStub );
-    assert.equal( "Test title", testQuiz.title );
+    assert.equal( "Test Quiz with Questions", quizWithQuestions.title );
   });
 
   it("should have same number of questions passed into constructor", function() {
-    var quizDataStub = {
-      questions: [ 1, 2, 3, 4 ]
-    };
-    var testQuiz = new Quiz( quizDataStub );
-    assert.equal( 4, testQuiz.questions.length );
+    assert.equal( 3, quizWithQuestions.length() );
   });
 
   it("should have a published boolean passed into the constructor", function() {
-    var quizDataStub = {
-      published: true
-    };
-    var testQuiz = new Quiz( quizDataStub );
-    assert.equal( true, testQuiz.published );
+    assert.equal( true, quizWithQuestions.published );
   });
 
-  it("should have same questions passed into constructor", function() {
-    var testQuestionsStub = [ "First question", "Second question", "Third question" ];
-    var quizDataStub = {
-      questions: testQuestionsStub
-    };
-    var testQuiz = new Quiz( quizDataStub );
-    assert.deepEqual( testQuestionsStub, testQuiz.questions );
+  it("should have same first question passed into constructor", function() {
+    var expected = new Question({
+      text: "first question",
+      countryCode: "AF",
+      countryName: "Afghanistan",
+      archived: false
+    });
+    assert.deepEqual( expected, quizWithQuestions.questions[0] );
+  });
+
+  it("should have same last question passed into constructor", function() {
+    var expected = new Question({
+      text: "third question",
+      countryCode: "GR",
+      countryName: "Germany",
+      archived: true
+    });
+    assert.deepEqual( expected, quizWithQuestions.questions[2] );
   });
 
   it("should start on question 1", function() {
-    assert.equal( "first question", quizWithQuestions.currentQuestion() );
+    var expected = new Question({
+      text: "first question",
+      countryCode: "AF",
+      countryName: "Afghanistan",
+      archived: false
+    });
+    assert.deepEqual( expected, quizWithQuestions.currentQuestion() );
   });
 
   it("should return next question", function() {
-    assert.equal( "second question", quizWithQuestions.nextQuestion() );
+    var expected = new Question({
+      text: "second question",
+      countryCode: "FR",
+      countryName: "France",
+      archived: true
+    });
+    assert.deepEqual( expected, quizWithQuestions.nextQuestion() );
   });
 
   it("should increment currentQuestion when nextQuestion() called", function() {
+    var expected = new Question({
+      text: "second question",
+      countryCode: "FR",
+      countryName: "France",
+      archived: true
+    });
     quizWithQuestions.nextQuestion();
-    assert.equal( "second question", quizWithQuestions.currentQuestion() );
+    assert.deepEqual( expected, quizWithQuestions.currentQuestion() );
   });
 
   it("should return false when not on last question from onLastQuestion()", function() {
@@ -102,8 +137,8 @@ describe('Quiz', function(){
   it("should create question with passed text, country code, country name and archived status", function() {
     blankQuiz.addQuestion( "Test question text", "AF", "Afghanistan", true );
     assert.equal( "Test question text", blankQuiz.questions[0].text );
-    assert.equal( "AF", blankQuiz.questions[0].answer.countryCode );
-    assert.equal( "Afghanistan", blankQuiz.questions[0].answer.countryName );
+    assert.equal( "AF", blankQuiz.questions[0].countryCode );
+    assert.equal( "Afghanistan", blankQuiz.questions[0].countryName );
     assert.equal( true, blankQuiz.questions[0].archived );
   });
 

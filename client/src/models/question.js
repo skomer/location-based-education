@@ -1,9 +1,7 @@
 var Question = function( params ){
   this.text = params.text;
-  this.answer = {
-    countryCode: params.answer.countryCode,
-    countryName: params.answer.countryName
-  };
+  this.countryCode = params.countryCode;
+  this.countryName = params.countryName;
   this.userAnswer = {
     countryCode: null,
     countryName: null
@@ -13,10 +11,10 @@ var Question = function( params ){
 
 Question.prototype = {
   isSaveable: function(){
-    if(!this.answer.countryCode){
+    if(!this.countryCode){
       return false;
     }
-    if(!this.answer.countryName){
+    if(!this.countryName){
       return false;
     }
     if(!this.text){
@@ -30,7 +28,7 @@ Question.prototype = {
     this.userAnswer.countryName = countryName;
   },
   isCorrect: function() {
-    return this.answer.countryCode === this.userAnswer.countryCode;
+    return this.countryCode === this.userAnswer.countryCode;
   }
 };
 
