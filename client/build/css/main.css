@@ -18,6 +18,8 @@ h1 {
   font-size: 40px;
   text-align: center;
   flex-grow: 1;
+  margin-top: 45px;
+  margin-bottom: 45px;
 }
 
 button, input {
@@ -168,7 +170,7 @@ button:disabled {
   position:absolute;
   right:1px;
   top: 1px;
-  padding: 5px;
+  padding: 15px;
 }
 
 .display-none {
