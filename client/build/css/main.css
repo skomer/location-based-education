@@ -1,8 +1,12 @@
 body {
-  background-color: gainsboro;
-  color: lightslategrey;
-  font-family: sans-serif;
-  font-size: 20px;
+  background-color: skyblue;
+  color: snow;
+  font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 26.4px;
   text-align: center;
 }
 
@@ -23,10 +27,14 @@ button, input {
   font-weight: bold;
   font-size: 15px;
   white-space: nowrap;
-  color: dimgrey;
-  background-color: whitesmoke;
+  color: skyblue;
+  background-color: white;
   background-clip: padding-box;
   border-radius: 3px;
+}
+
+img {
+  opacity: 0.9;
 }
 
 #add-quiz-button:hover {
@@ -49,6 +57,7 @@ button, input {
   align-items: center;
   justify-content: center;
   flex: 0 0 33.3333%;
+  color: #231f20;
 }
 
 .quiz-item {
