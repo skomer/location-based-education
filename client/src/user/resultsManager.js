@@ -29,13 +29,27 @@ ResultsManager.prototype = {
       var userAnswerTd = document.createElement( 'td' );
       userAnswerTd.innerText = question.userAnswer.countryName;
       userAnswerTd.classList.add( 'answer' );
+
+      var correctAnswerTd = document.createElement( 'td' );
+      correctAnswerTd.innerText = question.countryName;
+      correctAnswerTd.classList.add( 'correct-answer-cell' );
+
+      if ( question.isCorrect() ) {
+        correctAnswerTd.classList.add( 'display-none' );
+      } else {
+        correctAnswerTd.classList.add( 'display-hide' );
+      }
+
+
       question.userAnswerTd = userAnswerTd;
+      question.correctAnswerTd = correctAnswerTd;
       question.number = questionNumber;
 
       var resultRow = document.createElement( 'tr' );
       resultRow.id = 'question-' + questionNumber;
       resultRow.appendChild( questionTextTd );
       resultRow.appendChild( userAnswerTd );
+      resultRow.appendChild( correctAnswerTd );
 
       this.tableBody.appendChild( resultRow );
       questionNumber++;
@@ -71,15 +85,10 @@ ResultsManager.prototype = {
         td.innerText += " ✘";
         td.classList.add( "wrong-answer" );
         td.classList.add( "tooltip" );
-        this.createCorrectAnswerFor( td, question.countryName );
+        question.correctAnswerTd.classList.remove( 'display-hide' );
+        console.log( question.correctAnswerTd );
       }
     }.bind( this ), timeoutLength );
-  },
-  createCorrectAnswerFor( td, correctAnswer ) {
-    var correctAnswerSpan = document.createElement( 'span' );
-    correctAnswerSpan.innerText = correctAnswer;
-    correctAnswerSpan.classList.add( 'tooltip-text' );
-    td.appendChild( correctAnswerSpan );
   },
   updateScore: function( scoreIncrease ) {
     this.score += scoreIncrease;
