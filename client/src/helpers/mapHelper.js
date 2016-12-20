@@ -20,17 +20,16 @@ var MapHelper = function(container, lat, lng, defaultZoom, mapClickCallback){
       lng: ev.latLng.lng()
     };
     var icon = {
-      url: 'anchor.png',
+      url: '/images/anchor.png',
       size: new google.maps.Size(128, 128),
       scaledSize: new google.maps.Size(20, 20)
     };
-    var iconBase = '/images/';
-      var marker = new google.maps.Marker({
-        // scaledSize: new google.maps.Size(20, 20),
-        position: latLng,
-        map: this.map,
-        icon: icon
-      });
+    var marker = new google.maps.Marker({
+      // scaledSize: new google.maps.Size(20, 20),
+      position: latLng,
+      map: this.map,
+      icon: icon
+    });
 
     console.log("map clicked at", latLng);
     this.decodeCountry(latLng, function( countryCode, countryName){
