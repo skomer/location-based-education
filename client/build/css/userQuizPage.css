@@ -66,7 +66,7 @@ td.empty-cell {
     color: green;
 }
 
-@keyframes pulse {
+@keyframes pulse-green-animation {
   0% {
     background: white;
   }
@@ -79,7 +79,23 @@ td.empty-cell {
 }
 
 .pulse-green {
-  animation: pulse 0.7s ease-in-out;
+  animation: pulse-green-animation 0.7s ease-in-out;
+}
+
+@keyframes pulse-red-animation {
+  0% {
+    background: white;
+  }
+  50% {
+    background: tomato;
+  }
+  100% {
+    background: white;
+  }
+}
+
+.pulse-red {
+  animation: pulse-red-animation 0.7s ease-in-out;
 }
 
 #padding-under-score-bar, #score-bar {

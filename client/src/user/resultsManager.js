@@ -80,8 +80,10 @@ ResultsManager.prototype = {
         td.innerText += " ✔";
         td.classList.add( "correct-answer" );
         this.updateScore( 1 );
+        this.flashScore( 'green' );
       }
       else {
+        this.flashScore( 'red' );
         td.innerText += " ✘";
         td.classList.add( "wrong-answer" );
         td.classList.add( "tooltip" );
@@ -93,12 +95,13 @@ ResultsManager.prototype = {
   updateScore: function( scoreIncrease ) {
     this.score += scoreIncrease;
     this.scoreP.innerText = this.score.toString() + " / " + this.scoreOutOf;
-    if ( scoreIncrease > 0 ) {
-      this.scoreP.classList.remove( 'pulse-green' );
-      setTimeout( function() {
-        this.scoreP.classList.add( 'pulse-green' );
-      }.bind( this ), 100 );
-    }
+  },
+  flashScore: function( colour ) {
+    var cssClass = 'pulse-' + colour;
+    this.scoreP.classList.remove( cssClass );
+    setTimeout( function() {
+      this.scoreP.classList.add( cssClass );
+    }.bind( this ), 100 );
   }
 };
 
