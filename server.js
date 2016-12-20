@@ -73,13 +73,8 @@ app.get('/countries', function(req, res){
 
 // GET QUIZZES
 app.get('/quizzes', function(req, res){
-  firebaseHelper.getAllQuizzes(function(err, allQuizzes){
-    if ( err ) {
-      res.status( 500 ).end();
-    }
-    else {
-      res.json(allQuizzes);
-    }
+  firebaseHelper.getAllQuizzes(function( allQuizzes ){
+    res.json( allQuizzes );
   });
 });
 
