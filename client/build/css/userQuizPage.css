@@ -28,6 +28,11 @@ body, html{
   margin: 20px;
 }
 
+#progress-bar {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
 .correct-answer {
   color: green;
 }

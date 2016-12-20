@@ -36,29 +36,45 @@ var firebaseHelper = {
       newQuizRef.set({
         title: quiz.title,
         questions: quiz.questions,
+        published: quiz.published,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
-        createdBy: values.userEmail
+        createdBy: values.userEmail,
+        published: quiz.published
       });
+    });
+  },
+  updateQuiz: function( quiz ) {
+    this.getQuizzesRef( function( quizzesRef ) {
+      var quizRef = quizzesRef.child( quiz.id );
+      quizRef.set( quiz );
     });
   },
   getAllQuizzes: function( callback ) {
     this.getQuizzesRef( function( quizzesRef ) {
       quizzesRef.once( 'value' ).then( function( snapshot ) {
         var quizEntries = snapshot.val();
-        var quizzes = Object.keys( quizEntries ).map( function( key ) {
-          var quiz = quizEntries[key];
-          quiz.id = key;
-          return quiz;
-        });
-        callback( null, quizzes );
+        if ( quizEntries !== null ) {
+          var quizzes = Object.keys( quizEntries ).map( function( key ) {
+            var quiz = quizEntries[key];
+            quiz.id = key;
+            return quiz;
+          });
+          callback( quizzes );
+        }
+        else {
+          callback( [] );
+        }
       });
     });
   },
   getQuizById: function( quizId, callback ) {
     this.getQuizzesRef( function( quizzesRef ) {
       quizzesRef.orderByKey().equalTo( quizId ).once( 'value' ).then( function( snapshot ) {
-        if ( snapshot.val() ) {
-          callback( snapshot.val()[quizId] );
+        var responseData = snapshot.val();
+        if ( responseData && responseData[quizId] ) {
+          var quiz = responseData[quizId];
+          quiz.id = quizId
+          callback( quiz );
         }
         else {
           callback( null );

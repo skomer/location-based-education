@@ -26,6 +26,11 @@ var quizServer = {
     console.log( "creating quiz:", quiz );
     var url = "http://localhost:3000/quizzes";
     xmlHttpHelper.makePostRequest( url, quiz );
+  },
+  updateQuiz: function( quiz ) {
+    console.log( "updating quiz:", quiz );
+    var url= "http://localhost:3000/quizzes";
+    xmlHttpHelper.makePutRequest( url, quiz );
   }
 };
 
