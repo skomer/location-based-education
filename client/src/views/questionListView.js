@@ -5,14 +5,13 @@ var QuestionListView = function() {
  this.questionList = document.getElementById('questions-list');
  this.selectCountry = document.getElementById('countries-select');
  this.archiveList = document.getElementById('archive-list');
- this.selectedCountryCode;
 };
 
 QuestionListView.prototype = {
- addQuestion: function(question) {
-   this.selectedCountryCode = question.countryCode;
-   console.log("this.selectedCountryCode:", this.selectedCountryCode);
-   var listItem = this.buildListItem( question.countryCode );
+  addQuestion: function(question) {
+    var selectedCountryCode = question ? question.countryCode : null;
+
+   var listItem = this.buildListItem( selectedCountryCode );
    if (question === null) {
      this.questionList.appendChild(listItem)
    } else {
