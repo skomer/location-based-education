@@ -3,13 +3,28 @@ var miscHelper = require('../helpers/miscHelpers');
 var QuestionListView = require('../views/questionListView.js');
 var Quiz = require('../models/quiz.js');
 
+var publishedState = false;
+var publishButton;
+
 window.onload = function() {
   console.log("Ready to add quizzes");
 
   var quizTitleInput = document.getElementById( 'quiz-title-input' );
   var newQuestionButton = document.getElementById( 'new-question-button' );
   var countriesSelect = document.getElementById('countries-select');
-  var checkPublish = document.getElementById('check-publish');
+  publishButton = document.getElementById( 'publish-quiz-button' );
+  console.log("publishButton:", publishButton);
+
+  publishButton.onclick = function() {
+    if ( publishedState ) {
+      setButtonUnpublished();
+    }
+    else {
+      setButtonPublished();
+    }
+    publishedState = !publishedState;
+  }
+
   var saveQuizButton = document.getElementById( 'save-quiz-button' );
   var questionListView = new QuestionListView();
   var ulWarning = document.getElementById('ul-warning');
@@ -18,7 +33,7 @@ window.onload = function() {
   var archiveDiv = document.getElementById('archive-div');
   archiveDiv.style.display = "none";
   var showArchiveButton = document.getElementById('show-archive-button');
-  var published;
+  // var published;
   var quizId;
 
   var newOrExistingQuiz = function() {
@@ -35,7 +50,13 @@ window.onload = function() {
   var populateExistingQuiz = function(quiz) {
     quizId = quiz.id;
     quizTitleInput.value = quiz.title;
-    checkPublish.checked = quiz.published;
+    publishedState = quiz.published;
+    if ( publishedState ) {
+      setButtonPublished();
+    }
+    else {
+      setButtonUnpublished();
+    }
     buildQuestionLists(quiz);
   };
 
@@ -70,7 +91,7 @@ window.onload = function() {
   saveQuizButton.onclick = function() {
     var warningText = "";
 
-    published = document.getElementById("check-publish").checked;
+    published = publishedState;
 
     // WORK IN PROGRESS - error messages for creating quiz
     if (quizTitleInput.innerText === "") {
@@ -148,4 +169,14 @@ window.onload = function() {
 
     window.location.href = "http://localhost:3000/admin/quizzes";
   };
+};
+
+var setButtonUnpublished = function() {
+  publishButton.classList.remove( 'published' );
+  publishButton.innerText = "Publish"
+};
+
+var setButtonPublished = function() {
+  publishButton.classList.add( 'published' );
+  publishButton.innerText = "Unpublish"
 };

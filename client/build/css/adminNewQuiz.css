@@ -12,10 +12,6 @@ div{
   text-align: center;
 }
 
-#save-quiz-button, #show-archive-button{
-  margin: 15px;
-}
-
 select {
  -webkit-appearance: button;
  -webkit-border-radius: 2px;
@@ -57,10 +53,11 @@ select {
   font-size: x-large;
 }
 
- #save-quiz-button, #show-archive-button, label{
+ #save-quiz-button, #show-archive-button, #publish-quiz-button, label{
   bottom: 20px;
   right: 20px;
   height: 43px;
+  margin: 15px;
 }
 
 #archive-div{
@@ -83,4 +80,12 @@ select {
 .archive-button:hover:not([disabled]) {
   background-color: rgba(0,0,0,0);
   opacity: 0.7;
+}
+
+.published {
+  background-color: green;
+}
+
+.published:hover:not([disabled]) {
+  background-color: green;
 }

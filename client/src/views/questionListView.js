@@ -8,9 +8,9 @@ var QuestionListView = function() {
 };
 
 QuestionListView.prototype = {
-  addQuestion: function(question) {
-    var selectedCountryCode = question ? question.countryCode : null;
 
+ addQuestion: function(question) {
+   var selectedCountryCode = question ? question.countryCode : null;
    var listItem = this.buildListItem( selectedCountryCode );
    if (question === null) {
      this.questionList.appendChild(listItem)
