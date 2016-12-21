@@ -71,8 +71,7 @@ select {
   color: dimgrey;
 }
 
-/*.archive-button-div*/
- .archive-button {
+.archive-button-div{
   background:url(/images/folder.png) no-repeat;
   cursor: pointer;
   background-size: 100% 100%;
