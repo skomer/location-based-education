@@ -19,6 +19,7 @@ window.onload = function() {
   archiveDiv.style.display = "none";
   var showArchiveButton = document.getElementById('show-archive-button');
   var published;
+  var quizId;
 
   var newOrExistingQuiz = function() {
     var lastUrlElement = miscHelper.getLastUrlElement();
@@ -32,6 +33,7 @@ window.onload = function() {
   newOrExistingQuiz();
 
   var populateExistingQuiz = function(quiz) {    
+    quizId = quiz.id;
     quizTitleInput.value = quiz.title;
     checkPublish.checked = quiz.published;
     buildQuestionLists(quiz);
@@ -137,7 +139,13 @@ window.onload = function() {
       published: published
     }
 
-    quizServer.createQuiz( quiz );
+    if (quizId) {
+      quiz.id = quizId;
+      quizServer.updateQuiz( quiz );
+    } else {
+      quizServer.createQuiz( quiz );
+    }
+
     window.location.href = "http://localhost:3000/admin/quizzes";
   };
 };
