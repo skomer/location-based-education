@@ -1,14 +1,18 @@
 var CountriesServer = require('../models/countriesServer');
 
+
 var QuestionListView = function() {
   this.questionList = document.getElementById('questions-list');
   this.selectCountry = document.getElementById('countries-select');
   this.archiveList = document.getElementById('archive-list');
+  this.selectedCountryCode;
 };
 
 QuestionListView.prototype = {
   addQuestion: function(question) {
-    var listItem = this.buildListItem();
+    this.selectedCountryCode = question.countryCode;
+    console.log("this.selectedCountryCode:", this.selectedCountryCode);
+    var listItem = this.buildListItem( question.countryCode );
     if (question === null) {
       this.questionList.appendChild(listItem)
     } else {
@@ -16,7 +20,7 @@ QuestionListView.prototype = {
       eQuestion.getAttribute("archived") === "true" ? this.archiveList.appendChild(eQuestion) : this.questionList.appendChild(eQuestion);
     }
   },
-  buildListItem: function() {
+  buildListItem: function( selectedCountryCode ) {
     var qLi = document.createElement('li');
     var quizQuestionInput = document.createElement('input');
     quizQuestionInput.type = 'text';
@@ -25,11 +29,13 @@ QuestionListView.prototype = {
     qLi.appendChild(quizQuestionInput);
 
     var answerSelect = document.createElement('select');
-    this.populateSelect(answerSelect);
-    // 
-    // console.log(answerSelect.value = "AL");
-
+    answerSelect.onchange = function() {
+      console.log( "select value changed to:", answerSelect.value );
+    }
     qLi.appendChild(answerSelect);
+
+    this.populateSelect(answerSelect, selectedCountryCode );
+
     return this.buildArchiveButton(qLi);
   },
   buildArchiveButton: function(qLi) {
@@ -56,24 +62,22 @@ QuestionListView.prototype = {
     listItem.setAttribute("archived", question.archived);
     return listItem;
   },
-  populateSelect: function( elementId ) {
+  populateSelect: function( elementId, selectedCountryCode ) {
     var countriesServer = new CountriesServer( function() {
-      this.addCountries( elementId, countriesServer.countries );
+      this.addCountries( elementId, countriesServer.countries, selectedCountryCode );
     }.bind(this) );
   },
-  addCountries: function(elementId, countries) {
+  addCountries: function(elementId, countries, selectedCountryCode) {
     countries.forEach( function( country ) {
       var option = document.createElement('option');
       option.value = country.code;
       option.innerText = country.name;
+      if ( option.value === selectedCountryCode ) {
+        option.selected = true;
+      }
       elementId.appendChild(option);
-    });
+    }.bind( this ) );
   }
 };
 
 module.exports = QuestionListView;
-
-
-
-
-
