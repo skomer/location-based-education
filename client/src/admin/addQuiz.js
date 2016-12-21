@@ -68,8 +68,7 @@ window.onload = function() {
   saveQuizButton.onclick = function() {
     var warningText = "";
 
-    published = document.getElementById("check-publish").checked; 
-    console.log("published:", published);
+    published = document.getElementById("check-publish").checked;
 
     // WORK IN PROGRESS - error messages for creating quiz
     if (quizTitleInput.innerText === "") {
@@ -92,7 +91,7 @@ window.onload = function() {
 
     if (warningText = ""){
       alert("issue with data");
-    } else { 
+    } else {
       console.log("saving the quiz");
       saveQuiz();
     }
@@ -116,9 +115,8 @@ window.onload = function() {
         archived: archived
       };
       questions.push(question);
-
-      return questions;
     };
+    return questions;
    };
 
   // contacts quiz server to post the quiz to the db
@@ -127,11 +125,11 @@ window.onload = function() {
 
     arrayOfQuestions = unArchivedQuestionsTag.children;
     archivedQuestions = archivedQuestionsTag.children;
-    
+
     var q1 = addQuestions(arrayOfQuestions);
     var q2 = addQuestions(archivedQuestions);
 
-    var q3 = q1.concat(q2);
+    var q3 = q1.concat(q2 ? q2 : []);
 
     var quiz = {
       title: quizTitle,
