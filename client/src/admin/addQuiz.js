@@ -82,7 +82,6 @@ window.onload = function() {
       warningText = "Please enter a question";
     };
 
-    // loop through ul tag.children, if ultag.children[i] is undefined or empty, then display the warning!
     for(var i = 0; i < unArchivedQuestionsTag.children.length; i++){
       if ( unArchivedQuestionsTag.children[i] === undefined || unArchivedQuestionsTag.firstChild.firstChild.value === "" ) {
         var questionWarning = document.getElementById('question-warning');
@@ -102,7 +101,6 @@ window.onload = function() {
   // contacts quiz server to post the quiz to the db
    var addQuestions = function(questionArray){
     var questions = [];
-
     for (var i = 0; i < questionArray.length; i++) {
       var text = questionArray[i].firstChild.value;
       var answerIndex = questionArray[i].children[1].selectedIndex;
@@ -118,6 +116,7 @@ window.onload = function() {
         archived: archived
       };
       questions.push(question);
+
       return questions;
     };
    };
@@ -131,6 +130,7 @@ window.onload = function() {
     
     var q1 = addQuestions(arrayOfQuestions);
     var q2 = addQuestions(archivedQuestions);
+
     var q3 = q1.concat(q2);
 
     var quiz = {
@@ -139,7 +139,6 @@ window.onload = function() {
       published: published
     }
 
-    console.log(quiz);
     quizServer.createQuiz( quiz );
     window.location.href = "http://localhost:3000/admin/quizzes";
   };

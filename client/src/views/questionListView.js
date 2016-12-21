@@ -8,15 +8,13 @@ var QuestionListView = function() {
 
 QuestionListView.prototype = {
   addQuestion: function(question) {
-    question = question || null;
-    console.log("question", question);
     var listItem = this.buildListItem();
-    listItem.getAttribute("archived") === true ? this.archiveList.appendChild(listItem) : this.questionList.appendChild(listItem);
-    
-
-
-    // console.log("archiveList", this.archiveList);
-    // console.log("questionList", this.questionList);
+    if (question === null) {
+      this.questionList.appendChild(listItem)
+    } else {
+      var eQuestion = this.buildPopulatedQuestionLi(listItem, question);
+      eQuestion.getAttribute("archived") === "true" ? this.archiveList.appendChild(eQuestion) : this.questionList.appendChild(eQuestion);
+    }
   },
   buildListItem: function() {
     var qLi = document.createElement('li');
@@ -28,13 +26,14 @@ QuestionListView.prototype = {
 
     var answerSelect = document.createElement('select');
     this.populateSelect(answerSelect);
+    // 
     qLi.appendChild(answerSelect);
     return this.buildArchiveButton(qLi);
   },
   buildArchiveButton: function(qLi) {
-    var archiveButton = document.createElement('button');
+    var archiveButton = document.createElement('div');
     archiveButton.quizQuestionInput = qLi.quizQuestionInput;
-    archiveButton.className = 'archive-button';
+    archiveButton.className = 'archive-button-div';
     archiveButton.innerText = "Archive this question";
     archiveButton.onclick = function() {
       if (qLi.getAttribute("archived") === "false") {
@@ -50,6 +49,11 @@ QuestionListView.prototype = {
     qLi.appendChild(archiveButton);
     return qLi;
   },
+  buildPopulatedQuestionLi: function(listItem, question) {
+    listItem.children[0].value = question.text;
+    listItem.setAttribute("archived", question.archived);
+    return listItem;
+  },
   populateSelect: function( elementId ) {
     var countriesServer = new CountriesServer( function() {
       this.addCountries( elementId, countriesServer.countries );
@@ -63,14 +67,9 @@ QuestionListView.prototype = {
       elementId.appendChild(option);
     });
   }
-
 };
 
 module.exports = QuestionListView;
-
-
-
-
 
 
 
