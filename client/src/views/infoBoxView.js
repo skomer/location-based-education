@@ -21,6 +21,9 @@ InfoBoxView.prototype = {
   showWithText: function( text ) {
     this.textP.innerText = text;
     this.div.style.display = 'flex';
+  },
+  hide: function() {
+    this.div.style.display = 'none';
   }
 }
 

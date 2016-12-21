@@ -43,6 +43,7 @@ QuizManager.prototype = {
       this.nextQuestionButton.disabled = false;
       console.log( "this.quiz.currentQuestion()", this.quiz.currentQuestion() )
       this.quiz.currentQuestion().setUserAnswer( countryCode, countryName );
+      this.infoBoxView.hide();
     } else {
       this.infoBoxView.showWithText( "That is not a country, please click a country" );
     }

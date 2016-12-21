@@ -138,3 +138,7 @@ td.empty-cell {
 tr {
   color: #343434;
 }
+
+#infobox-close-button {
+  height: 30px;
+}
