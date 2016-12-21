@@ -1,16 +1,15 @@
 var quizServer = require('../models/quizServer.js');
+var miscHelper = require('../helpers/miscHelpers');
 var QuestionListView = require('../views/questionListView.js');
+var Quiz = require('../models/quiz.js');
 
 window.onload = function() {
   console.log("Ready to add quizzes");
 
-// snip off quiz id from url
-// see user/quiz.js
-// write function populate addQuiz.html page
-
   var quizTitleInput = document.getElementById( 'quiz-title-input' );
   var newQuestionButton = document.getElementById( 'new-question-button' );
   var countriesSelect = document.getElementById('countries-select');
+  var checkPublish = document.getElementById('check-publish');
   var saveQuizButton = document.getElementById( 'save-quiz-button' );
   var questionListView = new QuestionListView();
   var ulWarning = document.getElementById('ul-warning');
@@ -20,17 +19,51 @@ window.onload = function() {
   archiveDiv.style.display = "none";
   var showArchiveButton = document.getElementById('show-archive-button');
   var published;
+  var quizId;
+
+  var newOrExistingQuiz = function() {
+    var lastUrlElement = miscHelper.getLastUrlElement();
+    if (lastUrlElement != 'new') {
+      var requestedQuiz = quizServer.getQuizById(lastUrlElement, function(quiz) {
+        populateExistingQuiz(quiz);
+      });
+    }
+  };
+
+  newOrExistingQuiz();
+
+  var populateExistingQuiz = function(quiz) {
+    quizId = quiz.id;
+    quizTitleInput.value = quiz.title;
+    checkPublish.checked = quiz.published;
+    buildQuestionLists(quiz);
+  };
+
+  var buildQuestionLists = function(quiz) {
+    var eQuestions = [];
+    for (var i = 0; i < quiz.questions.length; i++) {
+      var emptyQuestion = {
+        text: quiz.questions[i].text,
+        countryCode: quiz.questions[i].countryCode,
+        countryName: quiz.questions[i].countryName,
+        archived: quiz.questions[i].archived
+      };
+      eQuestions.push(emptyQuestion);
+    }
+    for (var i = 0; i < quiz.questions.length; i++) {
+      questionListView.addQuestion(quiz.questions[i]);
+    }
+  };
 
   newQuestionButton.onclick = function() {
     ulWarning.style.display = "none";
-    questionListView.addQuestion();
+    questionListView.addQuestion(null);
   };
 
   showArchiveButton.onclick = function() {
-    console.log("showArchiveButton onclick");
     archiveDiv.style.display === "none" ?
-      (archiveDiv.style.display = "inline-block", showArchiveButton.innerText = "Hide archived") :
-      (archiveDiv.style.display = "none", showArchiveButton.innerText = "Show archived" );
+      (archiveDiv.style.display = "inline-block", showArchiveButton.innerText = "Hide archived questions") :
+      (archiveDiv.style.display = "none", showArchiveButton.innerText = "Show archived questions" );
   };
 
   // checks that all the inputs are valid before saving quiz
@@ -50,7 +83,6 @@ window.onload = function() {
       warningText = "Please enter a question";
     };
 
-    // loop through ul tag.children, if ultag.children[i] is undefined or empty, then display the warning!
     for(var i = 0; i < unArchivedQuestionsTag.children.length; i++){
       if ( unArchivedQuestionsTag.children[i] === undefined || unArchivedQuestionsTag.firstChild.firstChild.value === "" ) {
         var questionWarning = document.getElementById('question-warning');
@@ -67,9 +99,9 @@ window.onload = function() {
     }
   };
 
+  // contacts quiz server to post the quiz to the db
    var addQuestions = function(questionArray){
     var questions = [];
-
     for (var i = 0; i < questionArray.length; i++) {
       var text = questionArray[i].firstChild.value;
       var answerIndex = questionArray[i].children[1].selectedIndex;
@@ -98,6 +130,7 @@ window.onload = function() {
 
     var q1 = addQuestions(arrayOfQuestions);
     var q2 = addQuestions(archivedQuestions);
+
     var q3 = q1.concat(q2 ? q2 : []);
 
     var quiz = {
@@ -106,8 +139,13 @@ window.onload = function() {
       published: published
     }
 
-    console.log(quiz);
-    quizServer.createQuiz( quiz );
+    if (quizId) {
+      quiz.id = quizId;
+      quizServer.updateQuiz( quiz );
+    } else {
+      quizServer.createQuiz( quiz );
+    }
+
     window.location.href = "http://localhost:3000/admin/quizzes";
   };
 };
