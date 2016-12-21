@@ -29,8 +29,8 @@ window.onload = function() {
   showArchiveButton.onclick = function() {
     console.log("showArchiveButton onclick");
     archiveDiv.style.display === "none" ?
-      (archiveDiv.style.display = "inline-block", showArchiveButton.innerText = "Hide archived questions") :
-      (archiveDiv.style.display = "none", showArchiveButton.innerText = "Show archived questions" );
+      (archiveDiv.style.display = "inline-block", showArchiveButton.innerText = "Hide archived") :
+      (archiveDiv.style.display = "none", showArchiveButton.innerText = "Show archived" );
   };
 
   // checks that all the inputs are valid before saving quiz

@@ -22,20 +22,17 @@ QuestionListView.prototype = {
     var archiveButton = document.createElement('button');
     archiveButton.quizQuestionInput = quizQuestionInput;
     archiveButton.className = 'archive-button';
-    archiveButton.innerText = "Archive this question";
     archiveButton.onclick = function() {
       if (qLi.getAttribute("archived") === "false") {
         this.archiveList.appendChild(archiveButton.parentNode);
         qLi.setAttribute("archived", "true");
-        archiveButton.innerText = "Unarchive this question";
       } else {
         this.questionList.appendChild(archiveButton.parentNode);
         qLi.setAttribute("archived", "false");
-        archiveButton.innerText = "Archive this question";
       };
     }.bind(this);
     qLi.appendChild(archiveButton);
-    
+
     this.questionList.appendChild(qLi);
   },
   populateSelect: function( elementId ) {
@@ -55,12 +52,3 @@ QuestionListView.prototype = {
 };
 
 module.exports = QuestionListView;
-
-
-
-
-
-
-
-
-
