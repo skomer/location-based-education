@@ -47,6 +47,7 @@ select {
   border-top: 2px solid white;
   color: #343434;
   display: flex;
+  justify-content: center;
 }
 
 #check-publish{
