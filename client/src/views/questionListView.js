@@ -27,6 +27,8 @@ QuestionListView.prototype = {
     var answerSelect = document.createElement('select');
     this.populateSelect(answerSelect);
     // 
+    // console.log(answerSelect.value = "AL");
+
     qLi.appendChild(answerSelect);
     return this.buildArchiveButton(qLi);
   },
